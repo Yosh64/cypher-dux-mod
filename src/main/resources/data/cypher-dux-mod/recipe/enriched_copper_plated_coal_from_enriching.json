@@ -1,0 +1,15 @@
+{
+  "type": "cypher-dux-mod:enriching",
+  "addition": {
+    "tag": "c:dusts/glowstone"
+  },
+  "base": {
+    "item": "cypher-dux-mod:copper_plated_coal"
+  },
+  "result": {
+    "id": "cypher-dux-mod:enriched_copper_plated_coal",
+    "count": 1
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

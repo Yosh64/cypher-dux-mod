@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "cypher-dux-mod:rose_gold_ingot"
+  },
+  "base": {
+    "item": "minecraft:iron_axe"
+  },
+  "result": {
+    "count": 1,
+    "id": "cypher-dux-mod:rose_gold_axe"
+  },
+  "template": []
+}

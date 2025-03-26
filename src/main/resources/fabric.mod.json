@@ -1,0 +1,43 @@
+{
+	"schemaVersion": 1,
+	"id": "cypher-dux-mod",
+	"version": "${version}",
+	"name": "Cypher & Dux Mod",
+	"description": "Small mod that adds rose gold stuff, enriching furnace and more.",
+	"authors": [
+		"Yosh64"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC-BY-NC-SA-4.0",
+	"icon": "assets/cypher-dux-mod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.yosh.cyphdux.CypherDuxMod"
+		],
+		"fabric-datagen": [
+			"com.yosh.cyphdux.CypherDuxModDataGenerator"
+		],
+		"client": [
+			"com.yosh.cyphdux.CypherDuxModClient"
+		],
+		"emi": [
+			"com.yosh.cyphdux.integration.emi.ModEmiPlugin"
+		]
+	},
+	"mixins": [
+		"cypher-dux-mod.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

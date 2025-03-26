@@ -1,0 +1,15 @@
+{
+  "type": "cypher-dux-mod:enriching",
+  "addition": {
+    "item": "cypher-dux-mod:kayber_krystal"
+  },
+  "base": {
+    "item": "cypher-dux-mod:kayber_krystal"
+  },
+  "result": {
+    "id": "minecraft:echo_shard",
+    "count": 1
+  },
+  "experience": 7,
+  "cookingtime": 4800
+}

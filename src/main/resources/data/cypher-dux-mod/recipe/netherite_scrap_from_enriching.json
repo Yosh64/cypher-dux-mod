@@ -1,0 +1,15 @@
+{
+  "type": "cypher-dux-mod:enriching",
+  "addition": {
+    "item": "minecraft:crying_obsidian"
+  },
+  "base": {
+    "item": "cypher-dux-mod:kayber_krystal"
+  },
+  "result": {
+    "id": "minecraft:netherite_scrap",
+    "count": 1
+  },
+  "experience": 16,
+  "cookingtime": 6400
+}

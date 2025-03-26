@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "cypher-dux-mod:block/charcoal_block" }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "XOX",
+    "OTO",
+    "XOX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_nugget"
+    },
+    "T": {
+      "item": "minecraft:ender_pearl"
+    },
+    "O": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "id": "cypher-dux-mod:synthetic_emerald",
+    "count": 1
+  }
+}

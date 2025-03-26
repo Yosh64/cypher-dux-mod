@@ -1,0 +1,9 @@
+{
+	"parent": "minecraft:block/orientable_with_bottom",
+	"textures": {
+		"bottom": "cypher-dux-mod:block/enriching_furnace_bottom",
+		"front": "cypher-dux-mod:block/enriching_furnace_front",
+		"side": "cypher-dux-mod:block/enriching_furnace_side",
+		"top": "cypher-dux-mod:block/enriching_furnace_top"
+	}
+}

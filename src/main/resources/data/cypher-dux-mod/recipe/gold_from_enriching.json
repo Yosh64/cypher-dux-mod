@@ -1,0 +1,15 @@
+{
+  "type": "cypher-dux-mod:enriching",
+  "addition": {
+    "item": "cypher-dux-mod:copper_plated_coal_block"
+  },
+  "base": {
+    "item": "cypher-dux-mod:kayber_krystal"
+  },
+  "result": {
+    "id": "minecraft:gold_ingot",
+    "count": 1
+  },
+  "experience": 0.8,
+  "cookingtime": 1600
+}

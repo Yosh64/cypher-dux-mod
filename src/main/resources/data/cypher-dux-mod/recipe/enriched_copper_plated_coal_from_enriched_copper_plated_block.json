@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "cypher-dux-mod:enriched_copper_plated_coal_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "cypher-dux-mod:enriched_copper_plated_coal"
+  }
+}

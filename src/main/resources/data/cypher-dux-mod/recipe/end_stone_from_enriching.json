@@ -1,0 +1,15 @@
+{
+  "type": "cypher-dux-mod:enriching",
+  "addition": {
+    "item": "minecraft:netherrack"
+  },
+  "base": {
+    "item": "cypher-dux-mod:kayber_krystal"
+  },
+  "result": {
+    "id": "minecraft:end_stone",
+    "count": 1
+  },
+  "experience": 0.2,
+  "cookingtime": 400
+}

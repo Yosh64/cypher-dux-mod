@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "XOX",
+    "OTO",
+    "XOX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:iron_nugget"
+    },
+    "T": {
+      "item": "minecraft:flint"
+    },
+    "O": {
+      "item": "minecraft:purple_dye"
+    }
+  },
+  "result": {
+    "id": "cypher-dux-mod:synthetic_amethyst",
+    "count": 1
+  }
+}

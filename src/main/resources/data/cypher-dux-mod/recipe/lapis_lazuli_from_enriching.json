@@ -1,0 +1,15 @@
+{
+  "type": "cypher-dux-mod:enriching",
+  "addition": {
+    "item": "minecraft:quartz"
+  },
+  "base": {
+    "item": "cypher-dux-mod:kayber_krystal"
+  },
+  "result": {
+    "id": "minecraft:lapis_lazuli",
+    "count": 1
+  },
+  "experience": 0.6,
+  "cookingtime": 800
+}

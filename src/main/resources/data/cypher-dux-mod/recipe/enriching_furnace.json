@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "X L",
+    "OAO",
+    "FBF"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:lightning_rod"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "O": {
+      "item": "minecraft:gold_ingot"
+    },
+    "F": {
+      "item": "minecraft:iron_ingot"
+    },
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "B": {
+      "item": "minecraft:blast_furnace"
+    }
+  },
+  "result": {
+    "id": "cypher-dux-mod:enriching_furnace",
+    "count": 1
+  }
+}

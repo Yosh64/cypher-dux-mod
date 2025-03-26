@@ -1,0 +1,25 @@
+{
+  "type": "cypher-dux-mod:enriching",
+  "addition": [
+      {
+        "item": "minecraft:emerald"
+      },
+      {
+        "item": "cypher-dux-mod:synthetic_emerald"
+      }
+    ],
+  "base": [
+      {
+        "item": "minecraft:amethyst_shard"
+      },
+      {
+        "item": "cypher-dux-mod:synthetic_amethyst"
+      }
+    ],
+  "result": {
+    "id": "cypher-dux-mod:kayber_krystal",
+    "count": 1
+  },
+  "experience": 0.5,
+  "cookingtime": 400
+}

@@ -1,0 +1,29 @@
+{
+  "itemGroup.cypher-dux-mod": "Cypher & Dux Mod",
+  "emi.category.cypher-dux-mod.enriching":"Enrichissement",
+  "trim_material.cypher-dux-mod.rose_gold": "En or rose",
+  "tag.item.cypher-dux-mod.piglin_safe_armor": "Armure de Protection contre les Piglin",
+
+  "item.cypher-dux-mod.copper_plated_coal": "Charbon cuivré",
+  "item.cypher-dux-mod.enriched_copper_plated_coal": "Charbon cuivré enrichi",
+  "item.cypher-dux-mod.kayber_krystal": "Krystal Kayber",
+  "item.cypher-dux-mod.rose_gold_axe": "Hache en or rose",
+  "item.cypher-dux-mod.rose_gold_boots": "Bottes en or rose",
+  "item.cypher-dux-mod.rose_gold_chestplate": "Plastron en or rose",
+  "item.cypher-dux-mod.rose_gold_helmet": "Casque en or rose",
+  "item.cypher-dux-mod.rose_gold_hoe": "Houe en or rose",
+  "item.cypher-dux-mod.rose_gold_ingot": "Lingot d'or rose",
+  "item.cypher-dux-mod.rose_gold_leggings": "Jambières en or rose",
+  "item.cypher-dux-mod.rose_gold_pickaxe": "Pioche en or rose",
+  "item.cypher-dux-mod.rose_gold_shovel": "Pelle en or rose",
+  "item.cypher-dux-mod.rose_gold_sword": "Épée en or rose",
+  "item.cypher-dux-mod.synthetic_amethyst": "Améthyste sythétique",
+  "item.cypher-dux-mod.synthetic_emerald": "Émeraude sythétique",
+
+  "block.cypher-dux-mod.rose_gold_block": "Bloc d'or rose",
+  "block.cypher-dux-mod.charcoal_block": "Bloc de charbon de bois",
+  "block.cypher-dux-mod.copper_plated_coal_block": "Bloc de Charbon cuivré",
+  "block.cypher-dux-mod.enriched_copper_plated_coal_block": "Bloc de Charbon cuivré enrichi",
+  "block.cypher-dux-mod.enriching_furnace": "Four d'enrichissement",
+  "container.cypher-dux-mod.enriching_furnace": "Four d'enrichissement"
+}
