@@ -47,12 +47,4 @@ public class ItemDisplayBoardBlockEntity extends BlockEntity implements Implemen
     public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
         return createNbt(registryLookup);
     }
-
-    public float getRenderingRotation() {
-        rotation += 0.5F;
-        if (rotation>=360){
-            rotation = 0;
-        }
-        return rotation;
-    }
 }
