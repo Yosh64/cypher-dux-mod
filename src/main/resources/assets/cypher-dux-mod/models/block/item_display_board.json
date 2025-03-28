@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "cypher-dux-mod:block/item_display_board"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 14],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 8, 15]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#all"},
+				"east": {"uv": [0, 14, 16, 16], "rotation": 270, "texture": "#all"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#all"},
+				"west": {"uv": [0, 14, 16, 16], "rotation": 90, "texture": "#all"},
+				"up": {"uv": [0, 14, 16, 16], "rotation": 180, "texture": "#all"},
+				"down": {"uv": [0, 14, 16, 16], "texture": "#all"}
+			}
+		}
+	]
+}

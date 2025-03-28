@@ -21,14 +21,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         super(output, registriesFuture);
     }
     public static void offerSmithingUpgradeRecipe(RecipeExporter exporter, Item input, Item addition, RecipeCategory category, Item result) {
-        offerSmithingUpgradeRecipe(exporter,Items.AIR,input,addition,category,result);
+        //offerSmithingUpgradeRecipe(exporter,Items.AIR,input,addition,category,result);
     }
     public static void offerSmithingUpgradeRecipe(RecipeExporter exporter, Item template, Item input, Item addition, RecipeCategory category, Item result) {
-        SmithingTransformRecipeJsonBuilder.create(
+        /*SmithingTransformRecipeJsonBuilder.create(
                         Ingredient.ofItems(template), Ingredient.ofItems(input), Ingredient.ofItems(addition), category, result
                 )
                 .criterion(hasItem(addition), conditionsFromItem(addition))
-                .offerTo(exporter, getItemPath(result) + "_smithing");
+                .offerTo(exporter, getItemPath(result) + "_smithing");*/
     }
     @Override
     public void generate(RecipeExporter exporter) {

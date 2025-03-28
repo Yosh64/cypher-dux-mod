@@ -18,32 +18,6 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(ConventionalItemTags.AMETHYST_GEMS).add(ModItems.SYNTHETIC_AMETHYST);
-        getOrCreateTagBuilder(ConventionalItemTags.EMERALD_GEMS).add(ModItems.SYNTHETIC_EMERALD);
-        getOrCreateTagBuilder(ConventionalItemTags.GEMS).add(ModItems.SYNTHETIC_AMETHYST);
-        getOrCreateTagBuilder(ConventionalItemTags.GEMS).add(ModItems.SYNTHETIC_EMERALD);
-        getOrCreateTagBuilder(ItemTags.TRIM_MATERIALS).add(ModItems.SYNTHETIC_AMETHYST);
-        getOrCreateTagBuilder(ItemTags.TRIM_MATERIALS).add(ModItems.SYNTHETIC_EMERALD);
 
-        getOrCreateTagBuilder(ItemTags.TRIM_MATERIALS).add(ModItems.ROSE_GOLD_INGOT);
-
-        getOrCreateTagBuilder(ConventionalItemTags.MELEE_WEAPONS_TOOLS)
-                .add(ModItems.ROSE_GOLD_AXE)
-                .add(ModItems.ROSE_GOLD_SWORD);
-        getOrCreateTagBuilder(ConventionalItemTags.MELEE_WEAPON_TOOLS)
-                .add(ModItems.ROSE_GOLD_AXE)
-                .add(ModItems.ROSE_GOLD_SWORD);
-
-        getOrCreateTagBuilder(ConventionalItemTags.MINING_TOOL_TOOLS)
-                .add(ModItems.ROSE_GOLD_PICKAXE);
-        getOrCreateTagBuilder(ConventionalItemTags.MINING_TOOLS)
-                .add(ModItems.ROSE_GOLD_PICKAXE);
-
-        getOrCreateTagBuilder(ConventionalItemTags.INGOTS)
-                .add(ModItems.ROSE_GOLD_INGOT);
-
-        getOrCreateTagBuilder(ItemTags.COALS)
-                .add(ModItems.COPPER_PLATED_COAL)
-                .add(ModItems.ENRICHED_COPPER_PLATED_COAL);
     }
 }

@@ -1,9 +1,12 @@
 {
-  "itemGroup.cypher-dux-mod": "Cypher & Dux Mod",
-  "emi.category.cypher-dux-mod.enriching":"Enriching",
-  "trim_material.cypher-dux-mod.rose_gold": "Rose gold Material",
-  "tag.item.cypher-dux-mod.piglin_safe_armor": "Piglin Safe Armor",
-
+  "block.cypher-dux-mod.charcoal_block": "Block of Rose Gold",
+  "block.cypher-dux-mod.copper_plated_coal_block": "Block of Copper-Plated Coal",
+  "block.cypher-dux-mod.item_display_board": "Item Display Board",
+  "block.cypher-dux-mod.enriched_copper_plated_coal_block": "Block of Enriched Copper-Plated Coal",
+  "block.cypher-dux-mod.enriching_furnace": "Enriching Furnace",
+  "block.cypher-dux-mod.rose_gold_block": "Block of Rose Gold",
+  "container.cypher-dux-mod.enriching_furnace": "Enriching Furnace",
+  "emi.category.cypher-dux-mod.enriching": "Enriching",
   "item.cypher-dux-mod.copper_plated_coal": "Copper-Plated Coal",
   "item.cypher-dux-mod.enriched_copper_plated_coal": "Enriched Copper-Plated Coal",
   "item.cypher-dux-mod.kayber_krystal": "Kayber Krystal",
@@ -19,11 +22,7 @@
   "item.cypher-dux-mod.rose_gold_sword": "Rose Gold Sword",
   "item.cypher-dux-mod.synthetic_amethyst": "Synthetic Amethyst",
   "item.cypher-dux-mod.synthetic_emerald": "Synthetic Emerald",
-
-  "block.cypher-dux-mod.charcoal_block": "Block of Rose Gold",
-  "block.cypher-dux-mod.rose_gold_block": "Block of Rose Gold",
-  "block.cypher-dux-mod.copper_plated_coal_block": "Block of Copper-Plated Coal",
-  "block.cypher-dux-mod.enriched_copper_plated_coal_block": "Block of Enriched Copper-Plated Coal",
-  "block.cypher-dux-mod.enriching_furnace": "Enriching Furnace",
-  "container.cypher-dux-mod.enriching_furnace": "Enriching Furnace"
+  "itemGroup.cypher-dux-mod": "Cypher & Dux Mod",
+  "tag.item.cypher-dux-mod.piglin_safe_armor": "Piglin Safe Armor",
+  "trim_material.cypher-dux-mod.rose_gold": "Rose gold Material"
 }
