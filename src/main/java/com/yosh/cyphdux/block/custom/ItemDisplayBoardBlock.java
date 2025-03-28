@@ -13,7 +13,6 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
-import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -94,7 +93,6 @@ public class ItemDisplayBoardBlock extends BlockWithEntity implements BlockEntit
         if (!state.isOf(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof ItemDisplayBoardBlockEntity) {
-                    ItemScatterer.spawn(world, pos, (ItemDisplayBoardBlockEntity)blockEntity);
                     world.updateComparators(pos, this);
             }
             super.onStateReplaced(state, world, pos, newState, moved);
@@ -106,19 +104,18 @@ public class ItemDisplayBoardBlock extends BlockWithEntity implements BlockEntit
         if(world.getBlockEntity(pos) instanceof ItemDisplayBoardBlockEntity itemDisplayBoardBlockEntity) {
             if(itemDisplayBoardBlockEntity.isEmpty() && !stack.isEmpty()) {
                 itemDisplayBoardBlockEntity.setStack(0, stack.copyWithCount(1));
-                world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f, 2f);
-                stack.decrement(1);
+                world.playSound(player, pos, SoundEvents.ENTITY_ITEM_FRAME_ADD_ITEM, SoundCategory.BLOCKS, 1f, 1f);
 
                 itemDisplayBoardBlockEntity.markDirty();
                 world.updateListeners(pos, state, state, 0);
-            } else if(stack.isEmpty() && !player.isSneaking()) {
-                ItemStack stackOnPedestal = itemDisplayBoardBlockEntity.getStack(0);
-                player.setStackInHand(Hand.MAIN_HAND, stackOnPedestal);
-                world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f, 1f);
+            } else if(stack.isEmpty() && !player.isSneaking() && !itemDisplayBoardBlockEntity.isEmpty()) {
+                world.playSound(player, pos, SoundEvents.ENTITY_ITEM_FRAME_REMOVE_ITEM, SoundCategory.BLOCKS, 1f, 1f);
                 itemDisplayBoardBlockEntity.clear();
 
                 itemDisplayBoardBlockEntity.markDirty();
                 world.updateListeners(pos, state, state, 0);
+            } else if(player.isSneaking() && !world.isClient()) {
+                player.openHandledScreen(itemDisplayBoardBlockEntity);
             }
         }
 
