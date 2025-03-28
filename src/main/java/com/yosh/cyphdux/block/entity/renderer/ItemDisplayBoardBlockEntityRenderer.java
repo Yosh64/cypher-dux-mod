@@ -58,8 +58,8 @@ public class ItemDisplayBoardBlockEntityRenderer implements BlockEntityRenderer<
     }
 
     private int getLightLevel(World world, BlockPos pos){
-        int bLight = 15;//world.getLightLevel(LightType.BLOCK,pos);
-        int sLight = 15; //world.getLightLevel(LightType.SKY,pos);
+        int bLight = world.getLightLevel(LightType.BLOCK,pos);
+        int sLight = world.getLightLevel(LightType.SKY,pos);
         return LightmapTextureManager.pack(bLight,sLight);
     }
 }
