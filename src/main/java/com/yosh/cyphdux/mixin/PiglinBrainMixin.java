@@ -22,15 +22,3 @@ public class PiglinBrainMixin
         if (stack.isIn(ModTags.Items.PIGLIN_SAFE_ARMOR)) info.setReturnValue(true);
     }
 }
-/*
-public static boolean wearsGoldArmor(LivingEntity entity) {
-		for (ItemStack itemStack : entity.getAllArmorItems()) {
-			Item item = itemStack.getItem();
-			if (item instanceof ArmorItem && ((ArmorItem)item).getMaterial().matches(ArmorMaterials.GOLD)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-*/

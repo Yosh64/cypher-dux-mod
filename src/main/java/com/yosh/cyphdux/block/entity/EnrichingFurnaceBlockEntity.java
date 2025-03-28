@@ -3,8 +3,6 @@ package com.yosh.cyphdux.block.entity;
 import com.google.common.collect.Lists;
 import com.yosh.cyphdux.CypherDuxMod;
 import com.yosh.cyphdux.block.custom.EnrichingFurnaceBlock;
-import com.yosh.cyphdux.item.ModItems;
-import com.yosh.cyphdux.network.BlockPosPayload;
 import com.yosh.cyphdux.recipe.EnrichingRecipe;
 import com.yosh.cyphdux.sceenhandler.EnrichingFurnaceScreenHandler;
 import com.yosh.cyphdux.recipe.input.DoubleStackRecipeInput;
@@ -19,7 +17,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
-import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -29,7 +26,6 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -47,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class EnrichingFurnaceBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPosPayload>, ImplementedInventory, SidedInventory, RecipeUnlocker, RecipeInputProvider {
+public class EnrichingFurnaceBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory, SidedInventory, RecipeUnlocker, RecipeInputProvider {
     public static final Text TITLE = Text.translatable("container."+ CypherDuxMod.MOD_ID+".enriching_furnace");
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
 
@@ -85,7 +81,7 @@ public class EnrichingFurnaceBlockEntity extends BlockEntity implements Extended
                     case 1 -> EnrichingFurnaceBlockEntity.this.maxProgress = value;
                     case 2 -> EnrichingFurnaceBlockEntity.this.tickingFuel = value;
                     case 3 -> EnrichingFurnaceBlockEntity.this.maxTickingFuel = value;
-                };
+                }
             }
 
             @Override
@@ -101,8 +97,8 @@ public class EnrichingFurnaceBlockEntity extends BlockEntity implements Extended
     }
 
     @Override
-    public BlockPosPayload getScreenOpeningData(ServerPlayerEntity player) {
-        return new BlockPosPayload(this.pos);
+    public BlockPos getScreenOpeningData(ServerPlayerEntity player) {
+        return this.pos;
     }
 
     @Override

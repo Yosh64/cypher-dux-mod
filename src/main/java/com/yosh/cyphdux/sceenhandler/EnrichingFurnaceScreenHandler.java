@@ -1,26 +1,19 @@
 package com.yosh.cyphdux.sceenhandler;
 
-import com.yosh.cyphdux.CypherDuxMod;
 import com.yosh.cyphdux.block.ModBlocks;
 import com.yosh.cyphdux.block.entity.EnrichingFurnaceBlockEntity;
-import com.yosh.cyphdux.network.BlockPosPayload;
-import com.yosh.cyphdux.recipe.EnrichingRecipe;
-import com.yosh.cyphdux.recipe.input.DoubleStackRecipeInput;
 import com.yosh.cyphdux.sceenhandler.slot.ModOutputSlot;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.input.SingleStackRecipeInput;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.slot.FurnaceOutputSlot;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -29,11 +22,11 @@ public class EnrichingFurnaceScreenHandler extends ScreenHandler {
     private final ScreenHandlerContext context;
     private final Inventory inventory;
     private final World world;
-    private PropertyDelegate propertyDelegate;
+    private final PropertyDelegate propertyDelegate;
 
     // Client Constructor (called from client)
-    public EnrichingFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, BlockPosPayload payload){
-        this(syncId, playerInventory, (EnrichingFurnaceBlockEntity) playerInventory.player.getWorld().getBlockEntity(payload.pos()),new ArrayPropertyDelegate(4));
+    public EnrichingFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos){
+        this(syncId, playerInventory, (EnrichingFurnaceBlockEntity) playerInventory.player.getWorld().getBlockEntity(pos),new ArrayPropertyDelegate(4));
     }
     // Main Constructor (directly called from the server)
     public EnrichingFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, EnrichingFurnaceBlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
@@ -67,9 +60,7 @@ public class EnrichingFurnaceScreenHandler extends ScreenHandler {
     public float getCookProgress(){
         int progress = this.propertyDelegate.get(0);
         int maxProgress = this.propertyDelegate.get(1);
-        if (maxProgress == 0 || progress == 0){
-            //return 0.5F;
-        }
+
         return MathHelper.clamp((float)progress / maxProgress, 0.0F, 1.0F);
     }
 
