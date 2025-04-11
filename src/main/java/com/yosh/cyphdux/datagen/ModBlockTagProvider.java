@@ -18,23 +18,6 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(ModBlocks.CHARCOAL_BLOCK)
-                .add(ModBlocks.COPPER_PLATED_COAL_BLOCK)
-                .add(ModBlocks.ENRICHED_COPPER_PLATED_COAL_BLOCK)
-                .add(ModBlocks.ROSE_GOLD_BLOCK)
-                .add(ModBlocks.ENRICHING_FURNACE);
-
-        getOrCreateTagBuilder(BlockTags.NEEDS_IRON_TOOL)
-                .add(ModBlocks.ROSE_GOLD_BLOCK);
-        getOrCreateTagBuilder(BlockTags.BEACON_BASE_BLOCKS)
-                .add(ModBlocks.ROSE_GOLD_BLOCK);
-        getOrCreateTagBuilder(BlockTags.GUARDED_BY_PIGLINS)
-                .add(ModBlocks.ROSE_GOLD_BLOCK);
-
-        getOrCreateTagBuilder(ConventionalBlockTags.STORAGE_BLOCKS)
-                .add(ModBlocks.CHARCOAL_BLOCK)
-                .add(ModBlocks.COPPER_PLATED_COAL_BLOCK)
-                .add(ModBlocks.ENRICHED_COPPER_PLATED_COAL_BLOCK)
-                .add(ModBlocks.ROSE_GOLD_BLOCK);
+                .add(ModBlocks.ITEM_DISPLAY_BOARD);
     }
 }

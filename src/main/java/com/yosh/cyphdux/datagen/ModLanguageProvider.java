@@ -1,5 +1,6 @@
 package com.yosh.cyphdux.datagen;
 
+import com.yosh.cyphdux.block.ModBlocks;
 import com.yosh.cyphdux.item.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -8,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
 
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
 
@@ -36,9 +38,16 @@ public class ModLanguageProvider extends FabricLanguageProvider {
     @Override
     public void generateTranslations(RegistryWrapper.WrapperLookup registryLookup, TranslationBuilder translationBuilder) {
             String name;
-        for (Item item : Arrays.asList(ModItems.ROSE_GOLD_INGOT, ModItems.ROSE_GOLD_AXE, ModItems.ROSE_GOLD_HOE, ModItems.ROSE_GOLD_PICKAXE, ModItems.ROSE_GOLD_SHOVEL, ModItems.ROSE_GOLD_SWORD, ModItems.ROSE_GOLD_BOOTS, ModItems.ROSE_GOLD_LEGGINGS, ModItems.ROSE_GOLD_CHESTPLATE, ModItems.ROSE_GOLD_HELMET, ModItems.COPPER_PLATED_COAL, ModItems.ENRICHED_COPPER_PLATED_COAL, ModItems.SYNTHETIC_AMETHYST, ModItems.SYNTHETIC_EMERALD, ModItems.KAYBER_KRYSTAL)) {
-            name = Registries.ITEM.getId(item).getPath().replace('_',' ');
-            translationBuilder.add(item, capitalizeWords(name));
+        for (Block block : Arrays.asList(ModBlocks.ITEM_DISPLAY_BOARD)) {
+            name = Registries.BLOCK.getId(block).getPath().replace('_',' ');
+            translationBuilder.add(block, capitalizeWords(name));
+        }
+
+        try {
+            Path existingFilePath = dataOutput.getModContainer().findPath("assets/cypher-dux-mod/lang/en_us.json").get();
+            translationBuilder.add(existingFilePath);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to add existing language file!", e);
         }
     }
 }

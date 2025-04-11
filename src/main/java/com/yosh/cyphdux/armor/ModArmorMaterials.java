@@ -33,7 +33,6 @@ public class ModArmorMaterials {
         ArmorMaterial material = new ArmorMaterial(defensePoints, enchantability, equipSound, repairIngredientSupplier, layers, toughness, knockbackResistance);
         // Register the material within the ArmorMaterials registry.
         material = Registry.register(Registries.ARMOR_MATERIAL, Identifier.of(CypherDuxMod.MOD_ID, id), material);
-        CypherDuxMod.LOGGER.info("Registering "+Identifier.of(CypherDuxMod.MOD_ID, id)+" Materials");
         // The majority of the time, you'll want the RegistryEntry of the material - especially for the ArmorItem constructor.
         return RegistryEntry.of(material);
     }
