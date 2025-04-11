@@ -1,17 +1,27 @@
 package com.yosh.cyphdux.sceenhandler;
 
 import com.yosh.cyphdux.block.entity.ItemDisplayBoardBlockEntity;
+import com.yosh.cyphdux.network.DisplayItemC2SPayload;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.screen.slot.SlotActionType;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import org.apache.commons.compress.utils.Lists;
+
+import java.util.List;
 
 public class ItemDisplayBoardScreenHandler extends ScreenHandler {
     private final Inventory inventory;
-
+    public final List<ItemStack> itemList = Lists.newArrayList();
+    private final ItemDisplayBoardBlockEntity displayBoardBlockEntity;
     public ItemDisplayBoardScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
         this(syncId, playerInventory, (ItemDisplayBoardBlockEntity) playerInventory.player.getWorld().getBlockEntity(pos));
     }
@@ -19,35 +29,63 @@ public class ItemDisplayBoardScreenHandler extends ScreenHandler {
     public ItemDisplayBoardScreenHandler(int syncId, PlayerInventory playerInventory, ItemDisplayBoardBlockEntity blockEntity) {
         super(ScreenHandlerTypes.ITEM_DISPLAY_BOARD_SCREEN_HANDLER, syncId);
         this.inventory = ((Inventory) blockEntity);
+        this.displayBoardBlockEntity = blockEntity;
+        this.itemList.addAll(ItemGroups.getSearchGroup().getSearchTabStacks());
+        this.addSlot(new DisplaySlot(inventory,0,36,24));
+        this.drawSearchSlot();
 
-        this.addSlot(new DisplaySlot(inventory,0,80,20));
-
-        addPlayerInventory(playerInventory);
-        addPlayerHotbar(playerInventory);
     }
 
-    private void addPlayerHotbar(PlayerInventory playerInv){
-        for (int column = 0; column<9; column++){
-            addSlot(new Slot(playerInv,column,8+(column*18),109));
+    private void drawSearchSlot() {
+        int x = 9;
+        int y = 49;
+
+        for (int i = 0; i < 45 && i < (this.getItemListCount());++i){
+            int xSlot = x + i % 9 * 18;
+            int ySlot = y + (i / 9) * 18 + 2;
+            this.addSlot(new Slot(this.inventory,i+1 ,xSlot, ySlot){
+                @Override
+                public boolean canTakeItems(PlayerEntity playerEntity) {
+                    return false;
+                }
+            });
+
         }
     }
-    private void addPlayerInventory(PlayerInventory playerInv){
-        for (int row = 0; row<3; row++){
-            for (int column = 0; column<9; column++){
-                addSlot(new Slot(playerInv,9+(column+(row*9)),8+(column*18),51+(row*18)));
-            }
-        }
-    }
 
+    public List<ItemStack> getItemList(){
+        return this.itemList;
+    }
+    public int getItemListCount(){
+        return this.itemList.size();
+    }
     @Override
     public ItemStack quickMove(PlayerEntity player, int invSlot) {
         return ItemStack.EMPTY;
     }
 
     @Override
+    public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
+        if(player.getWorld().isClient && slotIndex > 0 && slotIndex <= 45) {
+            DisplayItemC2SPayload payload = new DisplayItemC2SPayload(this.getSlot(slotIndex).getStack());
+            ClientPlayNetworking.send(payload);
+        } else if (slotIndex == 0) {
+            if(!player.getWorld().isClient){
+                boolean isSlotTheSame = this.displayBoardBlockEntity.getStack(0) == this.displayBoardBlockEntity.getStack(slotIndex);
+                this.displayBoardBlockEntity.setStack(0, ItemStack.EMPTY);
+                if (!isSlotTheSame) {
+                    player.getWorld().playSound(null, player.getBlockPos(), SoundEvents.ENTITY_ITEM_FRAME_REMOVE_ITEM, SoundCategory.PLAYERS);
+                }
+            }
+        }
+        super.onSlotClick(slotIndex, button, actionType, player);
+    }
+
+    @Override
     public boolean canUse(PlayerEntity player) {
         return this.inventory.canPlayerUse(player);
     }
+
     static class DisplaySlot extends Slot {
 
         public DisplaySlot(Inventory inventory, int index, int x, int y) {
@@ -55,16 +93,21 @@ public class ItemDisplayBoardScreenHandler extends ScreenHandler {
         }
 
         @Override
+        public boolean canTakeItems(PlayerEntity playerEntity) {
+            return false;
+        }
+
+        @Override
         public int getMaxItemCount() {
             return 1;
         }
 
-        @Override
+        /*@Override
         public ItemStack takeStack(int amount) {
             super.takeStack(amount);
             return ItemStack.EMPTY;
 
-        }
+        }*/
 
         // ↓ ↓ override methods from Spud's shops "https://github.com/Milo-Cat/spuds-shops" ↓ ↓
         @Override
@@ -79,6 +122,7 @@ public class ItemDisplayBoardScreenHandler extends ScreenHandler {
             ItemStack thisStack = this.getStack();
 
             if (thisStack.isEmpty() || thisStack.getItem() != newStack.getItem()) {
+
                 this.setStack(newStack.copy());
                 this.getStack().setCount(1);
                 return newStack;

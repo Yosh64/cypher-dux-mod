@@ -22,8 +22,9 @@ import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemDisplayBoardBlockEntity extends BlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory<BlockPos> {
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(1, ItemStack.EMPTY);
+    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(46, ItemStack.EMPTY);
     public static final Text TITLE = Text.translatable("container."+ CypherDuxMod.MOD_ID+".item_display_board");
+
     public ItemDisplayBoardBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntityTypes.ITEM_DISPLAY_BOARD_BLOCK_ENTITY, pos, state);
 
@@ -55,7 +56,6 @@ public class ItemDisplayBoardBlockEntity extends BlockEntity implements Implemen
     public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
         return createNbt(registryLookup);
     }
-
 
     @Override
     public Text getDisplayName() {
