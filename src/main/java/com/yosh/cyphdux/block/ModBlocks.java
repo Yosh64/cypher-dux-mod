@@ -2,6 +2,7 @@ package com.yosh.cyphdux.block;
 
 import com.yosh.cyphdux.CypherDuxMod;
 import com.yosh.cyphdux.block.custom.EnrichingFurnaceBlock;
+import com.yosh.cyphdux.block.custom.ItemDisplayBoardBlock;
 import com.yosh.cyphdux.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -41,6 +42,8 @@ public class ModBlocks {
     public static final Block ENRICHED_COPPER_PLATED_COAL_BLOCK = register(new Block(AbstractBlock.Settings.create().mapColor(MapColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(5.0F, 6.0F).luminance(state -> 5)),"enriched_copper_plated_coal_block",true,16);
 
     public static final EnrichingFurnaceBlock ENRICHING_FURNACE = register(new EnrichingFurnaceBlock(AbstractBlock.Settings.create().luminance(EnrichingFurnaceBlock::getLuminance).mapColor(MapColor.DULL_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(3.5F)),"enriching_furnace",true);
+
+    public static final ItemDisplayBoardBlock ITEM_DISPLAY_BOARD = register(new ItemDisplayBoardBlock(AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).strength(2.0F,6.0F)),"item_display_board",true);
     public static void initialize() {
         CypherDuxMod.LOGGER.info("Registering Blocks");
         FuelRegistry.INSTANCE.add(ModBlocks.CHARCOAL_BLOCK,12000);
@@ -53,12 +56,17 @@ public class ModBlocks {
             itemGroup.add(ModBlocks.ENRICHED_COPPER_PLATED_COAL_BLOCK.asItem());
             itemGroup.add(ModBlocks.ENRICHING_FURNACE.asItem());
             itemGroup.add(ModBlocks.ROSE_GOLD_BLOCK.asItem());
+            itemGroup.add(ModBlocks.ITEM_DISPLAY_BOARD.asItem());
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register((itemGroup) -> {
             itemGroup.add(ModBlocks.CHARCOAL_BLOCK.asItem());
             itemGroup.add(ModBlocks.COPPER_PLATED_COAL_BLOCK.asItem());
             itemGroup.add(ModBlocks.ENRICHED_COPPER_PLATED_COAL_BLOCK.asItem());
             itemGroup.add(ModBlocks.ROSE_GOLD_BLOCK.asItem());
+        });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register((itemGroup)->{
+            itemGroup.add(ModBlocks.ENRICHING_FURNACE.asItem());
+            itemGroup.add(ModBlocks.ITEM_DISPLAY_BOARD.asItem());
         });
     }
 }
