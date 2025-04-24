@@ -1,10 +1,15 @@
 package com.yosh.cyphdux.item;
 
 import com.yosh.cyphdux.CypherDuxMod;
+import com.yosh.cyphdux.armor.DivingArmorItem;
 import com.yosh.cyphdux.armor.ModArmorMaterials;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.minecraft.component.type.AttributeModifierSlot;
+import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -35,6 +40,9 @@ public class ModItems {
         addToItemGroup(SYNTHETIC_AMETHYST, ItemGroups.INGREDIENTS);
         addToItemGroup(SYNTHETIC_EMERALD, ItemGroups.INGREDIENTS);
         addToItemGroup(KAYBER_KRYSTAL, ItemGroups.INGREDIENTS);
+        addToItemGroup(DIVING_HELMET,ItemGroups.COMBAT);
+        addToItemGroup(DIVING_HELMET_MK2,ItemGroups.COMBAT);
+        addToItemGroup(DIVING_HELMET_MK3,ItemGroups.COMBAT);
 
         addToItemGroup(ROSE_GOLD_INGOT);
         addToItemGroup(ROSE_GOLD_HELMET);
@@ -52,6 +60,9 @@ public class ModItems {
         addToItemGroup(SYNTHETIC_AMETHYST);
         addToItemGroup(SYNTHETIC_EMERALD);
         addToItemGroup(KAYBER_KRYSTAL);
+        addToItemGroup(DIVING_HELMET);
+        addToItemGroup(DIVING_HELMET_MK2);
+        addToItemGroup(DIVING_HELMET_MK3);
     }
 
     public static final RegistryKey<ItemGroup> CYPHER_DUX_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(CypherDuxMod.MOD_ID, "item_group"));
@@ -97,4 +108,17 @@ public class ModItems {
     public static final Item SYNTHETIC_AMETHYST = register(new Item(new Item.Settings()),"synthetic_amethyst");
     public static final Item SYNTHETIC_EMERALD = register(new Item(new Item.Settings()),"synthetic_emerald");
     public static final Item KAYBER_KRYSTAL = register(new Item(new Item.Settings()),"kayber_krystal");
+
+    public static final Item DIVING_HELMET = register(new DivingArmorItem(ModArmorMaterials.DIVING,ArmorItem.Type.HELMET, new Item.Settings().maxDamage(30)),"diving_helmet_mk1");
+
+    public static final Item DIVING_HELMET_MK2 = register(new DivingArmorItem(ModArmorMaterials.DIVING_2,ArmorItem.Type.HELMET, new Item.Settings().maxDamage(72)
+            .attributeModifiers(AttributeModifiersComponent.builder()
+                    .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,new EntityAttributeModifier(Identifier.ofVanilla("armor." + ArmorItem.Type.HELMET.getName()),(double)-0.05,EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),AttributeModifierSlot.forEquipmentSlot(ArmorItem.Type.HELMET.getEquipmentSlot()))
+                    .build())),"diving_helmet_mk2");
+
+    public static final Item DIVING_HELMET_MK3 = register(new DivingArmorItem(ModArmorMaterials.DIVING_3,ArmorItem.Type.HELMET, new Item.Settings().maxDamage(180)
+            .attributeModifiers(AttributeModifiersComponent.builder()
+                    .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,new EntityAttributeModifier(Identifier.ofVanilla("armor." + ArmorItem.Type.HELMET.getName()),(double)-0.1,EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),AttributeModifierSlot.forEquipmentSlot(ArmorItem.Type.HELMET.getEquipmentSlot()))
+                    .build())),"diving_helmet_mk3");
+
 }

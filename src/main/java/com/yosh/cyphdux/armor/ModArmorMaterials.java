@@ -2,8 +2,10 @@ package com.yosh.cyphdux.armor;
 
 import com.yosh.cyphdux.CypherDuxMod;
 import com.yosh.cyphdux.item.ModItems;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.PotionContentsComponent;
+import net.minecraft.item.*;
+import net.minecraft.potion.Potions;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -19,7 +21,9 @@ import java.util.function.Supplier;
 public class ModArmorMaterials {
     public static void initialize() {
         CypherDuxMod.LOGGER.info("Registering Armor Materials");
+        potion.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.WATER_BREATHING));
     }
+    private static final ItemStack potion = new ItemStack(Items.POTION);
     public static RegistryEntry<ArmorMaterial> registerMaterial(String id, Map<ArmorItem.Type, Integer> defensePoints, int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredientSupplier, float toughness, float knockbackResistance, boolean dyeable) {
         // Get the supported layers for the armor material
         List<ArmorMaterial.Layer> layers = List.of(
@@ -56,4 +60,38 @@ public class ModArmorMaterials {
             0.0F,
             // NOT dye-able, so we will pass false.
             false);
+    public static final RegistryEntry<ArmorMaterial> DIVING = registerMaterial("diving",
+            // Defense (protection) point values for each armor piece.
+            Map.of(
+                    ArmorItem.Type.HELMET, 0,
+                    ArmorItem.Type.CHESTPLATE, 4,
+                    ArmorItem.Type.LEGGINGS, 3,
+                    ArmorItem.Type.BOOTS, 0
+            ),
+            9, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
+            0.0F,
+            0.0F,false);
+    public static final RegistryEntry<ArmorMaterial> DIVING_2 = registerMaterial("diving_2",
+            // Defense (protection) point values for each armor piece.
+            Map.of(
+                    ArmorItem.Type.HELMET, 0,
+                    ArmorItem.Type.CHESTPLATE, 4,
+                    ArmorItem.Type.LEGGINGS, 3,
+                    ArmorItem.Type.BOOTS, 0
+            ),
+            9, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
+            0.0F,
+            0.0F,false);
+
+    public static final RegistryEntry<ArmorMaterial> DIVING_3 = registerMaterial("diving_3",
+            // Defense (protection) point values for each armor piece.
+            Map.of(
+                    ArmorItem.Type.HELMET, 0,
+                    ArmorItem.Type.CHESTPLATE, 4,
+                    ArmorItem.Type.LEGGINGS, 3,
+                    ArmorItem.Type.BOOTS, 0
+            ),
+            9, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
+            0.0F,
+            0.0F,false);
 }

@@ -6,18 +6,15 @@ import com.yosh.cyphdux.sceenhandler.ItemDisplayBoardScreenHandler;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.client.search.SearchManager;
-import net.minecraft.client.search.SearchProvider;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -31,8 +28,8 @@ public class ItemDisplayBoardScreen extends HandledScreen<ItemDisplayBoardScreen
     private float scrollAmount;
     private boolean mouseClicked;
     private int scrollOffset;
-    /*private TextFieldWidget searchWidget;
-    private boolean ignoreTypedCharacter;*/
+    private TextFieldWidget searchWidget;
+    private boolean ignoreTypedCharacter;
 
     public ItemDisplayBoardScreen(ItemDisplayBoardScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -60,10 +57,11 @@ public class ItemDisplayBoardScreen extends HandledScreen<ItemDisplayBoardScreen
     @Override
     protected void init() {
         super.init();
-        /*searchWidget = new TextFieldWidget(client.textRenderer,this.x+80,this.y+19,88,10,Text.of("container."+ CypherDuxMod.MOD_ID+".item_display_board.search"));
-        searchWidget.setMaxLength(50);
-        searchWidget.setDrawsBackground(false);
-        addDrawableChild(searchWidget);*/
+        this.searchWidget = new TextFieldWidget(client.textRenderer,this.x+81,this.y+20,100,10,Text.of("container."+ CypherDuxMod.MOD_ID+".item_display_board.search"));
+        this.searchWidget.setMaxLength(50);
+        this.searchWidget.setDrawsBackground(true);
+        this.searchWidget.setText("");
+        addDrawableChild(this.searchWidget);
     }
 
     @Override
@@ -78,7 +76,7 @@ public class ItemDisplayBoardScreen extends HandledScreen<ItemDisplayBoardScreen
             if (i < (this.handler.getItemListCount())){
                 this.handler.getSlot(i+1-this.scrollOffset).setStack(list.get(i));
             }else{
-                this.handler.getSlot(i+1-this.scrollOffset).setStack(new ItemStack(Items.BARRIER));
+                this.handler.getSlot(i+1-this.scrollOffset).setStack(ItemStack.EMPTY);
             }
         }
     }
@@ -130,7 +128,7 @@ public class ItemDisplayBoardScreen extends HandledScreen<ItemDisplayBoardScreen
         }
     }
 
-    /*@Override
+    @Override
     public boolean charTyped(char chr, int modifiers) {
         String string = this.searchWidget.getText();
         if (this.searchWidget.charTyped(chr, modifiers)) {
@@ -150,14 +148,11 @@ public class ItemDisplayBoardScreen extends HandledScreen<ItemDisplayBoardScreen
         if (string.isEmpty()){
             this.handler.itemList.addAll(ItemGroups.getSearchGroup().getSearchTabStacks());
         }else{
-            ClientPlayNetworkHandler clientPlayNetworkHandler = this.client.getNetworkHandler();
-            if (clientPlayNetworkHandler != null) {
-                SearchManager searchManager = clientPlayNetworkHandler.getSearchManager();
-                SearchProvider<ItemStack> searchProvider;
-                searchProvider = searchManager.getItemTooltipReloadFuture();
+            List<ItemStack> searchResult = new ArrayList<>(ItemGroups.getSearchGroup().getSearchTabStacks());
 
-                this.handler.itemList.addAll(searchProvider.findAll(string.toLowerCase(Locale.ROOT)));
-            }
+            searchResult = searchResult.stream().filter(itemStack -> itemStack.getName().getString().toLowerCase(Locale.ROOT).contains(string)).toList();
+
+            this.handler.itemList.addAll(searchResult);
         }
 
         this.scrollAmount = 0.0F;
@@ -182,5 +177,5 @@ public class ItemDisplayBoardScreen extends HandledScreen<ItemDisplayBoardScreen
                 return this.searchWidget.isFocused() && this.searchWidget.isVisible() && keyCode != 256 || super.keyPressed(keyCode, scanCode, modifiers);
             }
         }
-    }*/
+    }
 }

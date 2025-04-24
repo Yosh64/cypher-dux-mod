@@ -31,22 +31,22 @@ public class ItemDisplayBoardBlockEntityRenderer implements BlockEntityRenderer<
         matrices.push();
         switch (direction){
             default -> {
-                matrices.translate(0.5f,0.5f,0.87f);
+                matrices.translate(0.5f,0.5f,0.93f);
                 matrices.scale(0.5f,0.5f,0.01f);
                 rotation = 180F;
             }
             case SOUTH -> {
-                matrices.translate(0.5f,0.5f,0.13f);
+                matrices.translate(0.5f,0.5f,0.07f);
                 matrices.scale(0.5f,0.5f,0.01f);
                 rotation = 0F;
             }
             case EAST -> {
-                matrices.translate(0.13f,0.5f,0.5f);
+                matrices.translate(0.07f,0.5f,0.5f);
                 matrices.scale(0.01f,0.5f,0.5f);
                 rotation = 90F;
             }
             case WEST -> {
-                matrices.translate(0.87f,0.5f,0.5f);
+                matrices.translate(0.93f,0.5f,0.5f);
                 matrices.scale(0.01f,0.5f,0.5f);
                 rotation = 270F;
             }
@@ -54,12 +54,13 @@ public class ItemDisplayBoardBlockEntityRenderer implements BlockEntityRenderer<
         matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(rotation));
 
         itemRenderer.renderItem(stack, ModelTransformationMode.GUI, getLightLevel(entity.getWorld(),entity.getPos()), OverlayTexture.DEFAULT_UV,matrices, vertexConsumers,entity.getWorld(),1);
+
         matrices.pop();
     }
 
     private int getLightLevel(World world, BlockPos pos){
         int bLight = world.getLightLevel(LightType.BLOCK,pos);
         int sLight = world.getLightLevel(LightType.SKY,pos);
-        return LightmapTextureManager.pack(bLight,sLight);
+        return LightmapTextureManager.pack(15,15);
     }
 }

@@ -8,6 +8,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.screen.slot.SlotActionType;
@@ -67,7 +68,11 @@ public class ItemDisplayBoardScreenHandler extends ScreenHandler {
     @Override
     public void onSlotClick(int slotIndex, int button, SlotActionType actionType, PlayerEntity player) {
         if(player.getWorld().isClient && slotIndex > 0 && slotIndex <= 45) {
-            DisplayItemC2SPayload payload = new DisplayItemC2SPayload(this.getSlot(slotIndex).getStack());
+            ItemStack selectedItem =this.getSlot(slotIndex).getStack();
+            if(selectedItem.isEmpty()){
+                selectedItem = new ItemStack(Items.BARRIER);
+            }
+            DisplayItemC2SPayload payload = new DisplayItemC2SPayload(selectedItem);
             ClientPlayNetworking.send(payload);
         } else if (slotIndex == 0) {
             if(!player.getWorld().isClient){
@@ -101,13 +106,6 @@ public class ItemDisplayBoardScreenHandler extends ScreenHandler {
         public int getMaxItemCount() {
             return 1;
         }
-
-        /*@Override
-        public ItemStack takeStack(int amount) {
-            super.takeStack(amount);
-            return ItemStack.EMPTY;
-
-        }*/
 
         // ↓ ↓ override methods from Spud's shops "https://github.com/Milo-Cat/spuds-shops" ↓ ↓
         @Override

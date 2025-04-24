@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " c ",
+    "chc",
+    " k "
+  ],
+  "key": {
+    "k": {
+      "item": "cypher-dux-mod:kayber_krystal"
+    },
+    "c": {
+      "item": "minecraft:copper_ingot"
+    },
+    "h": {
+      "item": "cypher-dux-mod:diving_helmet_mk2"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "cypher-dux-mod:diving_helmet_mk3"
+  }
+}

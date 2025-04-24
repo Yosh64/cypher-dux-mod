@@ -6,10 +6,13 @@
   "block.cypher-dux-mod.enriching_furnace": "Enriching Furnace",
   "block.cypher-dux-mod.rose_gold_block": "Block of Rose Gold",
   "container.cypher-dux-mod.enriching_furnace": "Enriching Furnace",
-  "container.cypher-dux-mod.item_display_board": "Item Display Board",
+  "container.cypher-dux-mod.item_display_board": "Display Frame",
   "emi.category.cypher-dux-mod.enriching": "Enriching",
   "item.cypher-dux-mod.copper_plated_coal": "Copper-Plated Coal",
   "item.cypher-dux-mod.enriched_copper_plated_coal": "Enriched Copper-Plated Coal",
+  "item.cypher-dux-mod.diving_helmet_mk1": "Diving Helmet Mk.1",
+  "item.cypher-dux-mod.diving_helmet_mk2": "Diving Helmet Mk.2",
+  "item.cypher-dux-mod.diving_helmet_mk3": "Diving Helmet Mk.3",
   "item.cypher-dux-mod.kayber_krystal": "Kayber Krystal",
   "item.cypher-dux-mod.rose_gold_axe": "Rose Gold Axe",
   "item.cypher-dux-mod.rose_gold_boots": "Rose Gold Boots",
@@ -23,7 +26,7 @@
   "item.cypher-dux-mod.rose_gold_sword": "Rose Gold Sword",
   "item.cypher-dux-mod.synthetic_amethyst": "Synthetic Amethyst",
   "item.cypher-dux-mod.synthetic_emerald": "Synthetic Emerald",
-  "itemGroup.cypher-dux-mod": "Cypher & Dux Mod",
+  "itemGroup.cypher-dux-mod": "Cypher Dux Mod",
   "tag.item.cypher-dux-mod.piglin_safe_armor": "Piglin Safe Armor",
   "trim_material.cypher-dux-mod.rose_gold": "Rose gold Material"
 }

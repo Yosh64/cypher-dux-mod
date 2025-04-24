@@ -25,6 +25,12 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     }
     @Override
     public void generate(RecipeExporter exporter) {
-
+        /*
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.DIVING_HELMET).pattern("ggg").pattern("gpg")
+                .input('g', Ingredient.ofItems(Items.GLASS))
+                .input('p',Items.POTION)
+                .criterion(FabricRecipeProvider.hasItem(Items.POTION),FabricRecipeProvider.conditionsFromItem(Items.POTION))
+                .criterion(FabricRecipeProvider.hasItem(Items.GLASS),FabricRecipeProvider.conditionsFromItem(Items.GLASS))
+                .offerTo(exporter);*/
     }
 }

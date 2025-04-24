@@ -43,7 +43,7 @@ public class ModBlocks {
 
     public static final EnrichingFurnaceBlock ENRICHING_FURNACE = register(new EnrichingFurnaceBlock(AbstractBlock.Settings.create().luminance(EnrichingFurnaceBlock::getLuminance).mapColor(MapColor.DULL_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(3.5F)),"enriching_furnace",true);
 
-    public static final ItemDisplayBoardBlock ITEM_DISPLAY_BOARD = register(new ItemDisplayBoardBlock(AbstractBlock.Settings.create().mapColor(MapColor.STONE_GRAY).strength(2.0F,6.0F)),"item_display_board",true);
+    public static final ItemDisplayBoardBlock ITEM_DISPLAY_BOARD = register(new ItemDisplayBoardBlock(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).strength(2.0F,6.0F).sounds(BlockSoundGroup.WOOD)),"item_display_board",true);
     public static void initialize() {
         CypherDuxMod.LOGGER.info("Registering Blocks");
         FuelRegistry.INSTANCE.add(ModBlocks.CHARCOAL_BLOCK,12000);

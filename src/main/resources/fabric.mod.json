@@ -2,7 +2,7 @@
 	"schemaVersion": 1,
 	"id": "cypher-dux-mod",
 	"version": "${version}",
-	"name": "Cypher & Dux Mod",
+	"name": "Cypher Dux Mod",
 	"description": "Small mod that adds rose gold stuff, enriching furnace and more.",
 	"authors": [
 		"Yosh64"

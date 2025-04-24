@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "fsf",
+    "sis",
+    "fsf"
+  ],
+  "key": {
+    "f": {
+      "item": "minecraft:iron_nugget"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "i": [
+      {
+        "item": "minecraft:glow_item_frame"
+      },
+      {
+        "item": "minecraft:item_frame"
+      }
+    ]
+  },
+  "result": {
+    "count": 1,
+    "id": "cypher-dux-mod:item_display_board"
+  }
+}
