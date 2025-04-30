@@ -70,9 +70,23 @@ public class ItemDisplayBoardBlock extends BlockWithEntity implements BlockEntit
     }
 
     @Nullable
-    @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        BlockState blockState = this.getDefaultState();
+        WorldView worldView = ctx.getWorld();
+        BlockPos blockPos = ctx.getBlockPos();
+        Direction[] directions = ctx.getPlacementDirections();
+
+        for(Direction direction : directions) {
+            if (direction.getAxis().isHorizontal()) {
+                Direction direction2 = direction.getOpposite();
+                blockState = (BlockState)blockState.with(FACING, direction2);
+                if (blockState.canPlaceAt(worldView, blockPos)) {
+                    return blockState;
+                }
+            }
+        }
+
+        return null;
     }
 
     @Override
@@ -108,6 +122,7 @@ public class ItemDisplayBoardBlock extends BlockWithEntity implements BlockEntit
         BlockState blockState = world.getBlockState(blockPos);
         return blockState.isSideSolidFullSquare(world, blockPos, facing);
     }
+
     protected BlockState getStateForNeighborUpdate(BlockState state, Direction direction, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
         return direction.getOpposite() == state.get(FACING) && !state.canPlaceAt(world, pos) ? Blocks.AIR.getDefaultState() : state;
     }

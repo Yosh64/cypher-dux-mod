@@ -36,14 +36,14 @@ public class ModBlocks {
         return Registry.register(Registries.BLOCK, id, block);
     }
 
-    public static final Block ROSE_GOLD_BLOCK = register(new Block(AbstractBlock.Settings.create().mapColor(MapColor.GOLD).instrument(NoteBlockInstrument.BELL).requiresTool().strength(3.0F, 6.0F).sounds(BlockSoundGroup.METAL)),"rose_gold_block",true);
+    public static final Block ROSE_GOLD_BLOCK = register(new Block(AbstractBlock.Settings.create().mapColor(MapColor.PINK).instrument(NoteBlockInstrument.BELL).requiresTool().strength(4.5F, 6.0F).sounds(BlockSoundGroup.METAL)),"rose_gold_block",true);
     public static final Block CHARCOAL_BLOCK = register(new Block(AbstractBlock.Settings.create().mapColor(MapColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(5.0F, 6.0F)),"charcoal_block",true);
     public static final Block COPPER_PLATED_COAL_BLOCK= register(new Block(AbstractBlock.Settings.create().mapColor(MapColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(5.0F, 6.0F)),"copper_plated_coal_block",true);
     public static final Block ENRICHED_COPPER_PLATED_COAL_BLOCK = register(new Block(AbstractBlock.Settings.create().mapColor(MapColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(5.0F, 6.0F).luminance(state -> 5)),"enriched_copper_plated_coal_block",true,16);
 
     public static final EnrichingFurnaceBlock ENRICHING_FURNACE = register(new EnrichingFurnaceBlock(AbstractBlock.Settings.create().luminance(EnrichingFurnaceBlock::getLuminance).mapColor(MapColor.DULL_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(3.5F)),"enriching_furnace",true);
 
-    public static final ItemDisplayBoardBlock ITEM_DISPLAY_BOARD = register(new ItemDisplayBoardBlock(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).strength(2.0F,6.0F).sounds(BlockSoundGroup.WOOD)),"item_display_board",true);
+    public static final ItemDisplayBoardBlock ITEM_DISPLAY_BOARD = register(new ItemDisplayBoardBlock(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).strength(2.0F,3.0F).sounds(BlockSoundGroup.WOOD)),"item_display_board",true);
     public static void initialize() {
         CypherDuxMod.LOGGER.info("Registering Blocks");
         FuelRegistry.INSTANCE.add(ModBlocks.CHARCOAL_BLOCK,12000);

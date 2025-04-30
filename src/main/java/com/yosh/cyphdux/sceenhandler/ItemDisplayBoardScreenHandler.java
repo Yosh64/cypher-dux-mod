@@ -15,13 +15,13 @@ import net.minecraft.screen.slot.SlotActionType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import org.apache.commons.compress.utils.Lists;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDisplayBoardScreenHandler extends ScreenHandler {
     private final Inventory inventory;
-    public final List<ItemStack> itemList = Lists.newArrayList();
+    public final List<ItemStack> itemList = new ArrayList<>();
     private final ItemDisplayBoardBlockEntity displayBoardBlockEntity;
     public ItemDisplayBoardScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
         this(syncId, playerInventory, (ItemDisplayBoardBlockEntity) playerInventory.player.getWorld().getBlockEntity(pos));

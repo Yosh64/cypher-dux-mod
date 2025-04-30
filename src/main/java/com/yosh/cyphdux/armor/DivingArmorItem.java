@@ -53,7 +53,7 @@ public class DivingArmorItem extends ArmorItem {
     private void addStatusEffectForMaterial(PlayerEntity player, List<StatusEffectInstance> mapStatusEffect) {
         boolean hasPlayerEffect = mapStatusEffect.stream().allMatch(statusEffectInstance -> player.hasStatusEffect(statusEffectInstance.getEffectType()));
 
-        if (!hasPlayerEffect && player.isSubmergedInWater()) {
+        if (!hasPlayerEffect && player.getAir()!=player.getMaxAir()) {
             player.getInventory().getArmorStack(3).damage(1,player, player.getPreferredEquipmentSlot(player.getInventory().getArmorStack(3)));
             for (StatusEffectInstance instance : mapStatusEffect) {
                 player.addStatusEffect(new StatusEffectInstance(instance.getEffectType(),
