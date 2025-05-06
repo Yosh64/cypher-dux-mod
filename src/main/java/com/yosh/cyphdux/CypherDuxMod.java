@@ -12,6 +12,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
@@ -41,12 +42,15 @@ public class CypherDuxMod implements ModInitializer {
 					if(!isSlotTheSame){
 						context.player().getWorld().playSound(null,context.player().getBlockPos(), SoundEvents.ENTITY_ITEM_FRAME_REMOVE_ITEM, SoundCategory.PLAYERS);
 					}
+					screenHandler.getDisplayBoardBlockEntity().markDirty();
 				}else{
 					screenHandler.getSlot(0).setStack(displayedItem);
 					if(!isSlotTheSame){
 						context.player().getWorld().playSound(null,context.player().getBlockPos(), SoundEvents.ENTITY_ITEM_FRAME_ADD_ITEM, SoundCategory.PLAYERS);
 					}
+					screenHandler.getDisplayBoardBlockEntity().markDirty();
 				}
+				screenHandler.getDisplayBoardBlockEntity().getWorld().updateListeners(screenHandler.getDisplayBoardBlockEntity().getPos(),screenHandler.getDisplayBoardBlockEntity().getCachedState(),screenHandler.getDisplayBoardBlockEntity().getCachedState(), Block.NOTIFY_ALL);
 			}
 		});
 	}
