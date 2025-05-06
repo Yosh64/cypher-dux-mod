@@ -1,11 +1,12 @@
 {
-	"required": true,
-	"package": "com.yosh.cyphdux.mixin",
-	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-		"PiglinBrainMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
+  "required": true,
+  "package": "com.yosh.cyphdux.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EndermanEntityMixin",
+    "PiglinBrainMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
 	}
 }

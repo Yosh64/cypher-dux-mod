@@ -140,18 +140,19 @@ public class ItemDisplayBoardBlock extends BlockWithEntity implements BlockEntit
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if(world.getBlockEntity(pos) instanceof ItemDisplayBoardBlockEntity itemDisplayBoardBlockEntity) {
-            if(!stack.isEmpty() && !player.isSneaking()) {
+            ItemStack displayStack = itemDisplayBoardBlockEntity.getStack(0);
+            if(!stack.isEmpty() && !player.isSneaking() && !(displayStack==stack)) {
                 itemDisplayBoardBlockEntity.setStack(0, stack.copyWithCount(1));
                 world.playSound(player, pos, SoundEvents.ENTITY_ITEM_FRAME_ADD_ITEM, SoundCategory.BLOCKS, 1f, 1f);
 
                 itemDisplayBoardBlockEntity.markDirty();
-                world.updateListeners(pos, state, state, 0);
-            } else if(stack.isEmpty() && player.isSneaking()) {
+                world.updateListeners(pos, state, state, 3);
+            } else if(stack.isEmpty() && player.isSneaking() && !displayStack.isEmpty()) {
                 world.playSound(player, pos, SoundEvents.ENTITY_ITEM_FRAME_REMOVE_ITEM, SoundCategory.BLOCKS, 1f, 1f);
                 itemDisplayBoardBlockEntity.clear();
 
                 itemDisplayBoardBlockEntity.markDirty();
-                world.updateListeners(pos, state, state, 0);
+                world.updateListeners(pos, state, state, 3);
             } else if(!world.isClient()) {
                 player.openHandledScreen(itemDisplayBoardBlockEntity);
             }

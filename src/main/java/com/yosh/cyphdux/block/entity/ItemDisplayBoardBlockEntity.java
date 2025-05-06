@@ -71,4 +71,5 @@ public class ItemDisplayBoardBlockEntity extends BlockEntity implements Implemen
     public BlockPos getScreenOpeningData(ServerPlayerEntity serverPlayerEntity) {
         return this.pos;
     }
+
 }

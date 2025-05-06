@@ -3,6 +3,7 @@ package com.yosh.cyphdux.sceenhandler;
 import com.yosh.cyphdux.block.entity.ItemDisplayBoardBlockEntity;
 import com.yosh.cyphdux.network.DisplayItemC2SPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -76,9 +77,11 @@ public class ItemDisplayBoardScreenHandler extends ScreenHandler {
             ClientPlayNetworking.send(payload);
         } else if (slotIndex == 0) {
             if(!player.getWorld().isClient){
-                boolean isSlotTheSame = this.displayBoardBlockEntity.getStack(0) == this.displayBoardBlockEntity.getStack(slotIndex);
+                boolean isStackEmpty = this.displayBoardBlockEntity.getStack(0) == ItemStack.EMPTY;
                 this.displayBoardBlockEntity.setStack(0, ItemStack.EMPTY);
-                if (!isSlotTheSame) {
+                this.displayBoardBlockEntity.getWorld().updateListeners(this.displayBoardBlockEntity.getPos(),this.displayBoardBlockEntity.getCachedState(),this.displayBoardBlockEntity.getCachedState(),Block.NOTIFY_ALL);
+                this.displayBoardBlockEntity.markDirty();
+                if (!isStackEmpty) {
                     player.getWorld().playSound(null, player.getBlockPos(), SoundEvents.ENTITY_ITEM_FRAME_REMOVE_ITEM, SoundCategory.PLAYERS);
                 }
             }
@@ -89,6 +92,10 @@ public class ItemDisplayBoardScreenHandler extends ScreenHandler {
     @Override
     public boolean canUse(PlayerEntity player) {
         return this.inventory.canPlayerUse(player);
+    }
+
+    public ItemDisplayBoardBlockEntity getDisplayBoardBlockEntity() {
+        return displayBoardBlockEntity;
     }
 
     static class DisplaySlot extends Slot {
