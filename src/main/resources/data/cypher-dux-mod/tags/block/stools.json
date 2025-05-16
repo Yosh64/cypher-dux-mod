@@ -1,7 +1,6 @@
 {
   "values": [
-    "cypher-dux-mod:item_display_board",
-	"cypher-dux-mod:oak_stool",
+    "cypher-dux-mod:oak_stool",
     "cypher-dux-mod:spruce_stool",
     "cypher-dux-mod:birch_stool",
     "cypher-dux-mod:acacia_stool",

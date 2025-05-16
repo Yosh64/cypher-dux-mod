@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "waterlogged=false": {
+      "model": "cypher-dux-mod:block/glowing_torch_off"
+    },
+    "waterlogged=true": {
+      "model": "cypher-dux-mod:block/glowing_torch"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "cypher-dux-mod:block/stool",
+	"textures": {
+		"stool": "block/jungle_planks",
+		"particle": "block/jungle_planks"
+	}
+}

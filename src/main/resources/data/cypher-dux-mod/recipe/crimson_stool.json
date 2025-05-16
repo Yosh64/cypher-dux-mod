@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "g": {
+      "item": "minecraft:crimson_planks"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "ggg",
+    "s s"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cypher-dux-mod:crimson_stool"
+  }
+}

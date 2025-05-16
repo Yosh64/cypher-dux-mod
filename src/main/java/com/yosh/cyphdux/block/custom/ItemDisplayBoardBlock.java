@@ -71,22 +71,8 @@ public class ItemDisplayBoardBlock extends BlockWithEntity implements BlockEntit
 
     @Nullable
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        BlockState blockState = this.getDefaultState();
-        WorldView worldView = ctx.getWorld();
-        BlockPos blockPos = ctx.getBlockPos();
-        Direction[] directions = ctx.getPlacementDirections();
-
-        for(Direction direction : directions) {
-            if (direction.getAxis().isHorizontal()) {
-                Direction direction2 = direction.getOpposite();
-                blockState = (BlockState)blockState.with(FACING, direction2);
-                if (blockState.canPlaceAt(worldView, blockPos)) {
-                    return blockState;
-                }
-            }
-        }
-
-        return null;
+        BlockState blockState = Blocks.WALL_TORCH.getPlacementState(ctx);
+        return blockState == null ? null : (BlockState)this.getDefaultState().with(FACING, (Direction)blockState.get(FACING));
     }
 
     @Override

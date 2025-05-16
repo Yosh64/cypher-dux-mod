@@ -1,0 +1,15 @@
+{
+  "type": "cypher-dux-mod:enriching",
+  "addition": {
+    "item": "minecraft:blaze_rod"
+  },
+  "base": {
+    "item": "cypher-dux-mod:kayber_krystal"
+  },
+  "result": {
+    "id": "minecraft:breeze_rod",
+    "count": 1
+  },
+  "experience": 1,
+  "cookingtime": 3200
+}

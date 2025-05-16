@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "cypher-dux-mod:block/bamboo_stool",
+      "y": 90
+    },
+    "axis=z": {
+      "model": "cypher-dux-mod:block/bamboo_stool"
+    }
+  }
+}

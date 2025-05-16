@@ -13,7 +13,10 @@ public class ModTags {
         private static TagKey<Block> createTag(String name){
             return TagKey.of(RegistryKeys.BLOCK, Identifier.of(CypherDuxMod.MOD_ID,name));
         }
+
+        public static final TagKey<Block> STOOLS = createTag("stools");
     }
+
     public static class Items{
         public static final TagKey<Item> PIGLIN_SAFE_ARMOR = createTag("piglin_safe_armor");
         public static final TagKey<Item> ENDERMAN_SAFE_HAT = createTag("enderman_safe_hat");
@@ -22,6 +25,7 @@ public class ModTags {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(CypherDuxMod.MOD_ID,name));
         }
     }
+
     public static class EntityTypes{
         private static TagKey<EntityType<?>> createTag(String name){
             return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(CypherDuxMod.MOD_ID,name));
