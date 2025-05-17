@@ -36,6 +36,17 @@ public class EnrichingRecipe implements Recipe<DoubleStackRecipeInput> {
         return addition.test(input.getStackInSlot(0)) && base.test(input.getStackInSlot(1));
     }
 
+    public boolean isInRecipe(ItemStack itemStack, int slot, World world) {
+        if (world.isClient()){
+            return false;
+        }
+        return switch (slot) {
+            case 0 -> addition.test(itemStack);
+            case 1 -> base.test(itemStack);
+            default -> false;
+        };
+    }
+
     @Override
     public ItemStack craft(DoubleStackRecipeInput input, RegistryWrapper.WrapperLookup lookup) {
         return output;

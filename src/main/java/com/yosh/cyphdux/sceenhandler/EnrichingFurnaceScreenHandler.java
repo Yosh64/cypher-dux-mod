@@ -2,12 +2,14 @@ package com.yosh.cyphdux.sceenhandler;
 
 import com.yosh.cyphdux.block.ModBlocks;
 import com.yosh.cyphdux.block.entity.EnrichingFurnaceBlockEntity;
+import com.yosh.cyphdux.recipe.EnrichingRecipe;
 import com.yosh.cyphdux.sceenhandler.slot.ModOutputSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
@@ -22,6 +24,7 @@ public class EnrichingFurnaceScreenHandler extends ScreenHandler {
     private final ScreenHandlerContext context;
     private final Inventory inventory;
     private final World world;
+    private final RecipeType<EnrichingRecipe> recipeType = EnrichingRecipe.Type.INSTANCE;
     private final PropertyDelegate propertyDelegate;
 
     // Client Constructor (called from client)
@@ -109,12 +112,20 @@ public class EnrichingFurnaceScreenHandler extends ScreenHandler {
 
                 slot2.onQuickTransfer(itemStack2, itemStack);
             } else if (slot != 1 && slot != 0) {
-                if (this.isFuel(itemStack2)) {
+                if (this.isInRecipeSlot(itemStack2,0)) {
+                    if (!this.insertItem(itemStack2, 0, 1, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (this.isInRecipeSlot(itemStack2,1)) {
+                    if (!this.insertItem(itemStack2, 1, 2, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (this.isFuel(itemStack2)) {
                     if (!this.insertItem(itemStack2, 2, 3, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (!this.insertItem(itemStack2, 0, 2, false)) {
-                    return ItemStack.EMPTY;
+                /*} else if (!this.insertItem(itemStack2, 0, 2, false)) {
+                    return ItemStack.EMPTY;*/
                 } else if (slot >= 3 && slot < 30) {
                     if (!this.insertItem(itemStack2, 30, 39, false)) {
                         return ItemStack.EMPTY;
@@ -140,6 +151,10 @@ public class EnrichingFurnaceScreenHandler extends ScreenHandler {
         }
 
         return itemStack;
+    }
+
+    private boolean isInRecipeSlot(ItemStack itemStack, int slotIndex) {
+        return this.world.getRecipeManager().listAllOfType(this.recipeType).stream().anyMatch(enrichingRecipeRecipeEntry -> enrichingRecipeRecipeEntry.value().isInRecipe(itemStack,slotIndex, this.world));
     }
 
     protected boolean isFuel(ItemStack itemStack) {

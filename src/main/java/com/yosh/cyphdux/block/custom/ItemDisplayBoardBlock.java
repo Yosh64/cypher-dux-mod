@@ -91,6 +91,20 @@ public class ItemDisplayBoardBlock extends BlockWithEntity implements BlockEntit
     }
 
     @Override
+    protected boolean hasComparatorOutput(BlockState state) {
+        return true;
+    }
+
+    @Override
+    protected int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof ItemDisplayBoardBlockEntity displayBoardBlock) {
+            return displayBoardBlock.getStack(0).isEmpty()? 0:15;
+        }
+        return 0;
+    }
+
+    @Override
     protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
