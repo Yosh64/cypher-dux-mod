@@ -1,0 +1,10 @@
+{
+  "zinzin_of_the_bells": {
+    "sounds": [
+      {
+        "name": "cypher-dux-mod:records/zinzin_of_the_bells",
+        "stream": true
+      }
+    ]
+  }
+}

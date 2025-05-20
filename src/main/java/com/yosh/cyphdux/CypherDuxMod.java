@@ -9,6 +9,7 @@ import com.yosh.cyphdux.network.DisplayItemC2SPayload;
 import com.yosh.cyphdux.recipe.ModRecipes;
 import com.yosh.cyphdux.sceenhandler.ItemDisplayBoardScreenHandler;
 import com.yosh.cyphdux.sceenhandler.ScreenHandlerTypes;
+import com.yosh.cyphdux.sound.ModSounds;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
@@ -33,6 +34,7 @@ public class CypherDuxMod implements ModInitializer {
 		ModBlockEntityTypes.initialize();
 		ScreenHandlerTypes.initialize();
 		ModRecipes.initialize();
+		ModSounds.initialize();
 		ModEntities.registerModEntities();
 
 		PayloadTypeRegistry.playC2S().register(DisplayItemC2SPayload.ID, DisplayItemC2SPayload.CODEC);

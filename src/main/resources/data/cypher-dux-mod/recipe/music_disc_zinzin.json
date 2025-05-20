@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "PDP",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:ice"
+    },
+    "P": {
+      "item": "minecraft:ender_pearl"
+    },
+    "D": {
+      "item": "minecraft:music_disc_pigstep"
+    }
+  },
+  "result": {
+    "id": "cypher-dux-mod:music_disc_zinzin",
+    "count": 1
+  }
+}

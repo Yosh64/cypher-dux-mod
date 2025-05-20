@@ -4,10 +4,10 @@ import com.yosh.cyphdux.CypherDuxMod;
 import com.yosh.cyphdux.armor.DivingArmorItem;
 import com.yosh.cyphdux.armor.ModArmorMaterials;
 import com.yosh.cyphdux.block.ModBlocks;
+import com.yosh.cyphdux.sound.ModSounds;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.minecraft.block.Blocks;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
@@ -16,9 +16,14 @@ import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.math.Direction;
+
+import java.util.List;
 
 public class ModItems {
 
@@ -33,6 +38,7 @@ public class ModItems {
             itemGroup.addAfter(Items.CHARCOAL,COPPER_PLATED_COAL,ENRICHED_COPPER_PLATED_COAL);
             itemGroup.addAfter(Items.AMETHYST_SHARD,SYNTHETIC_AMETHYST,KAYBER_KRYSTAL);
             itemGroup.addAfter(Items.EMERALD,SYNTHETIC_EMERALD);
+            itemGroup.addAfter(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,ModItems.ROSE_GOLD_UPGRADE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(itemGroup -> {
             itemGroup.addAfter(Items.GOLDEN_BOOTS,ROSE_GOLD_HELMET,ROSE_GOLD_CHESTPLATE,ROSE_GOLD_LEGGINGS,ROSE_GOLD_BOOTS);
@@ -42,8 +48,11 @@ public class ModItems {
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(itemGroup -> {
             itemGroup.addAfter(Items.GOLDEN_HOE,ROSE_GOLD_SHOVEL,ROSE_GOLD_PICKAXE,ROSE_GOLD_AXE,ROSE_GOLD_HOE);
+            itemGroup.addAfter(Items.MUSIC_DISC_PIGSTEP,ZINZIN_DISC);
         });
+
         ItemGroupEvents.modifyEntriesEvent(CYPHER_DUX_ITEM_GROUP_KEY).register(itemGroup -> {
+            itemGroup.add(ROSE_GOLD_UPGRADE);
             itemGroup.add(ROSE_GOLD_INGOT);
             itemGroup.add(ROSE_GOLD_HELMET);
             itemGroup.add(ROSE_GOLD_CHESTPLATE);
@@ -63,28 +72,8 @@ public class ModItems {
             itemGroup.add(DIVING_HELMET_MK1);
             itemGroup.add(DIVING_HELMET_MK2);
             itemGroup.add(DIVING_HELMET_MK3);
-
+            itemGroup.add(ZINZIN_DISC);
         });
-
-        addToItemGroup(ROSE_GOLD_INGOT, ItemGroups.INGREDIENTS);
-        addToItemGroup(ROSE_GOLD_HELMET, ItemGroups.COMBAT);
-        addToItemGroup(ROSE_GOLD_CHESTPLATE, ItemGroups.COMBAT);
-        addToItemGroup(ROSE_GOLD_LEGGINGS, ItemGroups.COMBAT);
-        addToItemGroup(ROSE_GOLD_BOOTS, ItemGroups.COMBAT);
-        addToItemGroup(ROSE_GOLD_SWORD, ItemGroups.COMBAT);
-        addToItemGroup(ROSE_GOLD_AXE, ItemGroups.COMBAT);
-        addToItemGroup(ROSE_GOLD_SHOVEL, ItemGroups.TOOLS);
-        addToItemGroup(ROSE_GOLD_PICKAXE, ItemGroups.TOOLS);
-        addToItemGroup(ROSE_GOLD_AXE, ItemGroups.TOOLS);
-        addToItemGroup(ROSE_GOLD_HOE, ItemGroups.TOOLS);
-        addToItemGroup(COPPER_PLATED_COAL, ItemGroups.INGREDIENTS);
-        addToItemGroup(ENRICHED_COPPER_PLATED_COAL, ItemGroups.INGREDIENTS);
-        addToItemGroup(SYNTHETIC_AMETHYST, ItemGroups.INGREDIENTS);
-        addToItemGroup(SYNTHETIC_EMERALD, ItemGroups.INGREDIENTS);
-        addToItemGroup(KAYBER_KRYSTAL, ItemGroups.INGREDIENTS);
-        addToItemGroup(DIVING_HELMET_MK1,ItemGroups.COMBAT);
-        addToItemGroup(DIVING_HELMET_MK2,ItemGroups.COMBAT);
-        addToItemGroup(DIVING_HELMET_MK3,ItemGroups.COMBAT);
     }
 
     public static final RegistryKey<ItemGroup> CYPHER_DUX_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(CypherDuxMod.MOD_ID, "item_group"));
@@ -92,18 +81,8 @@ public class ModItems {
             .icon(() -> new ItemStack(ModItems.ROSE_GOLD_INGOT))
             .displayName(Text.translatable("itemGroup.cypher-dux-mod"))
             .build());
-
-    public static void addToItemGroup(Item item){
-        ItemGroupEvents.modifyEntriesEvent(CYPHER_DUX_ITEM_GROUP_KEY).register(itemGroup -> {
-            itemGroup.add(item);
-        });
-    }
-    public static void addToItemGroup(Item item, RegistryKey<ItemGroup> itemGroupRegistryKey) {
-        // register the item in the item group!
-        ItemGroupEvents.modifyEntriesEvent(itemGroupRegistryKey).register(itemGroup -> {
-            itemGroup.add(item);
-        });
-    }
+    public static final List<Identifier> EMPTY_BASE_SLOT = ((SmithingTemplateItem)Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE.asItem()).getEmptyBaseSlotTextures();
+    public static final List<Identifier> EMPTY_ADDITION_SLOT = ((SmithingTemplateItem)Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE.asItem()).getEmptyAdditionsSlotTextures();
 
     public static Item register(Item item, String id) {
         // Create the identifier for the item.
@@ -127,6 +106,14 @@ public class ModItems {
     public static final Item ROSE_GOLD_PICKAXE = register(new PickaxeItem(ModToolMaterials.ROSE_GOLD, new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(ModToolMaterials.ROSE_GOLD,1F,-2.8F))),"rose_gold_pickaxe");
     public static final Item ROSE_GOLD_SHOVEL = register(new ShovelItem(ModToolMaterials.ROSE_GOLD, new Item.Settings().attributeModifiers(ShovelItem.createAttributeModifiers(ModToolMaterials.ROSE_GOLD,1.5F,-3.0F))),"rose_gold_shovel");
     public static final Item ROSE_GOLD_HOE = register(new HoeItem(ModToolMaterials.ROSE_GOLD, new Item.Settings().attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.ROSE_GOLD,-2F,-1.0F))),"rose_gold_hoe");
+public static final Item ROSE_GOLD_UPGRADE = register(new SmithingTemplateItem(
+        Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".rose_gold_upgrade.applies_to").formatted(Formatting.BLUE),
+        Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".rose_gold_upgrade.ingredients").formatted(Formatting.BLUE),
+        Text.translatable("upgrade."+ CypherDuxMod.MOD_ID+".rose_gold_upgrade").formatted(Formatting.GRAY),
+        Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".rose_gold_upgrade.base_slot_description"),
+        Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".rose_gold_upgrade.additions_slot_description"),
+        EMPTY_BASE_SLOT,EMPTY_ADDITION_SLOT,new FeatureFlag[0]),
+        "rose_gold_upgrade_smithing_template");
 
     public static final Item COPPER_PLATED_COAL = register(new Item(new Item.Settings()),"copper_plated_coal");
     public static final Item ENRICHED_COPPER_PLATED_COAL = register(new Item(new Item.Settings()),"enriched_copper_plated_coal");
@@ -147,5 +134,8 @@ public class ModItems {
                     .build())),"diving_helmet_mk3");
 
     public static final Item GLOWING_TORCH = register((BlockItem)(new VerticallyAttachableBlockItem(ModBlocks.GLOWING_TORCH, ModBlocks.WALL_GLOWING_TORCH, new Item.Settings(), Direction.DOWN)));
+
+    public static final Item ZINZIN_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(ModSounds.ZINZIN_KEY)),"music_disc_zinzin");
+            //register("music_disc_strad", new Item((new Item.Settings()).maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(JukeboxSongs.STRAD)));
 
 }

@@ -1,0 +1,8 @@
+{
+  "description": {
+    "translate": "item.cypher-dux-mod.music_disc_zinzin.desc"
+  },
+  "comparator_output": 7,
+  "length_in_seconds": 155,
+  "sound_event": "cypher-dux-mod:zinzin_of_the_bells"
+}

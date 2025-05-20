@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:gold_nugget"
+    },
+    "C": [
+      {
+      "item": "minecraft:copper_block"
+      },
+      {
+      "item": "minecraft:waxed_copper_block"
+      }
+    ],
+    "S": {
+      "item": "minecraft:honeycomb"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "#C#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cypher-dux-mod:rose_gold_upgrade_smithing_template"
+  }
+}
