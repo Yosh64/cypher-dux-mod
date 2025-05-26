@@ -17,6 +17,8 @@
   "block.cypher-dux-mod.rose_gold_block": "Block of Rose Gold",
   "block.cypher-dux-mod.spruce_stool": "Spruce Stool",
   "block.cypher-dux-mod.warped_stool": "Warped Stool",
+  "block.cypher-dux-mod.cardboard_box": "Cardboard Box",
+  "container.cypher-dux-mod.cardboard_box": "Cardboard Box",
   "container.cypher-dux-mod.enriching_furnace": "Enriching Furnace",
   "container.cypher-dux-mod.item_display_board": "Display Frame",
   "emi.category.cypher-dux-mod.enriching": "Enriching",

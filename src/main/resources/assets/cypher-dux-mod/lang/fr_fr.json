@@ -17,6 +17,8 @@
   "block.cypher-dux-mod.rose_gold_block": "Bloc d'or rose",
   "block.cypher-dux-mod.spruce_stool": "Tabouret en spain",
   "block.cypher-dux-mod.warped_stool": "Tabouret biscornue",
+  "block.cypher-dux-mod.cardboard_box": "Boite en carton",
+  "container.cypher-dux-mod.cardboard_box": "Boite en carton",
   "container.cypher-dux-mod.enriching_furnace": "Four d'enrichissement",
   "container.cypher-dux-mod.item_display_board": "Cadre de présentation",
   "emi.category.cypher-dux-mod.enriching": "Enrichissement",

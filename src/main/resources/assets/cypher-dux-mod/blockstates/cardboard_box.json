@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "cypher-dux-mod:block/cardboard_box" },
+    "facing=south": { "model": "cypher-dux-mod:block/cardboard_box","y": 180 },
+    "facing=east": { "model": "cypher-dux-mod:block/cardboard_box","y": 90 },
+    "facing=west": { "model": "cypher-dux-mod:block/cardboard_box","y": 270 }
+  }
+}

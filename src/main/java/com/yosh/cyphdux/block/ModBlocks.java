@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.enums.NoteBlockInstrument;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -62,6 +63,8 @@ public class ModBlocks {
     public static final StoolBlock WARPED_STOOL = register(new StoolBlock(AbstractBlock.Settings.copy(Blocks.WARPED_PLANKS)),"warped_stool",true);
     public static final StoolBlock CRIMSON_STOOL = register(new StoolBlock(AbstractBlock.Settings.copy(Blocks.CRIMSON_PLANKS)),"crimson_stool",true);
 
+    public static final CardboardBoxBlock CARDBOARD_BOX = register(new CardboardBoxBlock(AbstractBlock.Settings.create().hardness(1.0F).resistance(5.0F).mapColor(MapColor.OAK_TAN).pistonBehavior(PistonBehavior.DESTROY)),"cardboard_box",true);
+
     public static void initialize() {
         CypherDuxMod.LOGGER.info("Registering Blocks");
         FuelRegistry.INSTANCE.add(ModBlocks.CHARCOAL_BLOCK,12000);
@@ -77,6 +80,7 @@ public class ModBlocks {
         FuelRegistry.INSTANCE.add(ModBlocks.MANGROVE_STOOL,300);
         FuelRegistry.INSTANCE.add(ModBlocks.CHERRY_STOOL,300);
         FuelRegistry.INSTANCE.add(ModBlocks.BAMBOO_STOOL,300);
+        FuelRegistry.INSTANCE.add(ModBlocks.CARDBOARD_BOX,40);
 
         ItemGroupEvents.modifyEntriesEvent(ModItems.CYPHER_DUX_ITEM_GROUP_KEY).register((itemGroup) -> {
             itemGroup.add(ModBlocks.CHARCOAL_BLOCK.asItem());
@@ -97,6 +101,7 @@ public class ModBlocks {
             itemGroup.add(ModBlocks.BAMBOO_STOOL.asItem());
             itemGroup.add(ModBlocks.CRIMSON_STOOL.asItem());
             itemGroup.add(ModBlocks.WARPED_STOOL.asItem());
+            itemGroup.add(ModBlocks.CARDBOARD_BOX.asItem());
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register((itemGroup) -> {
             itemGroup.addAfter(Items.COAL_BLOCK,ModBlocks.CHARCOAL_BLOCK.asItem(),ModBlocks.COPPER_PLATED_COAL_BLOCK.asItem(),ModBlocks.ENRICHED_COPPER_PLATED_COAL_BLOCK.asItem());
@@ -106,6 +111,7 @@ public class ModBlocks {
             itemGroup.addAfter(Items.BLAST_FURNACE,ModBlocks.ENRICHING_FURNACE.asItem());
             itemGroup.addBefore(Items.ITEM_FRAME,ModBlocks.ITEM_DISPLAY_BOARD.asItem());
             itemGroup.addAfter(Items.REDSTONE_TORCH,ModBlocks.GLOWING_TORCH.asItem());
+            itemGroup.addAfter(Items.BARREL,ModBlocks.CARDBOARD_BOX.asItem());
             itemGroup.add(ModBlocks.OAK_STOOL.asItem());
             itemGroup.add(ModBlocks.SPRUCE_STOOL.asItem());
             itemGroup.add(ModBlocks.BIRCH_STOOL.asItem());

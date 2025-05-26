@@ -1,8 +1,11 @@
 package com.yosh.cyphdux;
 
+import com.mojang.brigadier.arguments.FloatArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.yosh.cyphdux.armor.ModArmorMaterials;
 import com.yosh.cyphdux.block.ModBlocks;
 import com.yosh.cyphdux.block.entity.ModBlockEntityTypes;
+import com.yosh.cyphdux.command.RandomTeleportCommand;
 import com.yosh.cyphdux.entity.ModEntities;
 import com.yosh.cyphdux.item.ModItems;
 import com.yosh.cyphdux.network.DisplayItemC2SPayload;
@@ -12,6 +15,7 @@ import com.yosh.cyphdux.sceenhandler.ScreenHandlerTypes;
 import com.yosh.cyphdux.sound.ModSounds;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.block.Block;
@@ -21,6 +25,9 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static net.minecraft.server.command.CommandManager.argument;
+import static net.minecraft.server.command.CommandManager.literal;
 
 public class CypherDuxMod implements ModInitializer {
 	public static final String MOD_ID = "cypher-dux-mod";
@@ -35,7 +42,7 @@ public class CypherDuxMod implements ModInitializer {
 		ScreenHandlerTypes.initialize();
 		ModRecipes.initialize();
 		ModSounds.initialize();
-		ModEntities.registerModEntities();
+		ModEntities.initialize();
 
 		PayloadTypeRegistry.playC2S().register(DisplayItemC2SPayload.ID, DisplayItemC2SPayload.CODEC);
 		ServerPlayNetworking.registerGlobalReceiver(DisplayItemC2SPayload.ID,(payload, context)->{
@@ -58,5 +65,29 @@ public class CypherDuxMod implements ModInitializer {
 				screenHandler.getDisplayBoardBlockEntity().getWorld().updateListeners(screenHandler.getDisplayBoardBlockEntity().getPos(),screenHandler.getDisplayBoardBlockEntity().getCachedState(),screenHandler.getDisplayBoardBlockEntity().getCachedState(), Block.NOTIFY_ALL);
 			}
 		});
+
+		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("tp-r")
+                .executes(RandomTeleportCommand::randomTeleport)
+                .then(argument("width", FloatArgumentType.floatArg(1))
+                .executes(context ->
+                        RandomTeleportCommand.randomTeleport(
+                                context,
+                                FloatArgumentType.getFloat(context, "width")
+                        ))
+                .then(argument("height", FloatArgumentType.floatArg(1,16))
+                .executes(context ->
+                        RandomTeleportCommand.randomTeleport(
+                                context,
+                                FloatArgumentType.getFloat(context, "width"),
+                                FloatArgumentType.getFloat(context, "height")
+                        ))
+                .then(argument("maxAttempts", IntegerArgumentType.integer(1))
+                .executes(context ->
+                        RandomTeleportCommand.randomTeleport(
+                                context,
+                                FloatArgumentType.getFloat(context, "width"),
+                                FloatArgumentType.getFloat(context, "height"),
+                                IntegerArgumentType.getInteger(context, "maxAttempts")
+                        )))))));
 	}
 }

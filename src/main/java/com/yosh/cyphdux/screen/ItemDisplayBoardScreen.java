@@ -57,9 +57,10 @@ public class ItemDisplayBoardScreen extends HandledScreen<ItemDisplayBoardScreen
     @Override
     protected void init() {
         super.init();
-        this.searchWidget = new TextFieldWidget(client.textRenderer,this.x+81,this.y+20,100,10,Text.of("container."+ CypherDuxMod.MOD_ID+".item_display_board.search"));
+        this.searchWidget = new TextFieldWidget(client.textRenderer,this.x+80,this.y+19,108,12,Text.of("container."+ CypherDuxMod.MOD_ID+".item_display_board.search"));
         this.searchWidget.setMaxLength(50);
         this.searchWidget.setDrawsBackground(true);
+        this.setInitialFocus(this.searchWidget);
         this.searchWidget.setText("");
         addDrawableChild(this.searchWidget);
     }
@@ -107,9 +108,14 @@ public class ItemDisplayBoardScreen extends HandledScreen<ItemDisplayBoardScreen
         this.mouseClicked = false;
 
         int i = this.x + 175;
-        int j = this.y + 21;
+        int j = this.y + 33;
         if (mouseX >= (double)i && mouseX < (double)(i + 45) && mouseY >= (double)j && mouseY < (double)(j + SCROLLBAR_AREA_HEIGHT)) {
             this.mouseClicked = true;
+        }
+        i = this.x + 80;
+        j = this.y + 19;
+        if (mouseX >= (double)i && mouseX < (double)(i + 108) && mouseY >= (double)j && mouseY < (double)(j + 12)) {
+            this.setFocused(false);
         }
         return super.mouseClicked(mouseX, mouseY, button);
     }
