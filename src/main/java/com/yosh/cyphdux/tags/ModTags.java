@@ -20,6 +20,7 @@ public class ModTags {
     public static class Items{
         public static final TagKey<Item> PIGLIN_SAFE_ARMOR = createTag("piglin_safe_armor");
         public static final TagKey<Item> ENDERMAN_SAFE_HAT = createTag("enderman_safe_hat");
+        public static TagKey<Item> NO_LABEL_RENDER = createTag("no_label_render");
 
         private static TagKey<Item> createTag(String name){
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(CypherDuxMod.MOD_ID,name));
@@ -31,5 +32,6 @@ public class ModTags {
             return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(CypherDuxMod.MOD_ID,name));
         }
         public static TagKey<EntityType<?>> ENDERMAN_FRIENDS = createTag("enderman_friends");
+        public static TagKey<EntityType<?>> NO_LABEL_RENDER = createTag("no_label_render");
     }
 }

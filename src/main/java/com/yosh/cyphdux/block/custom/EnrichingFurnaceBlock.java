@@ -9,7 +9,7 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.ParticleTypes;
+import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -125,7 +125,7 @@ public class EnrichingFurnaceBlock extends BlockWithEntity implements BlockEntit
                 world.playSound(d, e, f, SoundEvents.BLOCK_SMOKER_SMOKE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
             }
 
-            world.addParticle(ParticleTypes.SMOKE, d, e + 1.1, f, 0.0, 0.0, 0.0);
+            world.addParticle(DustParticleEffect.DEFAULT, d, e + 1.1, f, 0.0, 0.0, 0.0);
         }
     }
 }

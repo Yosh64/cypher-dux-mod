@@ -4,8 +4,8 @@ import com.yosh.cyphdux.block.entity.ModBlockEntityTypes;
 import com.yosh.cyphdux.block.entity.renderer.ItemDisplayBoardBlockEntityRenderer;
 import com.yosh.cyphdux.entity.ModEntities;
 import com.yosh.cyphdux.entity.client.SitRenderer;
-import com.yosh.cyphdux.entity.custom.SitEntity;
 import com.yosh.cyphdux.sceenhandler.ScreenHandlerTypes;
+import com.yosh.cyphdux.screen.CardboardBoxScreen;
 import com.yosh.cyphdux.screen.EnrichingFurnaceScreen;
 import com.yosh.cyphdux.screen.ItemDisplayBoardScreen;
 import net.fabricmc.api.ClientModInitializer;
@@ -21,6 +21,7 @@ public class CypherDuxModClient implements ClientModInitializer {
         // Bind Screen <-> ScreenHandler
         HandledScreens.register(ScreenHandlerTypes.ENRICHING_FURNACE_SCREEN_HANDLER, EnrichingFurnaceScreen::new);
         HandledScreens.register(ScreenHandlerTypes.ITEM_DISPLAY_BOARD_SCREEN_HANDLER, ItemDisplayBoardScreen::new);
+        HandledScreens.register(ScreenHandlerTypes.CARDBOARD_BOX_SCREEN_HANDLER, CardboardBoxScreen::new);
 
         EntityRendererRegistry.register(ModEntities.SIT_ENTITY, SitRenderer::new);
     }

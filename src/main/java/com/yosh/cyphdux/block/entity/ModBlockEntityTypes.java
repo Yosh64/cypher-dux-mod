@@ -13,6 +13,8 @@ public class ModBlockEntityTypes {
 
     public static final BlockEntityType<ItemDisplayBoardBlockEntity> ITEM_DISPLAY_BOARD_BLOCK_ENTITY = register("item_display_board_block_entity",BlockEntityType.Builder.create(ItemDisplayBoardBlockEntity::new, ModBlocks.ITEM_DISPLAY_BOARD).build());
 
+    public static final BlockEntityType<CardboardBoxBlockEntity> CARDBOARD_BOX_ENTITY_BLOCK = register("cardboard_box_block_entity", BlockEntityType.Builder.create(CardboardBoxBlockEntity::new, ModBlocks.CARDBOARD_BOX).build());
+
     public static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type){
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(CypherDuxMod.MOD_ID,name), type);
     }

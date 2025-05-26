@@ -4,9 +4,13 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "EndermanEntityMixin",
+    "LivingEntityMixin",
     "PiglinBrainMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-	}
+  },
+  "client": [
+    "client.EntityRendererMixin"
+  ]
 }
