@@ -25,6 +25,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
+import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
 public class CardboardBoxBlock extends BlockWithEntity implements Equipment, Waterloggable {
@@ -54,7 +55,9 @@ public class CardboardBoxBlock extends BlockWithEntity implements Equipment, Wat
         if ((Boolean)state.get(WATERLOGGED)) {
             world.scheduleFluidTick(pos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-        return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
+        return direction == Direction.DOWN && !this.canPlaceAt(state, world, pos)
+                ? Blocks.AIR.getDefaultState()
+                : super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
     @Override
@@ -113,6 +116,11 @@ public class CardboardBoxBlock extends BlockWithEntity implements Equipment, Wat
         if (!world.isClient && projectile.canModifyAt(world, blockPos) && projectile.canBreakBlocks(world)) {
             world.breakBlock(blockPos, true, projectile);
         }
+    }
+
+    @Override
+    protected boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+        return !world.isAir(pos.down());
     }
 
     @Override

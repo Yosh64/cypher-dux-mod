@@ -5,7 +5,6 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,8 +23,8 @@ public abstract class LivingEntityMixin {
         for (EquipmentSlot equipmentSlot : slots) {
             ItemStack itemStack = this.getEquippedStack(equipmentSlot);
             if (itemStack.isOf(ModBlocks.CARDBOARD_BOX.asItem())){
+                playEquipmentBreakEffects(itemStack);
                 itemStack.decrement(1);
-                playEquipmentBreakEffects(Items.LEATHER_HELMET.getDefaultStack());
             }
         }
     }

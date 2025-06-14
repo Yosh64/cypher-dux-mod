@@ -5,9 +5,6 @@ import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.event.GameEvent;
@@ -45,14 +42,6 @@ public class RandomTeleportCommand {
                 Vec3d vec3d = user.getPos();
                 if (user.teleport(d, e, f, false)) {
                     world.emitGameEvent(GameEvent.TELEPORT, vec3d, GameEvent.Emitter.of(user));
-                    SoundCategory soundCategory;
-                    SoundEvent soundEvent;
-
-                    soundEvent = SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
-                    soundCategory = SoundCategory.PLAYERS;
-
-
-                    world.playSound(null, user.getX(), user.getY(), user.getZ(), soundEvent, soundCategory);
                     user.onLanding();
                     return 1;
                 }

@@ -49,7 +49,7 @@ public class ModBlocks {
     public static final ItemDisplayBoardBlock ITEM_DISPLAY_BOARD = register(new ItemDisplayBoardBlock(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).strength(2.0F,3.0F).sounds(BlockSoundGroup.WOOD)),"item_display_board",true);
 
     public static final GlowingTorchBlock GLOWING_TORCH = register(new GlowingTorchBlock(AbstractBlock.Settings.copy(Blocks.TORCH).luminance((state) -> (Boolean)state.get(Properties.WATERLOGGED) ? 14 : 0)),"glowing_torch",false);
-    public static final WallGlowingTorchBlock WALL_GLOWING_TORCH = register(new WallGlowingTorchBlock(AbstractBlock.Settings.copy(Blocks.WALL_TORCH).luminance((state) -> (Boolean)state.get(Properties.WATERLOGGED) ? 14 : 0)),"glowing_wall_torch",false);
+    public static final WallGlowingTorchBlock WALL_GLOWING_TORCH = register(new WallGlowingTorchBlock(AbstractBlock.Settings.copy(Blocks.WALL_TORCH).dropsLike(GLOWING_TORCH).luminance((state) -> (Boolean)state.get(Properties.WATERLOGGED) ? 14 : 0)),"glowing_wall_torch",false);
 
     public static final StoolBlock OAK_STOOL = register(new StoolBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)),"oak_stool",true);
     public static final StoolBlock SPRUCE_STOOL = register(new StoolBlock(AbstractBlock.Settings.copy(Blocks.SPRUCE_PLANKS)),"spruce_stool",true);
@@ -63,7 +63,7 @@ public class ModBlocks {
     public static final StoolBlock WARPED_STOOL = register(new StoolBlock(AbstractBlock.Settings.copy(Blocks.WARPED_PLANKS)),"warped_stool",true);
     public static final StoolBlock CRIMSON_STOOL = register(new StoolBlock(AbstractBlock.Settings.copy(Blocks.CRIMSON_PLANKS)),"crimson_stool",true);
 
-    public static final CardboardBoxBlock CARDBOARD_BOX = register(new CardboardBoxBlock(AbstractBlock.Settings.create().hardness(1.0F).resistance(5.0F).mapColor(MapColor.OAK_TAN).pistonBehavior(PistonBehavior.DESTROY)),"cardboard_box",true);
+    public static final CardboardBoxBlock CARDBOARD_BOX = register(new CardboardBoxBlock(AbstractBlock.Settings.create().hardness(0.75F).resistance(5.0F).mapColor(MapColor.OAK_TAN).pistonBehavior(PistonBehavior.DESTROY).sounds(BlockSoundGroup.BAMBOO)),"cardboard_box",true);
 
     public static void initialize() {
         CypherDuxMod.LOGGER.info("Registering Blocks");
