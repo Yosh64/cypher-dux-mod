@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cypher-dux-mod:item/music_disc_wilson"
+  }
+}

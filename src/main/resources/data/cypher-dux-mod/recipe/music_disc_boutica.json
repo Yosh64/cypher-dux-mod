@@ -7,23 +7,23 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:sweet_berries"
+      "item": "minecraft:spyglass"
     },
     "P": {
-      "item": "minecraft:powder_snow_bucket"
+      "item": "minecraft:heart_of_the_sea"
     },
     "B": {
-      "item": "minecraft:bell"
+      "item": "minecraft:clock"
     },
     "Q": {
       "item": "minecraft:copper_ingot"
     },
     "U": {
-      "item": "minecraft:blue_ice"
+      "item": "minecraft:horn_coral_block"
     }
   },
   "result": {
-    "id": "cypher-dux-mod:music_disc_zinzin",
+    "id": "cypher-dux-mod:music_disc_boutica",
     "count": 1
   }
 }

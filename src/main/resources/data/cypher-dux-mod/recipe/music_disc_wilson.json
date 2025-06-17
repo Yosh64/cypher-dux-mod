@@ -7,23 +7,23 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:sweet_berries"
+      "item": "minecraft:flowering_azalea_leaves"
     },
     "P": {
-      "item": "minecraft:powder_snow_bucket"
+      "item": "minecraft:glow_berries"
     },
     "B": {
-      "item": "minecraft:bell"
+      "item": "minecraft:honey_block"
     },
     "Q": {
       "item": "minecraft:copper_ingot"
     },
     "U": {
-      "item": "minecraft:blue_ice"
+      "item": "minecraft:grass_block"
     }
   },
   "result": {
-    "id": "cypher-dux-mod:music_disc_zinzin",
+    "id": "cypher-dux-mod:music_disc_wilson",
     "count": 1
   }
 }

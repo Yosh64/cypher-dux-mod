@@ -48,7 +48,7 @@ public class ModItems {
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(itemGroup -> {
             itemGroup.addAfter(Items.GOLDEN_HOE,ROSE_GOLD_SHOVEL,ROSE_GOLD_PICKAXE,ROSE_GOLD_AXE,ROSE_GOLD_HOE);
-            itemGroup.addAfter(Items.MUSIC_DISC_PIGSTEP,ZINZIN_DISC);
+            itemGroup.addAfter(Items.MUSIC_DISC_PIGSTEP,ZINZIN_DISC,WILSON_DISC,BOUTICA_DISC,KINGCHAM_DISC);
         });
 
         ItemGroupEvents.modifyEntriesEvent(CYPHER_DUX_ITEM_GROUP_KEY).register(itemGroup -> {
@@ -73,6 +73,9 @@ public class ModItems {
             itemGroup.add(DIVING_HELMET_MK2);
             itemGroup.add(DIVING_HELMET_MK3);
             itemGroup.add(ZINZIN_DISC);
+            itemGroup.add(WILSON_DISC);
+            itemGroup.add(BOUTICA_DISC);
+            itemGroup.add(KINGCHAM_DISC);
         });
     }
 
@@ -136,6 +139,9 @@ public static final Item ROSE_GOLD_UPGRADE = register(new SmithingTemplateItem(
     public static final Item GLOWING_TORCH = register((BlockItem)(new VerticallyAttachableBlockItem(ModBlocks.GLOWING_TORCH, ModBlocks.WALL_GLOWING_TORCH, new Item.Settings(), Direction.DOWN)));
 
     public static final Item ZINZIN_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(ModSounds.ZINZIN_KEY)),"music_disc_zinzin");
+    public static final Item BOUTICA_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON).jukeboxPlayable(ModSounds.ZINZIN_KEY)),"music_disc_boutica");
+    public static final Item WILSON_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.COMMON).jukeboxPlayable(ModSounds.ZINZIN_KEY)),"music_disc_wilson");
+    public static final Item KINGCHAM_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.EPIC).jukeboxPlayable(ModSounds.ZINZIN_KEY)),"music_disc_kingcham");
             //register("music_disc_strad", new Item((new Item.Settings()).maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(JukeboxSongs.STRAD)));
 
 }
