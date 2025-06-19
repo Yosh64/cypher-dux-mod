@@ -1,15 +1,15 @@
 {
   "type": "cypher-dux-mod:enriching",
   "addition": {
-    "item": "cypher-dux-mod:copper_plated_coal_block"
+    "item": "minecraft:raw_iron"
   },
   "base": {
-    "item": "cypher-dux-mod:kayber_krystal"
+    "item": "minecraft:raw_copper"
   },
   "result": {
-    "id": "minecraft:gold_ingot",
+    "id": "minecraft:raw_gold",
     "count": 1
   },
   "experience": 0.8,
-  "cookingtime": 1600
+  "cookingtime": 400
 }

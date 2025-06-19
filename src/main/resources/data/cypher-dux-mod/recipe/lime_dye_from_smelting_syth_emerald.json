@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "cypher-dux-mod:synthetic_amethyst"
+  },
+  "result": {
+    "id": "minecraft:magenta_dye"
+  },
+  "experience": 0.1,
+  "cookingtime": 200
+}
