@@ -1,0 +1,8 @@
+{
+  "description": {
+    "translate": "item.cypher-dux-mod.music_disc_wilson.desc"
+  },
+  "comparator_output": 9,
+  "length_in_seconds": 142,
+  "sound_event": "cypher-dux-mod:music_disc.haven"
+}

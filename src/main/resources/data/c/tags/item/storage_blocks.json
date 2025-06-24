@@ -3,6 +3,7 @@
     "cypher-dux-mod:rose_gold_block",
     "cypher-dux-mod:charcoal_block",
     "cypher-dux-mod:copper_plated_coal_block",
-    "cypher-dux-mod:enriched_copper_plated_coal_block"
+    "cypher-dux-mod:enriched_copper_plated_coal_block",
+    "cypher-dux-mod:kayber_block"
   ]
 }

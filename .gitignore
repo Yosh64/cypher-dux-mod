@@ -29,7 +29,8 @@ bin/
 *.DS_Store
 
 # fabric
-src/main/generated
+src/main/generated/
+src/main/java/com/yosh/cyphdux/datagen/
 run/
 
 # java

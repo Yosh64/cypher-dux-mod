@@ -138,10 +138,12 @@ public static final Item ROSE_GOLD_UPGRADE = register(new SmithingTemplateItem(
 
     public static final Item GLOWING_TORCH = register((BlockItem)(new VerticallyAttachableBlockItem(ModBlocks.GLOWING_TORCH, ModBlocks.WALL_GLOWING_TORCH, new Item.Settings(), Direction.DOWN)));
 
+    public static final Item CARDBOARD_BOX = register(new CardboardBoxBlockItem(ModBlocks.CARDBOARD_BOX, new Item.Settings().maxCount(1).fireproof()));
+
     public static final Item ZINZIN_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(ModSounds.ZINZIN_KEY)),"music_disc_zinzin");
-    public static final Item BOUTICA_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON).jukeboxPlayable(ModSounds.ZINZIN_KEY)),"music_disc_boutica");
-    public static final Item WILSON_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.COMMON).jukeboxPlayable(ModSounds.ZINZIN_KEY)),"music_disc_wilson");
-    public static final Item KINGCHAM_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.EPIC).jukeboxPlayable(ModSounds.ZINZIN_KEY)),"music_disc_kingcham");
+    public static final Item BOUTICA_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON).jukeboxPlayable(ModSounds.BOUTICA_KEY)),"music_disc_boutica");
+    public static final Item WILSON_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.COMMON).jukeboxPlayable(ModSounds.WILSON_KEY)),"music_disc_wilson");
+    public static final Item KINGCHAM_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.EPIC).jukeboxPlayable(ModSounds.KINGCHAM_KEY)),"music_disc_kingcham");
             //register("music_disc_strad", new Item((new Item.Settings()).maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(JukeboxSongs.STRAD)));
 
 }

@@ -5,10 +5,7 @@ import com.yosh.cyphdux.block.custom.*;
 import com.yosh.cyphdux.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.MapColor;
+import net.minecraft.block.*;
 import net.minecraft.block.enums.NoteBlockInstrument;
 import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.item.BlockItem;
@@ -49,6 +46,7 @@ public class ModBlocks {
     public static final ItemDisplayBoardBlock ITEM_DISPLAY_BOARD = register(new ItemDisplayBoardBlock(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).strength(2.0F,3.0F).sounds(BlockSoundGroup.WOOD)),"item_display_board",true);
 
     public static final GlowingTorchBlock GLOWING_TORCH = register(new GlowingTorchBlock(AbstractBlock.Settings.copy(Blocks.TORCH).luminance((state) -> (Boolean)state.get(Properties.WATERLOGGED) ? 14 : 0)),"glowing_torch",false);
+
     public static final WallGlowingTorchBlock WALL_GLOWING_TORCH = register(new WallGlowingTorchBlock(AbstractBlock.Settings.copy(Blocks.WALL_TORCH).dropsLike(GLOWING_TORCH).luminance((state) -> (Boolean)state.get(Properties.WATERLOGGED) ? 14 : 0)),"glowing_wall_torch",false);
 
     public static final StoolBlock OAK_STOOL = register(new StoolBlock(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS)),"oak_stool",true);
@@ -63,7 +61,9 @@ public class ModBlocks {
     public static final StoolBlock WARPED_STOOL = register(new StoolBlock(AbstractBlock.Settings.copy(Blocks.WARPED_PLANKS)),"warped_stool",true);
     public static final StoolBlock CRIMSON_STOOL = register(new StoolBlock(AbstractBlock.Settings.copy(Blocks.CRIMSON_PLANKS)),"crimson_stool",true);
 
-    public static final CardboardBoxBlock CARDBOARD_BOX = register(new CardboardBoxBlock(AbstractBlock.Settings.create().hardness(0.75F).resistance(5.0F).mapColor(MapColor.OAK_TAN).pistonBehavior(PistonBehavior.DESTROY).sounds(BlockSoundGroup.BAMBOO)),"cardboard_box",true);
+    public static final CardboardBoxBlock CARDBOARD_BOX = register(new CardboardBoxBlock(AbstractBlock.Settings.create().hardness(0.75F).resistance(5.0F).mapColor(MapColor.OAK_TAN).pistonBehavior(PistonBehavior.DESTROY).sounds(BlockSoundGroup.BAMBOO)),"cardboard_box",false);
+
+    public static final AmethystBlock KAYBER_BLOCK = register(new AmethystBlock(AbstractBlock.Settings.create().mapColor(MapColor.EMERALD_GREEN).strength(2.0F).sounds(BlockSoundGroup.AMETHYST_BLOCK).requiresTool()),"kayber_block",true);
 
     public static void initialize() {
         CypherDuxMod.LOGGER.info("Registering Blocks");
@@ -80,7 +80,7 @@ public class ModBlocks {
         FuelRegistry.INSTANCE.add(ModBlocks.MANGROVE_STOOL,300);
         FuelRegistry.INSTANCE.add(ModBlocks.CHERRY_STOOL,300);
         FuelRegistry.INSTANCE.add(ModBlocks.BAMBOO_STOOL,300);
-        FuelRegistry.INSTANCE.add(ModBlocks.CARDBOARD_BOX,40);
+        FuelRegistry.INSTANCE.add(ModItems.CARDBOARD_BOX,40);
 
         ItemGroupEvents.modifyEntriesEvent(ModItems.CYPHER_DUX_ITEM_GROUP_KEY).register((itemGroup) -> {
             itemGroup.add(ModBlocks.CHARCOAL_BLOCK.asItem());
@@ -88,6 +88,7 @@ public class ModBlocks {
             itemGroup.add(ModBlocks.ENRICHED_COPPER_PLATED_COAL_BLOCK.asItem());
             itemGroup.add(ModBlocks.ENRICHING_FURNACE.asItem());
             itemGroup.add(ModBlocks.ROSE_GOLD_BLOCK.asItem());
+            itemGroup.add(ModBlocks.KAYBER_BLOCK.asItem());
             itemGroup.add(ModBlocks.ITEM_DISPLAY_BOARD.asItem());
             itemGroup.add(ModBlocks.GLOWING_TORCH.asItem());
             itemGroup.add(ModBlocks.OAK_STOOL.asItem());
@@ -101,17 +102,18 @@ public class ModBlocks {
             itemGroup.add(ModBlocks.BAMBOO_STOOL.asItem());
             itemGroup.add(ModBlocks.CRIMSON_STOOL.asItem());
             itemGroup.add(ModBlocks.WARPED_STOOL.asItem());
-            itemGroup.add(ModBlocks.CARDBOARD_BOX.asItem());
+            itemGroup.add(ModItems.CARDBOARD_BOX);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.BUILDING_BLOCKS).register((itemGroup) -> {
             itemGroup.addAfter(Items.COAL_BLOCK,ModBlocks.CHARCOAL_BLOCK.asItem(),ModBlocks.COPPER_PLATED_COAL_BLOCK.asItem(),ModBlocks.ENRICHED_COPPER_PLATED_COAL_BLOCK.asItem());
             itemGroup.addAfter(Items.LIGHT_WEIGHTED_PRESSURE_PLATE,ModBlocks.ROSE_GOLD_BLOCK.asItem());
+            itemGroup.addAfter(Items.AMETHYST_BLOCK,ModBlocks.KAYBER_BLOCK.asItem());
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register((itemGroup)->{
             itemGroup.addAfter(Items.BLAST_FURNACE,ModBlocks.ENRICHING_FURNACE.asItem());
             itemGroup.addBefore(Items.ITEM_FRAME,ModBlocks.ITEM_DISPLAY_BOARD.asItem());
             itemGroup.addAfter(Items.REDSTONE_TORCH,ModBlocks.GLOWING_TORCH.asItem());
-            itemGroup.addAfter(Items.BARREL,ModBlocks.CARDBOARD_BOX.asItem());
+            itemGroup.addAfter(Items.BARREL,ModItems.CARDBOARD_BOX);
             itemGroup.add(ModBlocks.OAK_STOOL.asItem());
             itemGroup.add(ModBlocks.SPRUCE_STOOL.asItem());
             itemGroup.add(ModBlocks.BIRCH_STOOL.asItem());

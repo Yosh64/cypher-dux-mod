@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "cypher-dux-mod:block/kayber_block"
+    }
+  }
+}

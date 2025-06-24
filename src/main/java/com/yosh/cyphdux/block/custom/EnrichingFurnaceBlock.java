@@ -72,7 +72,7 @@ public class EnrichingFurnaceBlock extends BlockWithEntity implements BlockEntit
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return ModBlockEntityTypes.ENRICHING_FURNACE_BLOCK_ENTITY.instantiate(pos,state);
+        return new EnrichingFurnaceBlockEntity(pos,state);
     }
 
     @Override

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "kayber_krystal",
+  "ingredients": [
+    {
+      "item": "cypher-dux-mod:kayber_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "cypher-dux-mod:kayber_krystal"
+  }
+}

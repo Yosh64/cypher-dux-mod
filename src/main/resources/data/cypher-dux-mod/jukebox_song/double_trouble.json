@@ -1,0 +1,8 @@
+{
+  "description": {
+    "translate": "item.cypher-dux-mod.music_disc_kingcham.desc"
+  },
+  "comparator_output": 14,
+  "length_in_seconds": 217,
+  "sound_event": "cypher-dux-mod:music_disc.double_trouble"
+}

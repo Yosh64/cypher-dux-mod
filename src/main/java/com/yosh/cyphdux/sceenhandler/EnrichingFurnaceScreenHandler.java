@@ -31,6 +31,10 @@ public class EnrichingFurnaceScreenHandler extends ScreenHandler {
     public EnrichingFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos){
         this(syncId, playerInventory, (EnrichingFurnaceBlockEntity) playerInventory.player.getWorld().getBlockEntity(pos),new ArrayPropertyDelegate(4));
     }
+    // Client Constructor (called from client)
+    public EnrichingFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos, PropertyDelegate arrayPropertyDelegate){
+        this(syncId, playerInventory, (EnrichingFurnaceBlockEntity) playerInventory.player.getWorld().getBlockEntity(pos),arrayPropertyDelegate);
+    }
     // Main Constructor (directly called from the server)
     public EnrichingFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, EnrichingFurnaceBlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
         super(ScreenHandlerTypes.ENRICHING_FURNACE_SCREEN_HANDLER, syncId);

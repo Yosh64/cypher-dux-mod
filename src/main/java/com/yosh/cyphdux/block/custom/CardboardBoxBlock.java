@@ -1,23 +1,36 @@
 package com.yosh.cyphdux.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import com.yosh.cyphdux.block.ModBlocks;
 import com.yosh.cyphdux.block.entity.CardboardBoxBlockEntity;
+import com.yosh.cyphdux.block.entity.ModBlockEntityTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Equipment;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.loot.context.LootContextParameterSet;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -28,12 +41,15 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
+
 public class CardboardBoxBlock extends BlockWithEntity implements Equipment, Waterloggable {
 
     public static final MapCodec<CardboardBoxBlock> CODEC = createCodec(CardboardBoxBlock::new);
     public static final DirectionProperty FACING = Properties.HORIZONTAL_FACING;
     public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
     private static final VoxelShape SHAPE = CardboardBoxBlock.createCuboidShape(2,0,2,14,12,14);
+    public static final Identifier CONTENTS_DYNAMIC_DROP_ID = Identifier.ofVanilla("contents");
 
     public CardboardBoxBlock(Settings settings) {
         super(settings);
@@ -48,6 +64,12 @@ public class CardboardBoxBlock extends BlockWithEntity implements Equipment, Wat
     @Override
     public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new CardboardBoxBlockEntity(pos, state);
+    }
+
+    @Override
+    public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return validateTicker(type, ModBlockEntityTypes.CARDBOARD_BOX_BLOCK_ENTITY,
+                (world1, pos, state1, blockEntity) -> blockEntity.tick(world1, pos, state1));
     }
 
     @Override
@@ -100,11 +122,8 @@ public class CardboardBoxBlock extends BlockWithEntity implements Equipment, Wat
     protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (!state.isOf(newState.getBlock())) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
+            super.onStateReplaced(state, world, pos, newState, moved);
             if (blockEntity instanceof CardboardBoxBlockEntity) {
-                if (world instanceof ServerWorld) {
-                    ItemScatterer.spawn(world, pos, (CardboardBoxBlockEntity)blockEntity);
-                }
-                super.onStateReplaced(state, world, pos, newState, moved);
                 world.updateComparators(pos, this);
             }
         }
@@ -124,7 +143,69 @@ public class CardboardBoxBlock extends BlockWithEntity implements Equipment, Wat
     }
 
     @Override
+    public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state) {
+        ItemStack itemStack = super.getPickStack(world, pos, state);
+        world.getBlockEntity(pos, ModBlockEntityTypes.CARDBOARD_BOX_BLOCK_ENTITY).ifPresent(blockEntity -> blockEntity.setStackNbt(itemStack, world.getRegistryManager()));
+        return itemStack;
+    }
+
+    @Override
+    public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (blockEntity instanceof CardboardBoxBlockEntity CardboardBoxBlockEntity) {
+            if (!world.isClient && player.isCreative() && !CardboardBoxBlockEntity.isEmpty()) {
+                ItemStack itemStack = new ItemStack(ModBlocks.CARDBOARD_BOX);
+                itemStack.applyComponentsFrom(blockEntity.createComponentMap());
+                ItemEntity itemEntity = new ItemEntity(world, (double)pos.getX() + 0.5, (double)pos.getY() + 0.5, (double)pos.getZ() + 0.5, itemStack);
+                itemEntity.setToDefaultPickupDelay();
+                world.spawnEntity(itemEntity);
+            } else {
+                CardboardBoxBlockEntity.generateLoot(player);
+            }
+        }
+
+        return super.onBreak(world, pos, state, player);
+    }
+
+    @Override
+    protected List<ItemStack> getDroppedStacks(BlockState state, LootContextParameterSet.Builder builder) {
+        BlockEntity blockEntity = builder.getOptional(LootContextParameters.BLOCK_ENTITY);
+        if (blockEntity instanceof CardboardBoxBlockEntity CardboardBoxBlockEntity) {
+            builder = builder.addDynamicDrop(CONTENTS_DYNAMIC_DROP_ID, lootConsumer -> {
+                for (int i = 0; i < CardboardBoxBlockEntity.size(); i++) {
+                    lootConsumer.accept(CardboardBoxBlockEntity.getStack(i));
+                }
+            });
+        }
+
+        return super.getDroppedStacks(state, builder);
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
+        super.appendTooltip(stack, context, tooltip, options);
+
+        int i = 0;
+        int j = 0;
+
+        for (ItemStack itemStack : stack.getOrDefault(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT).iterateNonEmpty()) {
+            j++;
+            if (i <= 4) {
+                i++;
+                tooltip.add(Text.translatable("container.shulkerBox.itemCount", itemStack.getName(), itemStack.getCount()));
+            }
+        }
+
+        if (j - i > 0) {
+            tooltip.add(Text.translatable("container.shulkerBox.more", j - i).formatted(Formatting.ITALIC));
+        }
+    }
+
+    @Override
     public EquipmentSlot getSlotType() {
-        return EquipmentSlot.HEAD;
+        if (new ItemStack(this).get(DataComponentTypes.CONTAINER) == null) {
+            return EquipmentSlot.HEAD;
+        }
+        return EquipmentSlot.MAINHAND;
     }
 }

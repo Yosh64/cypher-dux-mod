@@ -1,6 +1,8 @@
 package com.yosh.cyphdux.sceenhandler;
 
 import com.yosh.cyphdux.block.entity.CardboardBoxBlockEntity;
+import com.yosh.cyphdux.item.ModItems;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
@@ -18,7 +20,12 @@ public class CardboardBoxScreenHandler extends ScreenHandler {
     public CardboardBoxScreenHandler(int syncId, PlayerInventory playerInventory, CardboardBoxBlockEntity blockEntity){
         super(ScreenHandlerTypes.CARDBOARD_BOX_SCREEN_HANDLER, syncId);
         this.inventory = ((Inventory)blockEntity);
-        this.addSlot(new Slot(inventory,0,80,17));
+        this.addSlot(new Slot(inventory,0,80,17){
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return !(stack.isIn(ConventionalItemTags.SHULKER_BOXES)||stack.isOf(ModItems.CARDBOARD_BOX));
+            }
+        });
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
     }

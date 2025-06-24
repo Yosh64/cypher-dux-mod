@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "cypher-dux-mod:block/kayber_block"
+  }
+}

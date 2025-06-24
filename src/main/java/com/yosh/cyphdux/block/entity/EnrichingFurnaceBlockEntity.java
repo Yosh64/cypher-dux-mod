@@ -109,7 +109,7 @@ public class EnrichingFurnaceBlockEntity extends BlockEntity implements Extended
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new EnrichingFurnaceScreenHandler(syncId,playerInventory,this, this.propertyDelegate);
+        return new EnrichingFurnaceScreenHandler(syncId,playerInventory,this.pos, this.propertyDelegate);
     }
 
     @Nullable

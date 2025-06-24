@@ -1,8 +1,32 @@
 {
-  "zinzin_of_the_bells": {
+  "music_disc.zinzin_of_the_bells": {
     "sounds": [
       {
         "name": "cypher-dux-mod:records/zinzin_of_the_bells",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.no_refunds": {
+    "sounds": [
+      {
+        "name": "cypher-dux-mod:records/no_refunds",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.haven": {
+    "sounds": [
+      {
+        "name": "cypher-dux-mod:records/haven",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.double_trouble": {
+    "sounds": [
+      {
+        "name": "cypher-dux-mod:records/double_trouble",
         "stream": true
       }
     ]

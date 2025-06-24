@@ -1,0 +1,8 @@
+{
+  "description": {
+    "translate": "item.cypher-dux-mod.music_disc_boutica.desc"
+  },
+  "comparator_output": 3,
+  "length_in_seconds": 116,
+  "sound_event": "cypher-dux-mod:music_disc.no_refunds"
+}

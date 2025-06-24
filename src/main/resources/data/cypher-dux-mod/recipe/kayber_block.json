@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "cypher-dux-mod:kayber_krystal"
+    },
+    {
+      "item": "cypher-dux-mod:kayber_krystal"
+    },
+    {
+      "item": "cypher-dux-mod:kayber_krystal"
+    },
+    {
+      "item": "cypher-dux-mod:kayber_krystal"
+    },
+    {
+      "item": "cypher-dux-mod:kayber_krystal"
+    },
+    {
+      "item": "cypher-dux-mod:kayber_krystal"
+    },
+    {
+      "item": "cypher-dux-mod:kayber_krystal"
+    },
+    {
+      "item": "cypher-dux-mod:kayber_krystal"
+    },
+    {
+      "item": "cypher-dux-mod:kayber_krystal"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cypher-dux-mod:kayber_block"
+  }
+}

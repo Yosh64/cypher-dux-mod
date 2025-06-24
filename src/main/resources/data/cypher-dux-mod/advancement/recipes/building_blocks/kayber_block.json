@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_kayber_krystal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "cypher-dux-mod:kayber_krystal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cypher-dux-mod:kayber_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_kayber_krystal"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cypher-dux-mod:kayber_block"
+    ]
+  }
+}

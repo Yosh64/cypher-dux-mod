@@ -19,6 +19,18 @@ public class ModSounds {
         return Registry.register(Registries.SOUND_EVENT,id,SoundEvent.of(id));
     }
 
-    public static SoundEvent ZINZIN_OF_THE_BELLS = register("zinzin_of_the_bells");
+    public static SoundEvent ZINZIN_OF_THE_BELLS = register("music_disc.zinzin_of_the_bells");
     public static final RegistryKey<JukeboxSong> ZINZIN_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(CypherDuxMod.MOD_ID,"zinzin_of_the_bells"));
+
+    public static SoundEvent BOUTICA = register("music_disc.no_refunds");
+    public static final RegistryKey<JukeboxSong> BOUTICA_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(CypherDuxMod.MOD_ID,"no_refunds"));
+
+    public static SoundEvent WILSON = register("music_disc.haven");
+    public static final RegistryKey<JukeboxSong> WILSON_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(CypherDuxMod.MOD_ID,"haven"));
+
+    //SoundEvent id in sound.json
+    public static SoundEvent KINGCHAM = register("music_disc.double_trouble");
+
+    //[path] need to the same as [path].json in data/namespace/jukebox_song
+    public static final RegistryKey<JukeboxSong> KINGCHAM_KEY = RegistryKey.of(RegistryKeys.JUKEBOX_SONG, Identifier.of(CypherDuxMod.MOD_ID,"double_trouble"));
 }
