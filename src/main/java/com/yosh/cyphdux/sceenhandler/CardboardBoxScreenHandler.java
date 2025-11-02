@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +24,7 @@ public class CardboardBoxScreenHandler extends ScreenHandler {
         this.addSlot(new Slot(inventory,0,80,17){
             @Override
             public boolean canInsert(ItemStack stack) {
-                return !(stack.isIn(ConventionalItemTags.SHULKER_BOXES)||stack.isOf(ModItems.CARDBOARD_BOX));
+                return !(stack.isIn(ConventionalItemTags.SHULKER_BOXES)||stack.isOf(ModItems.CARDBOARD_BOX)||stack.isOf(Items.BUNDLE));
             }
         });
         addPlayerInventory(playerInventory);

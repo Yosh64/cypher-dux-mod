@@ -27,7 +27,7 @@ public class RandomTeleportCommand {
         final PlayerEntity user = context.getSource().getPlayer();
         final ServerWorld world = context.getSource().getWorld();
         if (!world.isClient) {
-            for (int i = 0; i < 16; i++) {
+            for (int i = 0; i < maxAttempt; i++) {
                 double d = user.getX() + (user.getRandom().nextDouble() - 0.5) * width;
                 double e = MathHelper.clamp(
                         user.getY() + (double) (user.getRandom().nextInt(MathHelper.ceil((int) height))),

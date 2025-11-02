@@ -10,8 +10,11 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -50,10 +53,14 @@ public class ModItems {
             itemGroup.addAfter(Items.GOLDEN_HOE,ROSE_GOLD_SHOVEL,ROSE_GOLD_PICKAXE,ROSE_GOLD_AXE,ROSE_GOLD_HOE);
             itemGroup.addAfter(Items.MUSIC_DISC_PIGSTEP,ZINZIN_DISC,WILSON_DISC,BOUTICA_DISC,KINGCHAM_DISC);
         });
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(itemGroup -> {
+            itemGroup.addAfter(Items.GOLDEN_APPLE,ROSE_GOLD_APPLE);
+        });
 
         ItemGroupEvents.modifyEntriesEvent(CYPHER_DUX_ITEM_GROUP_KEY).register(itemGroup -> {
             itemGroup.add(ROSE_GOLD_UPGRADE);
             itemGroup.add(ROSE_GOLD_INGOT);
+            itemGroup.add(ROSE_GOLD_APPLE);
             itemGroup.add(ROSE_GOLD_HELMET);
             itemGroup.add(ROSE_GOLD_CHESTPLATE);
             itemGroup.add(ROSE_GOLD_LEGGINGS);
@@ -99,6 +106,15 @@ public class ModItems {
 
     public static final Item ROSE_GOLD_INGOT = register(new Item(new Item.Settings()),"rose_gold_ingot");
 
+    public static final Item ROSE_GOLD_APPLE = register(new Item(new Item.Settings().rarity(Rarity.RARE).food(new FoodComponent.Builder()
+            .nutrition(4)
+            .saturationModifier(1.6F)
+            .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 300, 1), 1.0F)
+            .statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 1), 1.0F)
+            .statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 300, 0), 1.0F)
+            .alwaysEdible()
+            .build())),"rose_gold_apple");
+
     public static final Item ROSE_GOLD_HELMET = register(new ArmorItem(ModArmorMaterials.ROSE_GOLD, ArmorItem.Type.HELMET, new Item.Settings().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(ModArmorMaterials.ROSE_GOLD_DURABILITY_MULTIPLIER))), "rose_gold_helmet");
     public static final Item ROSE_GOLD_CHESTPLATE = register(new ArmorItem(ModArmorMaterials.ROSE_GOLD, ArmorItem.Type.CHESTPLATE, new Item.Settings().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(ModArmorMaterials.ROSE_GOLD_DURABILITY_MULTIPLIER))), "rose_gold_chestplate");
     public static final Item ROSE_GOLD_LEGGINGS = register(new ArmorItem(ModArmorMaterials.ROSE_GOLD, ArmorItem.Type.LEGGINGS, new Item.Settings().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(ModArmorMaterials.ROSE_GOLD_DURABILITY_MULTIPLIER))), "rose_gold_leggings");
@@ -109,7 +125,8 @@ public class ModItems {
     public static final Item ROSE_GOLD_PICKAXE = register(new PickaxeItem(ModToolMaterials.ROSE_GOLD, new Item.Settings().attributeModifiers(PickaxeItem.createAttributeModifiers(ModToolMaterials.ROSE_GOLD,1F,-2.8F))),"rose_gold_pickaxe");
     public static final Item ROSE_GOLD_SHOVEL = register(new ShovelItem(ModToolMaterials.ROSE_GOLD, new Item.Settings().attributeModifiers(ShovelItem.createAttributeModifiers(ModToolMaterials.ROSE_GOLD,1.5F,-3.0F))),"rose_gold_shovel");
     public static final Item ROSE_GOLD_HOE = register(new HoeItem(ModToolMaterials.ROSE_GOLD, new Item.Settings().attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.ROSE_GOLD,-2F,-1.0F))),"rose_gold_hoe");
-public static final Item ROSE_GOLD_UPGRADE = register(new SmithingTemplateItem(
+
+    public static final Item ROSE_GOLD_UPGRADE = register(new SmithingTemplateItem(
         Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".rose_gold_upgrade.applies_to").formatted(Formatting.BLUE),
         Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".rose_gold_upgrade.ingredients").formatted(Formatting.BLUE),
         Text.translatable("upgrade."+ CypherDuxMod.MOD_ID+".rose_gold_upgrade").formatted(Formatting.GRAY),
@@ -138,7 +155,7 @@ public static final Item ROSE_GOLD_UPGRADE = register(new SmithingTemplateItem(
 
     public static final Item GLOWING_TORCH = register((BlockItem)(new VerticallyAttachableBlockItem(ModBlocks.GLOWING_TORCH, ModBlocks.WALL_GLOWING_TORCH, new Item.Settings(), Direction.DOWN)));
 
-    public static final Item CARDBOARD_BOX = register(new CardboardBoxBlockItem(ModBlocks.CARDBOARD_BOX, new Item.Settings().maxCount(1).fireproof()));
+    public static final Item CARDBOARD_BOX = register(new CardboardBoxBlockItem(ModBlocks.CARDBOARD_BOX, new Item.Settings().maxCount(1).fireproof().maxDamage(1)));
 
     public static final Item ZINZIN_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(ModSounds.ZINZIN_KEY)),"music_disc_zinzin");
     public static final Item BOUTICA_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON).jukeboxPlayable(ModSounds.BOUTICA_KEY)),"music_disc_boutica");

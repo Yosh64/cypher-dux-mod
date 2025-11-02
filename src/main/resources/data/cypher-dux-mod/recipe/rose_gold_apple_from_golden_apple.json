@@ -1,0 +1,22 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "rose_gold_apple",
+    "category": "equipment",
+    "pattern": [
+        " a ",
+        "aba",
+        " a "
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:copper_ingot"
+        },
+        "b": {
+            "item": "minecraft:golden_apple"
+        }
+    },
+    "result": {
+        "item": "cypher-dux-mod:rose_gold_apple",
+        "count": 1
+    }
+}

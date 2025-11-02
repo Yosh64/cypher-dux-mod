@@ -2,6 +2,7 @@ package com.yosh.cyphdux.item;
 
 import com.google.common.base.Suppliers;
 import net.minecraft.block.Block;
+import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.tag.BlockTags;
@@ -11,7 +12,7 @@ import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
 
-    ROSE_GOLD(BlockTags.INCORRECT_FOR_IRON_TOOL, 500, 7.0F, 2.5F, 18, () -> Ingredient.ofItems(ModItems.ROSE_GOLD_INGOT));
+    ROSE_GOLD(BlockTags.INCORRECT_FOR_IRON_TOOL, 500, 7.0F, 2.5F, 18, () -> Ingredient.ofItems(Items.GOLD_INGOT));
 
     private final TagKey<Block> inverseTag;
     private final int itemDurability;

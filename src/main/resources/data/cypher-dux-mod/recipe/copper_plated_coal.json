@@ -1,15 +1,18 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
+  "type": "minecraft:crafting_shaped",
   "group": "copper_plated_coal",
-  "ingredients": [
-    {
+  "pattern": [
+    " W ",
+    "WCW"
+  ],
+  "key": {
+    "W": {
       "item": "minecraft:raw_copper"
     },
-    {
+    "C": {
       "item": "minecraft:coal"
     }
-  ],
+  },
   "result": {
     "count": 1,
     "id": "cypher-dux-mod:copper_plated_coal"

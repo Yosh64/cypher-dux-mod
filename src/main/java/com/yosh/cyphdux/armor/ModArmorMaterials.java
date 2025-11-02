@@ -1,7 +1,6 @@
 package com.yosh.cyphdux.armor;
 
 import com.yosh.cyphdux.CypherDuxMod;
-import com.yosh.cyphdux.item.ModItems;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.item.*;
@@ -55,7 +54,7 @@ public class ModArmorMaterials {
             // The sound played when the armor is equipped.
             SoundEvents.ITEM_ARMOR_EQUIP_GOLD,
             // The ingredient(s) used to repair the armor.
-            () -> Ingredient.ofItems(ModItems.ROSE_GOLD_INGOT),
+            () -> Ingredient.ofItems(Items.GOLD_INGOT),
             1.0F,
             0.0F,
             // NOT dye-able, so we will pass false.

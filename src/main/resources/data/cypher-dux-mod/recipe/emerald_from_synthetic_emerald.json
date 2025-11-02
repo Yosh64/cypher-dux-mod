@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OT",
+    "XP"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:raw_gold"
+    },
+    "T": {
+      "item": "cypher-dux-mod:synthetic_emerald"
+    },
+    "O": {
+      "item": "minecraft:lapis_lazuli"
+    },
+    "P": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result": {
+    "id": "minecraft:emerald",
+    "count": 1
+  }
+}

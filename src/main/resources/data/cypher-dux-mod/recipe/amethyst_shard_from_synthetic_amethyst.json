@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OXO",
+    "XOX"
+  ],
+  "key": {
+    "X": {
+      "item": "cypher-dux-mod:synthetic_amethyst"
+    },
+    "O": {
+      "item": "minecraft:glow_ink_sac"
+    }
+  },
+  "result": {
+    "id": "minecraft:amethyst_shard",
+    "count": 4
+  }
+}
