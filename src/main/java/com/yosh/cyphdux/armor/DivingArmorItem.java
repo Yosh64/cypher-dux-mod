@@ -9,6 +9,8 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -24,6 +26,11 @@ public class DivingArmorItem extends ArmorItem {
 
     public DivingArmorItem(RegistryEntry<ArmorMaterial> material, Type type, Settings settings) {
         super(material, type, settings);
+    }
+
+    @Override
+    public SoundEvent getBreakSound() {
+        return SoundEvents.BLOCK_GLASS_BREAK;
     }
 
     @Override
