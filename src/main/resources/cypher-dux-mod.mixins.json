@@ -3,6 +3,7 @@
   "package": "com.yosh.cyphdux.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AbstractSkeletonMixin",
     "EndermanEntityMixin",
     "LivingEntityMixin",
     "PiglinBrainMixin"

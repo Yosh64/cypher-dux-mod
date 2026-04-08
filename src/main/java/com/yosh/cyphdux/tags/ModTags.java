@@ -32,6 +32,7 @@ public class ModTags {
             return TagKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(CypherDuxMod.MOD_ID,name));
         }
         public static TagKey<EntityType<?>> ENDERMAN_FRIENDS = createTag("enderman_friends");
+        public static TagKey<EntityType<?>> BONES_LOVERS = createTag("bones_lovers");
         public static TagKey<EntityType<?>> NO_LABEL_RENDER = createTag("no_label_render");
     }
 }
