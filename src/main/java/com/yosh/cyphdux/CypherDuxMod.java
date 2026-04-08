@@ -1,6 +1,5 @@
 package com.yosh.cyphdux;
 
-import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.yosh.cyphdux.armor.ModArmorMaterials;
 import com.yosh.cyphdux.block.ModBlocks;
@@ -68,25 +67,25 @@ public class CypherDuxMod implements ModInitializer {
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> dispatcher.register(literal("tp-r")
                 .executes(RandomTeleportCommand::randomTeleport)
-                .then(argument("width", FloatArgumentType.floatArg(1))
+                .then(argument("width", IntegerArgumentType.integer(1))
                 .executes(context ->
                         RandomTeleportCommand.randomTeleport(
                                 context,
-                                FloatArgumentType.getFloat(context, "width")
+								IntegerArgumentType.getInteger(context, "width")
                         ))
-                .then(argument("height", FloatArgumentType.floatArg(1,16))
+                .then(argument("height", IntegerArgumentType.integer(1,16))
                 .executes(context ->
                         RandomTeleportCommand.randomTeleport(
                                 context,
-                                FloatArgumentType.getFloat(context, "width"),
-                                FloatArgumentType.getFloat(context, "height")
+								IntegerArgumentType.getInteger(context, "width"),
+								IntegerArgumentType.getInteger(context, "height")
                         ))
                 .then(argument("maxAttempts", IntegerArgumentType.integer(1))
                 .executes(context ->
                         RandomTeleportCommand.randomTeleport(
                                 context,
-                                FloatArgumentType.getFloat(context, "width"),
-                                FloatArgumentType.getFloat(context, "height"),
+								IntegerArgumentType.getInteger(context, "width"),
+								IntegerArgumentType.getInteger(context, "height"),
                                 IntegerArgumentType.getInteger(context, "maxAttempts")
                         )))))));
 	}
