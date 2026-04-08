@@ -18,11 +18,14 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModArmorMaterials {
+
     public static void initialize() {
         CypherDuxMod.LOGGER.info("Registering Armor Materials");
         potion.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.WATER_BREATHING));
     }
+
     private static final ItemStack potion = new ItemStack(Items.POTION);
+
     public static RegistryEntry<ArmorMaterial> registerMaterial(String id, Map<ArmorItem.Type, Integer> defensePoints, int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredientSupplier, float toughness, float knockbackResistance, boolean dyeable) {
         // Get the supported layers for the armor material
         List<ArmorMaterial.Layer> layers = List.of(
@@ -40,25 +43,28 @@ public class ModArmorMaterials {
         return RegistryEntry.of(material);
     }
 
+    public static RegistryEntry<ArmorMaterial> registerVanillaMaterial(String id, Map<ArmorItem.Type, Integer> defensePoints, int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredientSupplier, float toughness, float knockbackResistance, boolean dyeable) {
+
+        List<ArmorMaterial.Layer> layers = List.of(
+                new ArmorMaterial.Layer(Identifier.ofVanilla(id), "", dyeable)
+        );
+
+        ArmorMaterial material = new ArmorMaterial(defensePoints, enchantability, equipSound, repairIngredientSupplier, layers, toughness, knockbackResistance);
+        material = Registry.register(Registries.ARMOR_MATERIAL, Identifier.ofVanilla(id), material);
+        return RegistryEntry.of(material);
+    }
+
     public static final int ROSE_GOLD_DURABILITY_MULTIPLIER = 22;
     public static final RegistryEntry<ArmorMaterial> ROSE_GOLD = registerMaterial("rose_gold",
-            // Defense (protection) point values for each armor piece.
             Map.of(
                     ArmorItem.Type.HELMET, 2,
                     ArmorItem.Type.CHESTPLATE, 6,
                     ArmorItem.Type.LEGGINGS, 5,
                     ArmorItem.Type.BOOTS, 2
             ),
-            // Enchant-ability. For reference, leather has 15, iron has 9, and diamond has 10.
-            17,
-            // The sound played when the armor is equipped.
-            SoundEvents.ITEM_ARMOR_EQUIP_GOLD,
-            // The ingredient(s) used to repair the armor.
-            () -> Ingredient.ofItems(Items.GOLD_INGOT),
-            1.0F,
-            0.0F,
-            // NOT dye-able, so we will pass false.
-            false);
+            17,SoundEvents.ITEM_ARMOR_EQUIP_GOLD, () -> Ingredient.ofItems(Items.GOLD_INGOT),
+            1.0F,0.0F,false);
+
     public static final RegistryEntry<ArmorMaterial> DIVING = registerMaterial("diving",
             // Defense (protection) point values for each armor piece.
             Map.of(
@@ -68,8 +74,8 @@ public class ModArmorMaterials {
                     ArmorItem.Type.BOOTS, 0
             ),
             9, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
-            0.0F,
-            0.0F,false);
+            0.0F,0.0F,false);
+
     public static final RegistryEntry<ArmorMaterial> DIVING_2 = registerMaterial("diving_2",
             // Defense (protection) point values for each armor piece.
             Map.of(
@@ -79,8 +85,7 @@ public class ModArmorMaterials {
                     ArmorItem.Type.BOOTS, 0
             ),
             9, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
-            0.0F,
-            0.0F,false);
+            0.0F,0.0F,false);
 
     public static final RegistryEntry<ArmorMaterial> DIVING_3 = registerMaterial("diving_3",
             // Defense (protection) point values for each armor piece.
@@ -91,6 +96,27 @@ public class ModArmorMaterials {
                     ArmorItem.Type.BOOTS, 0
             ),
             9, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
-            0.0F,
-            0.0F,false);
+            0.0F,0.0F,false);
+
+    public static final int WARDEN_DURABILITY_MULTIPLIER = 40;
+    public static final RegistryEntry<ArmorMaterial> WARDEN = registerMaterial("warden",
+            Map.of(
+                    ArmorItem.Type.HELMET,4,
+                    ArmorItem.Type.CHESTPLATE, 9,
+                    ArmorItem.Type.LEGGINGS, 7,
+                    ArmorItem.Type.BOOTS, 4
+            ),
+            18, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> Ingredient.ofItems(Items.ECHO_SHARD),
+            4f, 0.1f, false);
+
+    public static final RegistryEntry<ArmorMaterial> NETHERITE = registerVanillaMaterial("netherite",
+            Map.of(
+                    ArmorItem.Type.BOOTS, 3,
+                    ArmorItem.Type.LEGGINGS, 6,
+                    ArmorItem.Type.CHESTPLATE, 8,
+                    ArmorItem.Type.HELMET, 3,
+                    ArmorItem.Type.BODY, 11
+            ),
+            15, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_SCRAP),
+            6.0F, 0.1F,false);
 }

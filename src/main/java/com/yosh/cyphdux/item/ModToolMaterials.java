@@ -12,7 +12,8 @@ import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
 
-    ROSE_GOLD(BlockTags.INCORRECT_FOR_IRON_TOOL, 500, 7.0F, 2.5F, 18, () -> Ingredient.ofItems(Items.GOLD_INGOT));
+    ROSE_GOLD(BlockTags.INCORRECT_FOR_IRON_TOOL, 500, 7.0F, 2.5F, 18, () -> Ingredient.ofItems(Items.GOLD_INGOT)),
+    NETHERITE(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2031, 9.0F, 4.0F, 15, () -> Ingredient.ofItems(Items.NETHERITE_SCRAP));
 
     private final TagKey<Block> inverseTag;
     private final int itemDurability;

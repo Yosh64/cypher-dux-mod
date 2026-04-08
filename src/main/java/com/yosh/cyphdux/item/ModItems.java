@@ -37,6 +37,7 @@ public class ModItems {
         FuelRegistry.INSTANCE.add(ModItems.ENRICHED_COPPER_PLATED_COAL,4000);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(itemGroup -> {
+            itemGroup.addBefore(Items.DIAMOND,DIAMOND_NUGGET);
             itemGroup.addAfter(Items.GOLD_INGOT,ROSE_GOLD_INGOT);
             itemGroup.addAfter(Items.CHARCOAL,COPPER_PLATED_COAL,ENRICHED_COPPER_PLATED_COAL);
             itemGroup.addAfter(Items.AMETHYST_SHARD,SYNTHETIC_AMETHYST,KAYBER_KRYSTAL);
@@ -71,6 +72,7 @@ public class ModItems {
             itemGroup.add(ROSE_GOLD_PICKAXE);
             itemGroup.add(ROSE_GOLD_AXE);
             itemGroup.add(ROSE_GOLD_HOE);
+            itemGroup.add(DIAMOND_NUGGET);
             itemGroup.add(COPPER_PLATED_COAL);
             itemGroup.add(ENRICHED_COPPER_PLATED_COAL);
             itemGroup.add(SYNTHETIC_AMETHYST);
@@ -100,6 +102,14 @@ public class ModItems {
         // Return the registered item!
         return Registry.register(Registries.ITEM, itemID, item);
     }
+
+    public static Item registerVanilla(String id, Item item) {
+        // Create the identifier for the item.
+        Identifier itemID = Identifier.ofVanilla(id);
+        // Return the registered item!
+        return Registry.register(Registries.ITEM, itemID, item);
+    }
+
     public static Item register(BlockItem item){
         return Registry.register(Registries.ITEM,Registries.BLOCK.getId(item.getBlock()),item);
     }
@@ -162,5 +172,16 @@ public class ModItems {
     public static final Item WILSON_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.COMMON).jukeboxPlayable(ModSounds.WILSON_KEY)),"music_disc_wilson");
     public static final Item KINGCHAM_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.EPIC).jukeboxPlayable(ModSounds.KINGCHAM_KEY)),"music_disc_kingcham");
             //register("music_disc_strad", new Item((new Item.Settings()).maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(JukeboxSongs.STRAD)));
+    public static final Item DIAMOND_NUGGET = register(new Item(new Item.Settings()),"diamond_nugget");
 
+
+    public static final Item NETHERITE_HELMET = registerVanilla("netherite_helmet", new ArmorItem(ModArmorMaterials.NETHERITE, ArmorItem.Type.HELMET, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(37))));
+    public static final Item NETHERITE_CHESTPLATE = registerVanilla("netherite_chestplate", new ArmorItem(ModArmorMaterials.NETHERITE, ArmorItem.Type.CHESTPLATE, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(37))));
+    public static final Item NETHERITE_LEGGINGS = registerVanilla("netherite_leggings", new ArmorItem(ModArmorMaterials.NETHERITE, ArmorItem.Type.LEGGINGS, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(37))));
+    public static final Item NETHERITE_BOOTS = registerVanilla("netherite_boots", new ArmorItem(ModArmorMaterials.NETHERITE, ArmorItem.Type.BOOTS, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(37))));
+    public static final Item NETHERITE_SWORD = registerVanilla("netherite_sword", new SwordItem(ModToolMaterials.ROSE_GOLD, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.NETHERITE, 3, -2.4F))));
+    public static final Item NETHERITE_SHOVEL = registerVanilla("netherite_shovel", new ShovelItem(ModToolMaterials.NETHERITE, new Item.Settings().fireproof().attributeModifiers(ShovelItem.createAttributeModifiers(ToolMaterials.NETHERITE, 1.5F, -3.0F))));
+    public static final Item NETHERITE_PICKAXE = registerVanilla("netherite_pickaxe", new PickaxeItem(ModToolMaterials.NETHERITE, new Item.Settings().fireproof().attributeModifiers(PickaxeItem.createAttributeModifiers(ToolMaterials.NETHERITE, 1.0F, -2.8F))));
+    public static final Item NETHERITE_AXE = registerVanilla("netherite_axe", new AxeItem(ModToolMaterials.NETHERITE, new Item.Settings().fireproof().attributeModifiers(AxeItem.createAttributeModifiers(ToolMaterials.NETHERITE, 5.0F, -3.0F))));
+    public static final Item NETHERITE_HOE = registerVanilla("netherite_hoe", new HoeItem(ModToolMaterials.NETHERITE, new Item.Settings().fireproof().attributeModifiers(HoeItem.createAttributeModifiers(ToolMaterials.NETHERITE, -4.0F, 0.0F))));
 }
