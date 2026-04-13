@@ -21,6 +21,7 @@ public class ModTags {
         public static final TagKey<Item> PIGLIN_SAFE_ARMOR = createTag("piglin_safe_armor");
         public static final TagKey<Item> ENDERMAN_SAFE_HAT = createTag("enderman_safe_hat");
         public static TagKey<Item> NO_LABEL_RENDER = createTag("no_label_render");
+        public static TagKey<Item> BREWING_FUEL = createTag("brewing_fuel");
 
         private static TagKey<Item> createTag(String name){
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(CypherDuxMod.MOD_ID,name));
