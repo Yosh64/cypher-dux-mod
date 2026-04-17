@@ -128,8 +128,6 @@ public class EnrichingFurnaceScreenHandler extends ScreenHandler {
                     if (!this.insertItem(itemStack2, 2, 3, false)) {
                         return ItemStack.EMPTY;
                     }
-                /*} else if (!this.insertItem(itemStack2, 0, 2, false)) {
-                    return ItemStack.EMPTY;*/
                 } else if (slot >= 3 && slot < 30) {
                     if (!this.insertItem(itemStack2, 30, 39, false)) {
                         return ItemStack.EMPTY;

@@ -140,6 +140,7 @@ public class EnrichingFurnaceBlockEntity extends BlockEntity implements Extended
 
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+        this.getItems().clear();
         super.readNbt(nbt, registryLookup);
         Inventories.readNbt(nbt,inventory,registryLookup);
         progress = nbt.getInt("enriching_furnace.progress");
@@ -150,6 +151,14 @@ public class EnrichingFurnaceBlockEntity extends BlockEntity implements Extended
 
         for (String string : nbtCompound.getKeys()) {
             this.recipesUsed.put(Identifier.of(string), nbtCompound.getInt(string));
+        }
+    }
+
+    @Override
+    public void markDirty() {
+        super.markDirty();
+        if(this.world != null){
+            this.world.updateListeners(pos,getCachedState(),getCachedState(),3);
         }
     }
 
