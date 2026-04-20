@@ -1,82 +1,85 @@
 package com.yosh.cyphdux.sceenhandler;
 
-import com.yosh.cyphdux.block.ModBlocks;
-import com.yosh.cyphdux.block.entity.EnrichingFurnaceBlockEntity;
-import com.yosh.cyphdux.recipe.EnrichingRecipe;
-import com.yosh.cyphdux.sceenhandler.slot.ModOutputSlot;
+import com.yosh.cyphdux.block.entity.BlingPressBlockEntity;
+import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
 
-public class EnrichingFurnaceScreenHandler extends ScreenHandler {
-    private final EnrichingFurnaceBlockEntity blockEntity;
-    private final ScreenHandlerContext context;
+public class BlingPressScreenHandler extends ScreenHandler {
     private final Inventory inventory;
-    private final World world;
-    private final RecipeType<EnrichingRecipe> recipeType = EnrichingRecipe.Type.INSTANCE;
     private final PropertyDelegate propertyDelegate;
+    private final BlingPressBlockEntity blockEntity;
 
-    // Client Constructor (called from client)
-    public EnrichingFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos){
-        this(syncId, playerInventory, (EnrichingFurnaceBlockEntity) playerInventory.player.getWorld().getBlockEntity(pos),new ArrayPropertyDelegate(4));
+    public BlingPressScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
+        this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(pos), new ArrayPropertyDelegate(4));
     }
-    // Client Constructor (called from client)
-    public EnrichingFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos, PropertyDelegate arrayPropertyDelegate){
-        this(syncId, playerInventory, (EnrichingFurnaceBlockEntity) playerInventory.player.getWorld().getBlockEntity(pos),arrayPropertyDelegate);
-    }
-    // Main Constructor (directly called from the server)
-    public EnrichingFurnaceScreenHandler(int syncId, PlayerInventory playerInventory, EnrichingFurnaceBlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
-        super(ScreenHandlerTypes.ENRICHING_FURNACE_SCREEN_HANDLER, syncId);
-        checkSize(((Inventory)blockEntity),4);
-        checkDataCount(arrayPropertyDelegate, 4);
+
+    public BlingPressScreenHandler(int syncId, PlayerInventory playerInventory, BlockEntity blockEntity, PropertyDelegate arrayPropertyDelegate) {
+        super(ScreenHandlerTypes.BLING_PRESS_SCREEN_HANDLER,syncId);
         this.inventory = ((Inventory) blockEntity);
-        inventory.onOpen(playerInventory.player);
-        this.world = playerInventory.player.getWorld();
+        this.blockEntity = ((BlingPressBlockEntity) blockEntity);
         this.propertyDelegate = arrayPropertyDelegate;
-        this.blockEntity = blockEntity;
-        this.context = ScreenHandlerContext.create(this.blockEntity.getWorld(),this.blockEntity.getPos());
-        //Addition Slot
+
+        //Left Slot
         this.addSlot(new Slot(inventory,0,38,17));
-        //Base Slot
+        //Right Slot
         this.addSlot(new Slot(inventory,1,56,17));
         //Fuel Slot
         this.addSlot(new Slot(inventory,2,56,53));
         //Output
-        this.addSlot(new ModOutputSlot(playerInventory.player, inventory,3,116,35));
+        this.addSlot(new Slot(inventory,3,116,35){
+            @Override
+            public boolean canInsert(ItemStack stack) {
+                return false;
+            }
+        });
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);
 
-        this.addProperties(arrayPropertyDelegate);
+        addProperties(arrayPropertyDelegate);
+    }
+
+    private void addPlayerHotbar(PlayerInventory playerInv){
+        for (int column = 0; column<9; column++){
+            addSlot(new Slot(playerInv,column,8+(column*18),142));
+        }
+    }
+
+    private void addPlayerInventory(PlayerInventory playerInv){
+        for (int row = 0; row<3; row++){
+            for (int column = 0; column<9; column++){
+                addSlot(new Slot(playerInv,9+(column+(row*9)),8+(column*18),84+(row*18)));
+            }
+        }
     }
 
     public boolean isCrafting(){
-        return propertyDelegate.get(0)>0;
+        return propertyDelegate.get(0) > 0;
     }
-    public float getCookProgress(){
+
+    public boolean isFuelTicking(){
+        return propertyDelegate.get(2)>0;
+    }
+
+    public float getScaledArrowProgress(){
         int progress = this.propertyDelegate.get(0);
         int maxProgress = this.propertyDelegate.get(1);
 
         return MathHelper.clamp((float)progress / maxProgress, 0.0F, 1.0F);
     }
 
-
-    public boolean isFuelTicking(){
-        return propertyDelegate.get(2)>0;
-    }
-
-    public float getFuelProgress(){
+    public float getScaledFireProgress(){
         int maxTickingFuel = this.propertyDelegate.get(3);
         int tickingFuel = this.propertyDelegate.get(2);
         if (maxTickingFuel == 0) {
@@ -85,18 +88,7 @@ public class EnrichingFurnaceScreenHandler extends ScreenHandler {
 
         return MathHelper.clamp((float)tickingFuel / (float)maxTickingFuel, 0.0F, 1.0F);
     }
-    private void addPlayerHotbar(PlayerInventory playerInv){
-        for (int column = 0; column<9; column++){
-            addSlot(new Slot(playerInv,column,8+(column*18),142));
-        }
-    }
-    private void addPlayerInventory(PlayerInventory playerInv){
-        for (int row = 0; row<3; row++){
-            for (int column = 0; column<9; column++){
-                addSlot(new Slot(playerInv,9+(column+(row*9)),8+(column*18),84+(row*18)));
-            }
-        }
-    }
+
     @Override
     public ItemStack quickMove(PlayerEntity player, int slot) {
         ItemStack itemStack = ItemStack.EMPTY;
@@ -156,21 +148,16 @@ public class EnrichingFurnaceScreenHandler extends ScreenHandler {
         return itemStack;
     }
 
-    private boolean isInRecipeSlot(ItemStack itemStack, int slotIndex) {
-        return this.world.getRecipeManager().listAllOfType(this.recipeType).stream().anyMatch(enrichingRecipeRecipeEntry -> enrichingRecipeRecipeEntry.value().isInRecipe(itemStack,slotIndex, this.world));
+    private boolean isInRecipeSlot(ItemStack stack, int slotId) {
+        return (slotId==0 && stack.isOf(Items.GOLD_INGOT)) || (slotId==1 && stack.isOf(Items.DIAMOND));
     }
 
-    protected boolean isFuel(ItemStack itemStack) {
-        return itemStack.isOf(Items.REDSTONE) || itemStack.isOf(Items.REDSTONE_BLOCK);
+    private boolean isFuel(ItemStack itemStack) {
+        return AbstractFurnaceBlockEntity.canUseAsFuel(itemStack);
     }
 
     @Override
     public boolean canUse(PlayerEntity player) {
-        return canUse(this.context,player, ModBlocks.ENRICHING_FURNACE);
+        return this.inventory.canPlayerUse(player);
     }
-    public EnrichingFurnaceBlockEntity getBlockEntity(){
-        return this.blockEntity;
-    }
-
-
 }

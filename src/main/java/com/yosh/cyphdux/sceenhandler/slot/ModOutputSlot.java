@@ -1,7 +1,6 @@
 package com.yosh.cyphdux.sceenhandler.slot;
 
 import com.yosh.cyphdux.block.entity.EnrichingFurnaceBlockEntity;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
@@ -9,8 +8,8 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class ModOutputSlot extends Slot {
-    private final PlayerEntity player;
-    private int amount;
+    protected final PlayerEntity player;
+    protected int amount;
     public ModOutputSlot(PlayerEntity player, Inventory inventory, int index, int x, int y) {
         super(inventory, index, x, y);
         this.player = player;

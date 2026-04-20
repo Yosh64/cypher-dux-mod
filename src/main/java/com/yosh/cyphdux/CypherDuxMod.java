@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +32,10 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class CypherDuxMod implements ModInitializer {
 	public static final String MOD_ID = "cypher-dux-mod";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+
+	public static Identifier of(String path){
+		return Identifier.of(CypherDuxMod.MOD_ID,path);
+	}
 
 	@Override
 	public void onInitialize() {

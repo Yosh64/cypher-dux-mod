@@ -15,6 +15,8 @@ public class ModBlockEntityTypes {
 
     public static final BlockEntityType<CardboardBoxBlockEntity> CARDBOARD_BOX_BLOCK_ENTITY = register("cardboard_box_block_entity", BlockEntityType.Builder.create(CardboardBoxBlockEntity::new, ModBlocks.CARDBOARD_BOX).build());
 
+    public static final BlockEntityType<BlingPressBlockEntity> BLING_PRESS_BLOCK_ENTITY = register("bling_press_block_entity", BlockEntityType.Builder.create(BlingPressBlockEntity::new, ModBlocks.BLING_PRESS).build());
+
     public static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType<T> type){
         return Registry.register(Registries.BLOCK_ENTITY_TYPE, Identifier.of(CypherDuxMod.MOD_ID,name), type);
     }

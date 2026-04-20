@@ -19,9 +19,14 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.Identifier;
 
 public class ModBlocks {
+    public static <T extends Block> T register(T block, String name){
+        return register(block,name,true,64);
+    }
+
     public static <T extends Block> T register(T block, String name, boolean shouldRegisterItem){
         return register(block,name,shouldRegisterItem,64);
     }
+
     public static <T extends Block> T register(T block, String name, boolean shouldRegisterItem,int maxStack) {
         // Register the block and its item.
         Identifier id = Identifier.of(CypherDuxMod.MOD_ID, name);
@@ -41,9 +46,11 @@ public class ModBlocks {
     public static final Block COPPER_PLATED_COAL_BLOCK= register(new Block(AbstractBlock.Settings.create().mapColor(MapColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(5.0F, 6.0F)),"copper_plated_coal_block",true);
     public static final Block ENRICHED_COPPER_PLATED_COAL_BLOCK = register(new Block(AbstractBlock.Settings.create().mapColor(MapColor.BLACK).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(5.0F, 6.0F).luminance(state -> 5)),"enriched_copper_plated_coal_block",true,16);
 
-    public static final EnrichingFurnaceBlock ENRICHING_FURNACE = register(new EnrichingFurnaceBlock(AbstractBlock.Settings.create().luminance(EnrichingFurnaceBlock::getLuminance).mapColor(MapColor.DULL_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(3.5F)),"enriching_furnace",true);
+    public static final EnrichingFurnaceBlock ENRICHING_FURNACE = register(new EnrichingFurnaceBlock(AbstractBlock.Settings.create().luminance(EnrichingFurnaceBlock::getLuminance).mapColor(MapColor.DULL_RED).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(3.5F)),"enriching_furnace");
 
-    public static final ItemDisplayBoardBlock ITEM_DISPLAY_BOARD = register(new ItemDisplayBoardBlock(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).strength(2.0F,3.0F).sounds(BlockSoundGroup.WOOD)),"item_display_board",true);
+    public static final ItemDisplayBoardBlock ITEM_DISPLAY_BOARD = register(new ItemDisplayBoardBlock(AbstractBlock.Settings.create().mapColor(MapColor.OAK_TAN).strength(2.0F,3.0F).sounds(BlockSoundGroup.WOOD)),"item_display_board");
+
+    public static final BlingPressBlock BLING_PRESS = register(new BlingPressBlock(AbstractBlock.Settings.create().luminance(BlingPressBlock::getLuminance).mapColor(MapColor.GOLD).instrument(NoteBlockInstrument.BASEDRUM).requiresTool().strength(3.5F)),"bling_press");
 
     public static final GlowingTorchBlock GLOWING_TORCH = register(new GlowingTorchBlock(
             AbstractBlock.Settings.create()
@@ -84,7 +91,7 @@ public class ModBlocks {
         CypherDuxMod.LOGGER.info("Registering Blocks");
         FuelRegistry.INSTANCE.add(ModBlocks.CHARCOAL_BLOCK,12000);
         FuelRegistry.INSTANCE.add(ModBlocks.COPPER_PLATED_COAL_BLOCK,24000);
-        FuelRegistry.INSTANCE.add(ModBlocks.ENRICHED_COPPER_PLATED_COAL_BLOCK,40000);
+        FuelRegistry.INSTANCE.add(ModBlocks.ENRICHED_COPPER_PLATED_COAL_BLOCK,17000);
         FuelRegistry.INSTANCE.add(ModBlocks.ITEM_DISPLAY_BOARD,200);
         FuelRegistry.INSTANCE.add(ModBlocks.OAK_STOOL,300);
         FuelRegistry.INSTANCE.add(ModBlocks.SPRUCE_STOOL,300);
@@ -102,6 +109,7 @@ public class ModBlocks {
             itemGroup.add(ModBlocks.COPPER_PLATED_COAL_BLOCK.asItem());
             itemGroup.add(ModBlocks.ENRICHED_COPPER_PLATED_COAL_BLOCK.asItem());
             itemGroup.add(ModBlocks.ENRICHING_FURNACE.asItem());
+            itemGroup.add(ModBlocks.BLING_PRESS.asItem());
             itemGroup.add(ModBlocks.ROSE_GOLD_BLOCK.asItem());
             itemGroup.add(ModBlocks.KAYBER_BLOCK.asItem());
             itemGroup.add(ModBlocks.ITEM_DISPLAY_BOARD.asItem());
@@ -126,6 +134,7 @@ public class ModBlocks {
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register((itemGroup)->{
             itemGroup.addAfter(Items.BLAST_FURNACE,ModBlocks.ENRICHING_FURNACE.asItem());
+            itemGroup.addAfter(ModBlocks.ENRICHING_FURNACE,ModBlocks.BLING_PRESS.asItem());
             itemGroup.addBefore(Items.ITEM_FRAME,ModBlocks.ITEM_DISPLAY_BOARD.asItem());
             itemGroup.addAfter(Items.REDSTONE_TORCH,ModBlocks.GLOWING_TORCH.asItem());
             itemGroup.addAfter(Items.BARREL,ModItems.CARDBOARD_BOX);

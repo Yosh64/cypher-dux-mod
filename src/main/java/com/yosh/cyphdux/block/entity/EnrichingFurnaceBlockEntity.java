@@ -45,7 +45,7 @@ import java.util.Optional;
 
 public class EnrichingFurnaceBlockEntity extends BlockEntity implements ExtendedScreenHandlerFactory<BlockPos>, ImplementedInventory, SidedInventory, RecipeUnlocker, RecipeInputProvider {
     public static final Text TITLE = Text.translatable("container."+ CypherDuxMod.MOD_ID+".enriching_furnace");
-    private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
+    private DefaultedList<ItemStack> inventory = DefaultedList.ofSize(4, ItemStack.EMPTY);
 
     private final int ADDITION_SLOT =0;
     private final int BASE_SLOT =1;
@@ -141,7 +141,7 @@ public class EnrichingFurnaceBlockEntity extends BlockEntity implements Extended
     @Override
     protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
         this.getItems().clear();
-        super.readNbt(nbt, registryLookup);
+        this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
         Inventories.readNbt(nbt,inventory,registryLookup);
         progress = nbt.getInt("enriching_furnace.progress");
         maxProgress = nbt.getInt("enriching_furnace.maxProgress");
@@ -152,6 +152,7 @@ public class EnrichingFurnaceBlockEntity extends BlockEntity implements Extended
         for (String string : nbtCompound.getKeys()) {
             this.recipesUsed.put(Identifier.of(string), nbtCompound.getInt(string));
         }
+        super.readNbt(nbt, registryLookup);
     }
 
     @Override
@@ -186,6 +187,8 @@ public class EnrichingFurnaceBlockEntity extends BlockEntity implements Extended
                     this.setLastRecipe(recipeEntry.get());
                     this.resetProgress();
                 }
+            }else if (hasTickingFuel() && this.progress > 0) {
+                this.progress = MathHelper.clamp(this.progress - 2, 0, this.maxProgress);
             }else {
                 this.resetProgress();
                 this.resetMaxProgress();
@@ -233,7 +236,7 @@ public class EnrichingFurnaceBlockEntity extends BlockEntity implements Extended
         return getStack(FUEL_SLOT).isOf(Items.REDSTONE) || getStack(FUEL_SLOT).isOf(Items.REDSTONE_BLOCK) || hasTickingFuel();
     }
     private boolean isFuel(ItemStack itemStack) {
-        return itemStack.isOf(Items.REDSTONE) || itemStack.isOf(Items.REDSTONE_BLOCK) || hasTickingFuel();
+        return itemStack.isOf(Items.REDSTONE) || itemStack.isOf(Items.REDSTONE_BLOCK);
     }
 
     private boolean hasRecipe() {

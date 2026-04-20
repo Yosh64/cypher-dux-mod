@@ -7,8 +7,8 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
-import dev.emi.emi.api.widget.SlotWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
+import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
@@ -68,6 +68,7 @@ public class EnrichingRecipeEmiRecipe implements EmiRecipe {
     public void addWidgets(WidgetHolder widgets) {
         // Add an arrow texture to indicate processing
         widgets.addFillingArrow(44,5,this.cookingTime*50);
+        widgets.addTooltip(List.of(TooltipComponent.of(Text.translatable("emi.cooking.time",cookingTime/20).asOrderedText())),44,5, 24, 17);
 
         widgets.addText(Text.of(this.experience+" XP"),44,30,16777215,true);
         if (this.cookingTime >= 1000) {
