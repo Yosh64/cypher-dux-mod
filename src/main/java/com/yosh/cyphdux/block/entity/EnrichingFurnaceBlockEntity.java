@@ -211,13 +211,13 @@ public class EnrichingFurnaceBlockEntity extends BlockEntity implements Extended
     private void setTickingFuel() {
         if(getStack(FUEL_SLOT).isOf(Items.REDSTONE)){
             this.removeStack(FUEL_SLOT, 1);
-            this.tickingFuel = 100;
-            this.maxTickingFuel = 100;
+            this.tickingFuel = 200;
+            this.maxTickingFuel = 200;
         }
         if(getStack(FUEL_SLOT).isOf(Items.REDSTONE_BLOCK)){
             this.removeStack(FUEL_SLOT, 1);
-            this.tickingFuel = 1000;
-            this.maxTickingFuel = 1000;
+            this.tickingFuel = 2000;
+            this.maxTickingFuel = 2000;
         }
     }
     private void setMaxProgressForRecipe(){

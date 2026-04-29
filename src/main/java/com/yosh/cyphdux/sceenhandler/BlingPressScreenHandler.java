@@ -1,24 +1,29 @@
 package com.yosh.cyphdux.sceenhandler;
 
 import com.yosh.cyphdux.block.entity.BlingPressBlockEntity;
+import com.yosh.cyphdux.recipe.ModRecipes;
+import com.yosh.cyphdux.recipe.PressingRecipe;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 
 public class BlingPressScreenHandler extends ScreenHandler {
     private final Inventory inventory;
     private final PropertyDelegate propertyDelegate;
     private final BlingPressBlockEntity blockEntity;
+    private final RecipeType<PressingRecipe> recipeType = ModRecipes.PRESSING_TYPE;
+    private final World world;
 
     public BlingPressScreenHandler(int syncId, PlayerInventory playerInventory, BlockPos pos) {
         this(syncId, playerInventory, playerInventory.player.getWorld().getBlockEntity(pos), new ArrayPropertyDelegate(4));
@@ -29,6 +34,7 @@ public class BlingPressScreenHandler extends ScreenHandler {
         this.inventory = ((Inventory) blockEntity);
         this.blockEntity = ((BlingPressBlockEntity) blockEntity);
         this.propertyDelegate = arrayPropertyDelegate;
+        this.world = playerInventory.player.getWorld();
 
         //Left Slot
         this.addSlot(new Slot(inventory,0,38,17));
@@ -149,7 +155,7 @@ public class BlingPressScreenHandler extends ScreenHandler {
     }
 
     private boolean isInRecipeSlot(ItemStack stack, int slotId) {
-        return (slotId==0 && stack.isOf(Items.GOLD_INGOT)) || (slotId==1 && stack.isOf(Items.DIAMOND));
+        return this.world.getRecipeManager().listAllOfType(this.recipeType).stream().anyMatch(recipeEntry -> recipeEntry.value().isInRecipe(stack,slotId, this.world));
     }
 
     private boolean isFuel(ItemStack itemStack) {

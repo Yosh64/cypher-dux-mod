@@ -26,6 +26,7 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
@@ -78,7 +79,7 @@ public class BlingPressBlock extends BlockWithEntity implements BlockEntityProvi
             if (blockEntity instanceof BlingPressBlockEntity) {
                 if (world instanceof ServerWorld) {
                     ItemScatterer.spawn(world, pos, (BlingPressBlockEntity)blockEntity);
-                    //((BlingPressBlockEntity)blockEntity).getRecipesUsedAndDropExperience((ServerWorld)world, Vec3d.ofCenter(pos));
+                    ((BlingPressBlockEntity)blockEntity).getRecipesUsedAndDropExperience((ServerWorld)world, Vec3d.ofCenter(pos));
                     world.updateComparators(pos, this);
                 }
                 super.onStateReplaced(state, world, pos, newState, moved);
@@ -127,7 +128,7 @@ public class BlingPressBlock extends BlockWithEntity implements BlockEntityProvi
             double e = (double)pos.getY();
             double f = (double)pos.getZ() + (double)0.5F;
             if (random.nextDouble() < 0.1) {
-                world.playSound(d, e, f, SoundEvents.BLOCK_SMOKER_SMOKE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+                world.playSound(d, e, f, SoundEvents.BLOCK_BLASTFURNACE_FIRE_CRACKLE, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
             }
 
             world.addParticle(ParticleTypes.SMOKE, d, e + 1.1, f, (double)0.0F, (double)0.0F, (double)0.0F);

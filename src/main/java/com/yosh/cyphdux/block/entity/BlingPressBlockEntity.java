@@ -1,21 +1,25 @@
 package com.yosh.cyphdux.block.entity;
 
+import com.google.common.collect.Lists;
 import com.yosh.cyphdux.CypherDuxMod;
-import com.yosh.cyphdux.block.custom.EnrichingFurnaceBlock;
-import com.yosh.cyphdux.item.ModItems;
-import com.yosh.cyphdux.recipe.EnrichingRecipe;
+import com.yosh.cyphdux.block.custom.BlingPressBlock;
+import com.yosh.cyphdux.recipe.ModRecipes;
+import com.yosh.cyphdux.recipe.PressingRecipe;
+import com.yosh.cyphdux.recipe.input.DoubleStackRecipeInput;
 import com.yosh.cyphdux.sceenhandler.BlingPressScreenHandler;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.entity.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.network.packet.Packet;
@@ -36,6 +40,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 public class BlingPressBlockEntity extends BlockEntity implements ImplementedInventory, ExtendedScreenHandlerFactory<BlockPos> {
@@ -96,7 +101,27 @@ public class BlingPressBlockEntity extends BlockEntity implements ImplementedInv
 
 
 
-    public void getRecipesUsedAndDropExperience(ServerWorld world, Vec3d vec3d) {
+    public List<RecipeEntry<?>> getRecipesUsedAndDropExperience(ServerWorld world, Vec3d pos) {
+        List<RecipeEntry<?>> list = Lists.<RecipeEntry<?>>newArrayList();
+
+        for (Object2IntMap.Entry<Identifier> entry : this.recipesUsed.object2IntEntrySet()) {
+            world.getRecipeManager().get((Identifier)entry.getKey()).ifPresent(recipe -> {
+                list.add(recipe);
+                dropExperience(world, pos, entry.getIntValue(), ((PressingRecipe)recipe.value()).experience());
+            });
+        }
+
+        return list;
+    }
+
+    private void dropExperience(ServerWorld world, Vec3d pos, int intValue, double experience) {
+        int i = MathHelper.floor((float)intValue * experience);
+        double f = MathHelper.fractionalPart(intValue * experience);
+        if (f != 0.0F && Math.random() < f) {
+            i++;
+        }
+
+        ExperienceOrbEntity.spawn(world, pos, i);
     }
 
     @Override
@@ -115,7 +140,16 @@ public class BlingPressBlockEntity extends BlockEntity implements ImplementedInv
     }
 
     public void dropExperienceForRecipesUsed(ServerPlayerEntity serverPlayerEntity) {
+        List<RecipeEntry<?>> list = this.getRecipesUsedAndDropExperience(serverPlayerEntity.getServerWorld(), serverPlayerEntity.getPos());
+        serverPlayerEntity.unlockRecipes(list);
 
+        for (RecipeEntry<?> recipeEntry : list) {
+            if (recipeEntry != null) {
+                serverPlayerEntity.onRecipeCrafted(recipeEntry, this.inventory);
+            }
+        }
+
+        this.recipesUsed.clear();
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
@@ -129,7 +163,7 @@ public class BlingPressBlockEntity extends BlockEntity implements ImplementedInv
 
         if (isOutputSlotEmptyOrReceivable()&&hasFuel()){
             if(this.hasRecipe()){
-                //Optional<RecipeEntry<EnrichingRecipe>> recipeEntry = getCurrentRecipe();
+                Optional<RecipeEntry<PressingRecipe>> recipeEntry = getCurrentRecipe();
                 setMaxProgressForRecipe();
                 if (!hasTickingFuel()){
                     this.setTickingFuel();
@@ -139,7 +173,7 @@ public class BlingPressBlockEntity extends BlockEntity implements ImplementedInv
 
                 if (hasCraftingFinished()){
                     this.craftItem();
-                    //this.setLastRecipe(recipeEntry.get());
+                    this.setLastRecipe(recipeEntry.get());
                     this.resetProgress();
                 }
             }else if (hasTickingFuel() && this.progress > 0) {
@@ -153,7 +187,7 @@ public class BlingPressBlockEntity extends BlockEntity implements ImplementedInv
             markDirty();
         }
         if (hasTickingFuel() != lit){
-            state = state.with(EnrichingFurnaceBlock.LIT, hasTickingFuel());
+            state = state.with(BlingPressBlock.LIT, hasTickingFuel());
             world.setBlockState(pos,state, Block.NOTIFY_ALL);
             markDirty();
         }
@@ -167,17 +201,18 @@ public class BlingPressBlockEntity extends BlockEntity implements ImplementedInv
         this.progress = 0;
     }
 
-    private void setLastRecipe(RecipeEntry<EnrichingRecipe> enrichingRecipeRecipeEntry) {
+    private void setLastRecipe(@Nullable RecipeEntry<?> recipe) {
+        if (recipe != null) {
+            Identifier identifier = recipe.id();
+            this.recipesUsed.addTo(identifier, 1);
+        }
     }
 
     private void craftItem() {
-        this.getStack(LEFT_SLOT).decrement(1);
-        this.getStack(RIGHT_SLOT).decrement(1);
-        if (this.getStack(OUTPUT_SLOT).isEmpty()) {
-            this.setStack(OUTPUT_SLOT, ModItems.BLING.getDefaultStack());
-        } else {
-            this.getStack(OUTPUT_SLOT).increment(1);
-        }
+        Optional<RecipeEntry<PressingRecipe>> recipe = getCurrentRecipe();
+        this.removeStack(LEFT_SLOT,1);
+        this.removeStack(RIGHT_SLOT,1);
+        this.setStack(OUTPUT_SLOT, new ItemStack(recipe.get().value().getResult(null).getItem(), getStack(OUTPUT_SLOT).getCount()+recipe.get().value().getResult(null).getCount()));
 
     }
 
@@ -196,15 +231,27 @@ public class BlingPressBlockEntity extends BlockEntity implements ImplementedInv
     }
 
     private void setMaxProgressForRecipe() {
-        this.maxProgress = 100;
+        Optional<RecipeEntry<PressingRecipe>> recipe = getCurrentRecipe();
+        this.maxProgress = recipe.get().value().pressingTime();
     }
 
-    private Optional<RecipeEntry<EnrichingRecipe>> getCurrentRecipe() {
-        return Optional.empty();
+    private Optional<RecipeEntry<PressingRecipe>> getCurrentRecipe() {
+        return this.world.getRecipeManager().getFirstMatch(ModRecipes.PRESSING_TYPE, new DoubleStackRecipeInput(inventory.get(LEFT_SLOT),inventory.get(RIGHT_SLOT)), this.world);
     }
 
     private boolean hasRecipe() {
-        return this.getStack(LEFT_SLOT).isOf(Items.GOLD_INGOT)&&this.getStack(RIGHT_SLOT).isOf(Items.DIAMOND);
+        //return this.getStack(LEFT_SLOT).isOf(Items.GOLD_INGOT)&&this.getStack(RIGHT_SLOT).isOf(Items.DIAMOND);
+        Optional<RecipeEntry<PressingRecipe>> recipe = getCurrentRecipe();
+
+        return recipe.isPresent() && canInsertAmountIntoOutputSlot(recipe.get().value().getResult(null))&&canInsertItemIntoOutputSlot(recipe.get().value().getResult(null).getItem());
+    }
+
+    private boolean canInsertItemIntoOutputSlot(Item item) {
+        return this.getStack(OUTPUT_SLOT).getItem()==item || this.getStack(OUTPUT_SLOT).isEmpty();
+    }
+
+    private boolean canInsertAmountIntoOutputSlot(ItemStack result) {
+        return this.getStack(OUTPUT_SLOT).getCount()+result.getCount()<=this.getStack(OUTPUT_SLOT).getMaxCount();
     }
 
     private boolean hasFuel() {

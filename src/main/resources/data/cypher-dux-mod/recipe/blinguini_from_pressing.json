@@ -1,0 +1,15 @@
+{
+  "type": "cypher-dux-mod:pressing",
+  "left_item": {
+    "item": "minecraft:raw_iron"
+  },
+  "right_item": {
+    "item": "minecraft:raw_copper"
+  },
+  "result": {
+    "id": "cypher-dux-mod:blinguini",
+    "count": 1
+  },
+  "experience": 0.8,
+  "pressing_time": 200
+}
