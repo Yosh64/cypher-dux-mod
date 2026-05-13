@@ -1,100 +1,72 @@
 package com.yosh.cyphdux.armor;
 
 import com.yosh.cyphdux.CypherDuxMod;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.item.*;
-import net.minecraft.potion.Potions;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
+import net.minecraft.util.Util;
 
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModArmorMaterials {
 
-    public static void initialize() {
-        CypherDuxMod.LOGGER.info("Registering Armor Materials");
-        potion.set(DataComponentTypes.POTION_CONTENTS, new PotionContentsComponent(Potions.WATER_BREATHING));
-    }
-
-    private static final ItemStack potion = new ItemStack(Items.POTION);
-
-    public static RegistryEntry<ArmorMaterial> registerMaterial(String id, Map<ArmorItem.Type, Integer> defensePoints, int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredientSupplier, float toughness, float knockbackResistance, boolean dyeable) {
-        // Get the supported layers for the armor material
-        List<ArmorMaterial.Layer> layers = List.of(
-                // The ID of the texture layer, the suffix, and whether the layer is dyeable.
-                // We can just pass the armor material ID as the texture layer ID.
-                // We have no need for a suffix, so we'll pass an empty string.
-                // We'll pass the dyeable boolean we received as the dyeable parameter.
-                new ArmorMaterial.Layer(Identifier.of(CypherDuxMod.MOD_ID, id), "", dyeable)
-        );
-
-        ArmorMaterial material = new ArmorMaterial(defensePoints, enchantability, equipSound, repairIngredientSupplier, layers, toughness, knockbackResistance);
-        // Register the material within the ArmorMaterials registry.
-        material = Registry.register(Registries.ARMOR_MATERIAL, Identifier.of(CypherDuxMod.MOD_ID, id), material);
-        // The majority of the time, you'll want the RegistryEntry of the material - especially for the ArmorItem constructor.
-        return RegistryEntry.of(material);
+    public static RegistryEntry<ArmorMaterial> registerArmorMaterial(String id, Supplier<ArmorMaterial> material){
+        return Registry.registerReference(Registries.ARMOR_MATERIAL, CypherDuxMod.of(id),material.get());
     }
 
     public static final int ROSE_GOLD_DURABILITY_MULTIPLIER = 22;
-    public static final RegistryEntry<ArmorMaterial> ROSE_GOLD = registerMaterial("rose_gold",
-            Map.of(
-                    ArmorItem.Type.HELMET, 2,
-                    ArmorItem.Type.CHESTPLATE, 6,
-                    ArmorItem.Type.LEGGINGS, 5,
-                    ArmorItem.Type.BOOTS, 2
-            ),
-            17,SoundEvents.ITEM_ARMOR_EQUIP_GOLD, () -> Ingredient.ofItems(Items.GOLD_INGOT),
-            1.0F,0.0F,false);
+    public static final RegistryEntry<ArmorMaterial> ROSE_GOLD = registerArmorMaterial("rose_gold",
+            ()->new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map ->{
+                map.put(ArmorItem.Type.BOOTS,2);
+                map.put(ArmorItem.Type.LEGGINGS,5);
+                map.put(ArmorItem.Type.CHESTPLATE,6);
+                map.put(ArmorItem.Type.HELMET,2);
+                map.put(ArmorItem.Type.BODY,10);
+            }),17,SoundEvents.ITEM_ARMOR_EQUIP_GOLD,()->Ingredient.ofItems(Items.GOLD_INGOT),
+                    List.of(new ArmorMaterial.Layer(CypherDuxMod.of("rose_gold"))),1.0F,0));
 
-    public static final RegistryEntry<ArmorMaterial> DIVING = registerMaterial("diving",
-            // Defense (protection) point values for each armor piece.
-            Map.of(
-                    ArmorItem.Type.HELMET, 0,
-                    ArmorItem.Type.CHESTPLATE, 4,
-                    ArmorItem.Type.LEGGINGS, 3,
-                    ArmorItem.Type.BOOTS, 0
-            ),
-            9, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
-            0.0F,0.0F,false);
+    public static final RegistryEntry<ArmorMaterial> DIVING = registerArmorMaterial("diving",
+            ()->new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map ->{
+                map.put(ArmorItem.Type.BOOTS,0);
+                map.put(ArmorItem.Type.LEGGINGS,0);
+                map.put(ArmorItem.Type.CHESTPLATE,0);
+                map.put(ArmorItem.Type.HELMET,0);
+                map.put(ArmorItem.Type.BODY,0);
+            }),9,SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
+                    List.of(new ArmorMaterial.Layer(CypherDuxMod.of("diving"))),0,0));
 
-    public static final RegistryEntry<ArmorMaterial> DIVING_2 = registerMaterial("diving_2",
-            // Defense (protection) point values for each armor piece.
-            Map.of(
-                    ArmorItem.Type.HELMET, 0,
-                    ArmorItem.Type.CHESTPLATE, 4,
-                    ArmorItem.Type.LEGGINGS, 3,
-                    ArmorItem.Type.BOOTS, 0
-            ),
-            9, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
-            0.0F,0.0F,false);
+    public static final RegistryEntry<ArmorMaterial> DIVING_2 = registerArmorMaterial("diving_2",
+            ()->new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map ->{
+                map.put(ArmorItem.Type.BOOTS,0);
+                map.put(ArmorItem.Type.LEGGINGS,0);
+                map.put(ArmorItem.Type.CHESTPLATE,0);
+                map.put(ArmorItem.Type.HELMET,0);
+                map.put(ArmorItem.Type.BODY,0);
+            }),9,SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
+                    List.of(new ArmorMaterial.Layer(CypherDuxMod.of("diving_2"))),0,0));
 
-    public static final RegistryEntry<ArmorMaterial> DIVING_3 = registerMaterial("diving_3",
-            // Defense (protection) point values for each armor piece.
-            Map.of(
-                    ArmorItem.Type.HELMET, 0,
-                    ArmorItem.Type.CHESTPLATE, 4,
-                    ArmorItem.Type.LEGGINGS, 3,
-                    ArmorItem.Type.BOOTS, 0
-            ),
-            9, SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
-            0.0F,0.0F,false);
+    public static final RegistryEntry<ArmorMaterial> DIVING_3 = registerArmorMaterial("diving_3",
+            ()->new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map ->{
+                map.put(ArmorItem.Type.BOOTS,0);
+                map.put(ArmorItem.Type.LEGGINGS,0);
+                map.put(ArmorItem.Type.CHESTPLATE,0);
+                map.put(ArmorItem.Type.HELMET,0);
+                map.put(ArmorItem.Type.BODY,0);
+            }),9,SoundEvents.ITEM_ARMOR_EQUIP_TURTLE, Ingredient::empty,
+                    List.of(new ArmorMaterial.Layer(CypherDuxMod.of("diving_3"))),0,0));
 
     public static final int WARDEN_DURABILITY_MULTIPLIER = 40;
-    public static final RegistryEntry<ArmorMaterial> WARDEN = registerMaterial("warden",
-            Map.of(
-                    ArmorItem.Type.HELMET,4,
-                    ArmorItem.Type.CHESTPLATE, 9,
-                    ArmorItem.Type.LEGGINGS, 7,
-                    ArmorItem.Type.BOOTS, 4
-            ),
-            18, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> Ingredient.ofItems(Items.ECHO_SHARD),
-            4f, 0.1f, false);
-
+    public static final RegistryEntry<ArmorMaterial> WARDEN = registerArmorMaterial("warden",
+            ()->new ArmorMaterial(Util.make(new EnumMap<>(ArmorItem.Type.class), map ->{
+                map.put(ArmorItem.Type.BOOTS,4);
+                map.put(ArmorItem.Type.LEGGINGS,7);
+                map.put(ArmorItem.Type.CHESTPLATE,9);
+                map.put(ArmorItem.Type.HELMET,4);
+                map.put(ArmorItem.Type.BODY,12);
+            }),18,SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE,()->Ingredient.ofItems(Items.ECHO_SHARD),
+                    List.of(new ArmorMaterial.Layer(CypherDuxMod.of("warden"))),4.0F,0.1F));
 }

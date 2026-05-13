@@ -52,7 +52,7 @@
     {
       "model": "cypher-dux-mod:item/turtle_helmet_rose_gold_trim",
       "predicate": {
-        "trim_type": 0.85
+       "trim_type": 0.777
       }
     },
     {

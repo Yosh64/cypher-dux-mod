@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"values": [
-	"cypher-dux-mod:rose_gold_chestplate"
+		"cypher-dux-mod:rose_gold_chestplate",
+		"cypher-dux-mod:warden_chestplate"
 	]
 }

@@ -1,7 +1,6 @@
 package com.yosh.cyphdux;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.yosh.cyphdux.armor.ModArmorMaterials;
 import com.yosh.cyphdux.block.ModBlocks;
 import com.yosh.cyphdux.block.entity.ModBlockEntityTypes;
 import com.yosh.cyphdux.command.RandomTeleportCommand;
@@ -39,7 +38,6 @@ public class CypherDuxMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModArmorMaterials.initialize();
 		ModBlocks.initialize();
 		ModItems.initialize();
 		ModBlockEntityTypes.initialize();
@@ -47,7 +45,6 @@ public class CypherDuxMod implements ModInitializer {
 		ModRecipes.initialize();
 		ModSounds.initialize();
 		ModEntities.initialize();
-
 		PayloadTypeRegistry.playC2S().register(DisplayItemC2SPayload.ID, DisplayItemC2SPayload.CODEC);
 		ServerPlayNetworking.registerGlobalReceiver(DisplayItemC2SPayload.ID,(payload, context)->{
 			ItemStack displayedItem = payload.itemStack().isOf(Items.BARRIER)? ItemStack.EMPTY:payload.itemStack();

@@ -4,3 +4,5 @@ This mod adds anything needed for the private server that other mods don't offer
 >Rose Gold is inspired by "Additional Additions" by Dqu1J ([GitHub of the mod](https://github.com/Additional-Mods/additionaladditions))
 
 >Glowing Torch is inspired by "Aquatic Torches" by realmayus ([GitHub of the mod](https://github.com/realmayus/aquatictorches))
+
+>Warden Armor, tools and Reinforced Echo Shard assets are from "Deeper and Darker" by KyaniteMods ([GitHub of the mod](https://github.com/KyaniteMods/DeeperAndDarker/tree/neoforge-1.21))

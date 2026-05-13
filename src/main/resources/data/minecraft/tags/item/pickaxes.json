@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"values": [
-	"cypher-dux-mod:rose_gold_pickaxe"
+		"cypher-dux-mod:rose_gold_pickaxe",
+		"cypher-dux-mod:warden_pickaxe"
 	]
 }

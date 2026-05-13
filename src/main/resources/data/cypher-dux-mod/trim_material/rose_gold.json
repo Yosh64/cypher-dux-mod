@@ -1,18 +1,12 @@
 {
-  "asset_name": "rose_gold_darker",
+  "asset_name": "rose_gold",
   "description": {
     "color": "#DF7377",
     "translate": "trim_material.cypher-dux-mod.rose_gold"
   },
   "ingredient": "cypher-dux-mod:rose_gold_ingot",
-  "item_model_index": 0.85,
+  "item_model_index": 0.777,
   "override_armor_materials": {
-    "minecraft:gold": "rose_gold",
-    "minecraft:leather": "rose_gold",
-    "minecraft:chainmail": "rose_gold",
-    "minecraft:diamond": "rose_gold",
-    "minecraft:iron": "rose_gold",
-    "minecraft:turtle": "rose_gold",
-    "minecraft:netherite": "rose_gold"
+    "cypher-dux-mod:rose_gold": "rose_gold_darker"
   }
 }
