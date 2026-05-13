@@ -12,9 +12,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 public class BlingPressScreen extends HandledScreen<BlingPressScreenHandler> {
-    private static final Identifier GUI_TEXTURE = Identifier.of(CypherDuxMod.MOD_ID,"textures/gui/container/enriching_furnace.png");
-    private static final Identifier PROGRESS_TEXTURE = Identifier.of(CypherDuxMod.MOD_ID,"textures/gui/sprites/container/enriching_furnace/burn_progress.png");
-    private static final Identifier BURN_TEXTURE = Identifier.of(CypherDuxMod.MOD_ID,"textures/gui/sprites/container/enriching_furnace/lit_progress.png");
+    private static final Identifier GUI_TEXTURE = Identifier.of(CypherDuxMod.MOD_ID,"textures/gui/container/bling_press.png");
+    private static final Identifier PROGRESS_TEXTURE = Identifier.of(CypherDuxMod.MOD_ID,"textures/gui/sprites/container/bling_press/burn_progress.png");
+    private static final Identifier BURN_TEXTURE = Identifier.of(CypherDuxMod.MOD_ID,"textures/gui/sprites/container/bling_press/lit_progress.png");
 
     public BlingPressScreen(BlingPressScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);

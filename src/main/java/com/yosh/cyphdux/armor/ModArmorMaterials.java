@@ -42,17 +42,6 @@ public class ModArmorMaterials {
         return RegistryEntry.of(material);
     }
 
-    public static RegistryEntry<ArmorMaterial> registerVanillaMaterial(String id, Map<ArmorItem.Type, Integer> defensePoints, int enchantability, RegistryEntry<SoundEvent> equipSound, Supplier<Ingredient> repairIngredientSupplier, float toughness, float knockbackResistance, boolean dyeable) {
-
-        List<ArmorMaterial.Layer> layers = List.of(
-                new ArmorMaterial.Layer(Identifier.ofVanilla(id), "", dyeable)
-        );
-
-        ArmorMaterial material = new ArmorMaterial(defensePoints, enchantability, equipSound, repairIngredientSupplier, layers, toughness, knockbackResistance);
-        material = Registry.register(Registries.ARMOR_MATERIAL, Identifier.ofVanilla(id), material);
-        return RegistryEntry.of(material);
-    }
-
     public static final int ROSE_GOLD_DURABILITY_MULTIPLIER = 22;
     public static final RegistryEntry<ArmorMaterial> ROSE_GOLD = registerMaterial("rose_gold",
             Map.of(
@@ -108,14 +97,4 @@ public class ModArmorMaterials {
             18, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> Ingredient.ofItems(Items.ECHO_SHARD),
             4f, 0.1f, false);
 
-    public static final RegistryEntry<ArmorMaterial> NETHERITE = registerVanillaMaterial("netherite",
-            Map.of(
-                    ArmorItem.Type.BOOTS, 3,
-                    ArmorItem.Type.LEGGINGS, 6,
-                    ArmorItem.Type.CHESTPLATE, 8,
-                    ArmorItem.Type.HELMET, 3,
-                    ArmorItem.Type.BODY, 11
-            ),
-            15, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_SCRAP),
-            6.0F, 0.1F,false);
 }

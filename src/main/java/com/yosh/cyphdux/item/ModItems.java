@@ -30,6 +30,7 @@ import java.util.List;
 
 public class ModItems {
 
+
     public static void initialize() {
         CypherDuxMod.LOGGER.info("Registering Items");
         FuelRegistry.INSTANCE.add(Items.CHARCOAL,1200);
@@ -37,19 +38,20 @@ public class ModItems {
         FuelRegistry.INSTANCE.add(ModItems.ENRICHED_COPPER_PLATED_COAL,4000);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(itemGroup -> {
-            itemGroup.addBefore(Items.NETHERITE_INGOT, BLINGUINI);
-            itemGroup.addBefore(BLINGUINI, BLING);
-            itemGroup.addBefore(BLING, BIG_BLING);
-            itemGroup.addAfter(Items.GOLD_INGOT,ROSE_GOLD_INGOT);
-            itemGroup.addAfter(Items.CHARCOAL,COPPER_PLATED_COAL,ENRICHED_COPPER_PLATED_COAL);
+            itemGroup.addAfter(Items.NETHERITE_INGOT, BLING_ALLOY, BLINGUINI, BLING, BIG_BLING);
+            itemGroup.addAfter(Items.GOLD_INGOT, ROSE_GOLD_INGOT);
+            itemGroup.addAfter(Items.CHARCOAL, COPPER_PLATED_COAL, ENRICHED_COPPER_PLATED_COAL);
             itemGroup.addAfter(Items.AMETHYST_SHARD,SYNTHETIC_AMETHYST,KAYBER_KRYSTAL);
             itemGroup.addAfter(Items.EMERALD,SYNTHETIC_EMERALD);
             itemGroup.addAfter(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,ModItems.ROSE_GOLD_UPGRADE);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(itemGroup -> {
             itemGroup.addAfter(Items.GOLDEN_BOOTS,ROSE_GOLD_HELMET,ROSE_GOLD_CHESTPLATE,ROSE_GOLD_LEGGINGS,ROSE_GOLD_BOOTS);
+            itemGroup.addAfter(Items.NETHERITE_BOOTS,WARDEN_HELMET,WARDEN_CHESTPLATE,WARDEN_LEGGINGS,WARDEN_BOOTS);
             itemGroup.addAfter(Items.GOLDEN_SWORD,ROSE_GOLD_SWORD);
+            itemGroup.addAfter(Items.NETHERITE_SWORD,WARDEN_SWORD);
             itemGroup.addAfter(Items.GOLDEN_AXE,ROSE_GOLD_AXE);
+            itemGroup.addAfter(Items.NETHERITE_AXE,WARDEN_AXE);
             itemGroup.addAfter(Items.TURTLE_HELMET,DIVING_HELMET_MK1,DIVING_HELMET_MK2,DIVING_HELMET_MK3);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(itemGroup -> {
@@ -74,6 +76,17 @@ public class ModItems {
             itemGroup.add(ROSE_GOLD_PICKAXE);
             itemGroup.add(ROSE_GOLD_AXE);
             itemGroup.add(ROSE_GOLD_HOE);
+            itemGroup.add(WARDEN_HELMET);
+            itemGroup.add(WARDEN_CHESTPLATE);
+            itemGroup.add(WARDEN_LEGGINGS);
+            itemGroup.add(WARDEN_BOOTS);
+            itemGroup.add(WARDEN_SWORD);
+            itemGroup.add(WARDEN_AXE);
+            itemGroup.add(WARDEN_SHOVEL);
+            itemGroup.add(WARDEN_PICKAXE);
+            itemGroup.add(WARDEN_AXE);
+            itemGroup.add(WARDEN_HOE);
+            itemGroup.add(BLING_ALLOY);
             itemGroup.add(BLINGUINI);
             itemGroup.add(BLING);
             itemGroup.add(BIG_BLING);
@@ -122,7 +135,7 @@ public class ModItems {
 
     public static final Item ROSE_GOLD_APPLE = register(new Item(new Item.Settings().rarity(Rarity.RARE).food(new FoodComponent.Builder()
             .nutrition(4)
-            .saturationModifier(1.6F)
+            .saturationModifier(1.2F)
             .statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 300, 1), 1.0F)
             .statusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 1200, 1), 1.0F)
             .statusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 300, 0), 1.0F)
@@ -179,16 +192,18 @@ public class ModItems {
 
     public static final Item BLINGUINI = register(new Item(new Item.Settings()),"blinguini");
     public static final Item BLING = register(new Item(new Item.Settings()),"bling");
+    public static final Item BLING_ALLOY = register(new Item(new Item.Settings()),"bling_alloy");
     public static final Item BIG_BLING = register(new Item(new Item.Settings()),"big_bling");
 
 
-    public static final Item NETHERITE_HELMET = registerVanilla("netherite_helmet", new ArmorItem(ModArmorMaterials.NETHERITE, ArmorItem.Type.HELMET, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(37))));
-    public static final Item NETHERITE_CHESTPLATE = registerVanilla("netherite_chestplate", new ArmorItem(ModArmorMaterials.NETHERITE, ArmorItem.Type.CHESTPLATE, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(37))));
-    public static final Item NETHERITE_LEGGINGS = registerVanilla("netherite_leggings", new ArmorItem(ModArmorMaterials.NETHERITE, ArmorItem.Type.LEGGINGS, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(37))));
-    public static final Item NETHERITE_BOOTS = registerVanilla("netherite_boots", new ArmorItem(ModArmorMaterials.NETHERITE, ArmorItem.Type.BOOTS, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(37))));
-    public static final Item NETHERITE_SWORD = registerVanilla("netherite_sword", new SwordItem(ModToolMaterials.ROSE_GOLD, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ToolMaterials.NETHERITE, 3, -2.4F))));
-    public static final Item NETHERITE_SHOVEL = registerVanilla("netherite_shovel", new ShovelItem(ModToolMaterials.NETHERITE, new Item.Settings().fireproof().attributeModifiers(ShovelItem.createAttributeModifiers(ToolMaterials.NETHERITE, 1.5F, -3.0F))));
-    public static final Item NETHERITE_PICKAXE = registerVanilla("netherite_pickaxe", new PickaxeItem(ModToolMaterials.NETHERITE, new Item.Settings().fireproof().attributeModifiers(PickaxeItem.createAttributeModifiers(ToolMaterials.NETHERITE, 1.0F, -2.8F))));
-    public static final Item NETHERITE_AXE = registerVanilla("netherite_axe", new AxeItem(ModToolMaterials.NETHERITE, new Item.Settings().fireproof().attributeModifiers(AxeItem.createAttributeModifiers(ToolMaterials.NETHERITE, 5.0F, -3.0F))));
-    public static final Item NETHERITE_HOE = registerVanilla("netherite_hoe", new HoeItem(ModToolMaterials.NETHERITE, new Item.Settings().fireproof().attributeModifiers(HoeItem.createAttributeModifiers(ToolMaterials.NETHERITE, -4.0F, 0.0F))));
+    public static final Item WARDEN_HELMET = register(new ArmorItem(ModArmorMaterials.WARDEN, ArmorItem.Type.HELMET, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(ModArmorMaterials.WARDEN_DURABILITY_MULTIPLIER))),"warden_helmet");
+    public static final Item WARDEN_CHESTPLATE = register(new ArmorItem(ModArmorMaterials.WARDEN, ArmorItem.Type.CHESTPLATE, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.CHESTPLATE.getMaxDamage(ModArmorMaterials.WARDEN_DURABILITY_MULTIPLIER))),"warden_chestplate");
+    public static final Item WARDEN_LEGGINGS = register(new ArmorItem(ModArmorMaterials.WARDEN, ArmorItem.Type.LEGGINGS, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.LEGGINGS.getMaxDamage(ModArmorMaterials.WARDEN_DURABILITY_MULTIPLIER))),"warden_leggings");
+    public static final Item WARDEN_BOOTS = register(new ArmorItem(ModArmorMaterials.WARDEN, ArmorItem.Type.BOOTS, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.BOOTS.getMaxDamage(ModArmorMaterials.WARDEN_DURABILITY_MULTIPLIER))),"warden_boots");
+
+    public static final Item WARDEN_SWORD = register(new SwordItem(ModToolMaterials.WARDEN, new Item.Settings().fireproof().attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.WARDEN, 3, -2.4F))),"warden_sword");
+    public static final Item WARDEN_SHOVEL = register(new ShovelItem(ModToolMaterials.WARDEN, new Item.Settings().fireproof().attributeModifiers(ShovelItem.createAttributeModifiers(ModToolMaterials.WARDEN, 1.5F, -3.0F))),"warden_shovel");
+    public static final Item WARDEN_PICKAXE = register(new PickaxeItem(ModToolMaterials.WARDEN, new Item.Settings().fireproof().attributeModifiers(PickaxeItem.createAttributeModifiers(ModToolMaterials.WARDEN, 1.0F, -2.8F))),"warden_pickaxe");
+    public static final Item WARDEN_AXE = register(new AxeItem(ModToolMaterials.WARDEN, new Item.Settings().fireproof().attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.WARDEN, 5.0F, -3.0F))),"warden_axe");
+    public static final Item WARDEN_HOE = register(new HoeItem(ModToolMaterials.WARDEN, new Item.Settings().fireproof().attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.WARDEN, -4.0F, 0.0F))),"warden_hoe");
 }
