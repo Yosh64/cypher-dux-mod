@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"values": [
-	"cypher-dux-mod:rose_gold_shovel"
+		"cypher-dux-mod:rose_gold_shovel",
+		"cypher-dux-mod:warden_shovel"
 	]
 }

@@ -43,7 +43,8 @@ public class ModItems {
             itemGroup.addAfter(Items.CHARCOAL, COPPER_PLATED_COAL, ENRICHED_COPPER_PLATED_COAL);
             itemGroup.addAfter(Items.AMETHYST_SHARD,SYNTHETIC_AMETHYST,KAYBER_KRYSTAL);
             itemGroup.addAfter(Items.EMERALD,SYNTHETIC_EMERALD);
-            itemGroup.addAfter(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,ModItems.ROSE_GOLD_UPGRADE);
+            itemGroup.addBefore(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,ModItems.ROSE_GOLD_UPGRADE);
+            itemGroup.addAfter(Items.ECHO_SHARD,ModItems.REINFORCED_ECHO_SHARD);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(itemGroup -> {
             itemGroup.addAfter(Items.GOLDEN_BOOTS,ROSE_GOLD_HELMET,ROSE_GOLD_CHESTPLATE,ROSE_GOLD_LEGGINGS,ROSE_GOLD_BOOTS);
@@ -56,6 +57,7 @@ public class ModItems {
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(itemGroup -> {
             itemGroup.addAfter(Items.GOLDEN_HOE,ROSE_GOLD_SHOVEL,ROSE_GOLD_PICKAXE,ROSE_GOLD_AXE,ROSE_GOLD_HOE);
+            itemGroup.addAfter(Items.NETHERITE_HOE,WARDEN_SHOVEL,WARDEN_PICKAXE,WARDEN_AXE,WARDEN_HOE);
             itemGroup.addAfter(Items.MUSIC_DISC_PIGSTEP,ZINZIN_DISC,WILSON_DISC,BOUTICA_DISC,KINGCHAM_DISC);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(itemGroup -> {
@@ -90,6 +92,7 @@ public class ModItems {
             itemGroup.add(BLINGUINI);
             itemGroup.add(BLING);
             itemGroup.add(BIG_BLING);
+            itemGroup.add(REINFORCED_ECHO_SHARD);
             itemGroup.add(COPPER_PLATED_COAL);
             itemGroup.add(ENRICHED_COPPER_PLATED_COAL);
             itemGroup.add(SYNTHETIC_AMETHYST);
@@ -194,6 +197,7 @@ public class ModItems {
     public static final Item BLING = register(new Item(new Item.Settings()),"bling");
     public static final Item BLING_ALLOY = register(new Item(new Item.Settings()),"bling_alloy");
     public static final Item BIG_BLING = register(new Item(new Item.Settings()),"big_bling");
+    public static final Item REINFORCED_ECHO_SHARD = register(new Item(new Item.Settings()),"reinforced_echo_shard");
 
 
     public static final Item WARDEN_HELMET = register(new ArmorItem(ModArmorMaterials.WARDEN, ArmorItem.Type.HELMET, new Item.Settings().fireproof().maxDamage(ArmorItem.Type.HELMET.getMaxDamage(ModArmorMaterials.WARDEN_DURABILITY_MULTIPLIER))),"warden_helmet");
