@@ -1,13 +1,13 @@
 {
   "type": "cypher-dux-mod:enriching",
   "addition": {
-    "item": "minecraft:blaze_rod"
+    "item": "cypher-dux-mod:synthetic_emerald"
   },
   "base": {
-    "item": "cypher-dux-mod:kayber_krystal"
+    "item": "minecraft:glow_ink_sac"
   },
   "result": {
-    "id": "minecraft:breeze_rod",
+    "id": "minecraft:emerald",
     "count": 1
   },
   "experience": 1,

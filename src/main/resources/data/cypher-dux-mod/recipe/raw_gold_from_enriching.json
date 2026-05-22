@@ -1,13 +1,13 @@
 {
   "type": "cypher-dux-mod:enriching",
   "addition": {
-    "item": "minecraft:blaze_rod"
+    "item": "minecraft:raw_copper"
   },
   "base": {
-    "item": "cypher-dux-mod:kayber_krystal"
+    "item": "minecraft:raw_iron"
   },
   "result": {
-    "id": "minecraft:breeze_rod",
+    "id": "minecraft:raw_gold",
     "count": 1
   },
   "experience": 1,

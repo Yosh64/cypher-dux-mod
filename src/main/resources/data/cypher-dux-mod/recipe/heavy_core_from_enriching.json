@@ -1,7 +1,7 @@
 {
   "type": "cypher-dux-mod:enriching",
   "addition": {
-    "tag": "minecraft:anvil"
+    "item": "minecraft:anvil"
   },
   "base": {
     "item": "cypher-dux-mod:kayber_krystal"
@@ -10,6 +10,6 @@
     "id": "minecraft:heavy_core",
     "count": 1
   },
-  "experience": 27,
-  "cookingtime": 14000
+  "experience": 1,
+  "cookingtime": 10800
 }

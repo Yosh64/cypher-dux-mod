@@ -1,15 +1,15 @@
 {
   "type": "cypher-dux-mod:enriching",
   "addition": {
-    "item": "minecraft:apple"
+    "item": "cypher-dux-mod:rose_gold_ingot"
   },
   "base": {
     "item": "cypher-dux-mod:kayber_krystal"
   },
   "result": {
-    "id": "minecraft:popped_chorus_fruit",
+    "id": "minecraft:resin_brick",
     "count": 1
   },
   "experience": 1,
-  "cookingtime": 200
+  "cookingtime": 3600
 }

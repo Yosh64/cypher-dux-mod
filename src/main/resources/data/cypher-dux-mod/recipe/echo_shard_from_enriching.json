@@ -1,7 +1,7 @@
 {
   "type": "cypher-dux-mod:enriching",
   "addition": {
-    "item": "cypher-dux-mod:kayber_krystal"
+    "item": "minecraft:sculk_sensor"
   },
   "base": {
     "item": "cypher-dux-mod:kayber_krystal"
@@ -10,6 +10,6 @@
     "id": "minecraft:echo_shard",
     "count": 1
   },
-  "experience": 7,
-  "cookingtime": 4800
+  "experience": 1,
+  "cookingtime": 10800
 }

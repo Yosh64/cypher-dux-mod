@@ -19,7 +19,6 @@ import net.minecraft.item.*;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.resource.featuretoggle.FeatureFlag;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -44,6 +43,7 @@ public class ModItems {
             itemGroup.addAfter(Items.AMETHYST_SHARD,SYNTHETIC_AMETHYST,KAYBER_KRYSTAL);
             itemGroup.addAfter(Items.EMERALD,SYNTHETIC_EMERALD);
             itemGroup.addBefore(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,ModItems.ROSE_GOLD_UPGRADE);
+            itemGroup.addAfter(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE,ModItems.WARDEN_UPGRADE);
             itemGroup.addAfter(Items.ECHO_SHARD,ModItems.REINFORCED_ECHO_SHARD);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(itemGroup -> {
@@ -79,6 +79,8 @@ public class ModItems {
             itemGroup.add(ROSE_GOLD_AXE);
             itemGroup.add(ROSE_GOLD_HOE);
             itemGroup.add(WARDEN_HELMET);
+            itemGroup.add(WARDEN_UPGRADE);
+            itemGroup.add(WARDEN_HEART);
             itemGroup.add(WARDEN_CHESTPLATE);
             itemGroup.add(WARDEN_LEGGINGS);
             itemGroup.add(WARDEN_BOOTS);
@@ -162,7 +164,7 @@ public class ModItems {
         Text.translatable("upgrade."+ CypherDuxMod.MOD_ID+".rose_gold_upgrade").formatted(Formatting.GRAY),
         Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".rose_gold_upgrade.base_slot_description"),
         Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".rose_gold_upgrade.additions_slot_description"),
-        EMPTY_BASE_SLOT,EMPTY_ADDITION_SLOT,new FeatureFlag[0]),
+        EMPTY_BASE_SLOT,EMPTY_ADDITION_SLOT),
         "rose_gold_upgrade_smithing_template");
 
     public static final Item COPPER_PLATED_COAL = register(new Item(new Item.Settings()),"copper_plated_coal");
@@ -197,6 +199,7 @@ public class ModItems {
     public static final Item BLING = register(new Item(new Item.Settings()),"bling");
     public static final Item BLING_ALLOY = register(new Item(new Item.Settings()),"bling_alloy");
     public static final Item BIG_BLING = register(new Item(new Item.Settings()),"big_bling");
+    public static final Item WARDEN_HEART = register(new Item(new Item.Settings()),"warden_heart");
     public static final Item REINFORCED_ECHO_SHARD = register(new Item(new Item.Settings()),"reinforced_echo_shard");
 
 
@@ -210,4 +213,13 @@ public class ModItems {
     public static final Item WARDEN_PICKAXE = register(new PickaxeItem(ModToolMaterials.WARDEN, new Item.Settings().fireproof().attributeModifiers(PickaxeItem.createAttributeModifiers(ModToolMaterials.WARDEN, 1.0F, -2.8F))),"warden_pickaxe");
     public static final Item WARDEN_AXE = register(new AxeItem(ModToolMaterials.WARDEN, new Item.Settings().fireproof().attributeModifiers(AxeItem.createAttributeModifiers(ModToolMaterials.WARDEN, 5.0F, -3.0F))),"warden_axe");
     public static final Item WARDEN_HOE = register(new HoeItem(ModToolMaterials.WARDEN, new Item.Settings().fireproof().attributeModifiers(HoeItem.createAttributeModifiers(ModToolMaterials.WARDEN, -4.0F, 0.0F))),"warden_hoe");
+
+    public static final Item WARDEN_UPGRADE = register(new SmithingTemplateItem(
+                    Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".warden_upgrade.applies_to").formatted(Formatting.BLUE),
+                    Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".warden_upgrade.ingredients").formatted(Formatting.BLUE),
+                    Text.translatable("upgrade."+ CypherDuxMod.MOD_ID+".warden_upgrade").formatted(Formatting.GRAY),
+                    Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".warden_upgrade.base_slot_description"),
+                    Text.translatable("smithing_template."+ CypherDuxMod.MOD_ID+".warden_upgrade.additions_slot_description"),
+                    EMPTY_BASE_SLOT,EMPTY_ADDITION_SLOT),
+            "warden_upgrade_smithing_template");
 }

@@ -69,7 +69,7 @@
   "item.cypher-dux-mod.warden_sword": "Warden Sword",
   "itemGroup.cypher-dux-mod": "Cypher Dux Mod",
   "smithing_template.cypher-dux-mod.rose_gold_upgrade.additions_slot_description": "Add Rose Gold Ingot",
-  "smithing_template.cypher-dux-mod.rose_gold_upgrade.applies_to": "Rose Gold Equipment",
+  "smithing_template.cypher-dux-mod.rose_gold_upgrade.applies_to": "Iron Equipment",
   "smithing_template.cypher-dux-mod.rose_gold_upgrade.base_slot_description": "Add iron armor, weapon, or tool",
   "smithing_template.cypher-dux-mod.rose_gold_upgrade.ingredients": "Rose Gold Ingot",
   "tag.item.cypher-dux-mod.brewing_fuel": "Brewing Fuel",

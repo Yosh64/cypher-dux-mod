@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    "XOX",
     "OTO",
-    "XOX"
+    "TPT",
+    "OTO"
   ],
   "key": {
-    "X": {
-      "item": "minecraft:iron_nugget"
+    "P": {
+      "item": "minecraft:flint"
     },
     "T": {
-      "item": "minecraft:flint"
+      "item": "minecraft:glass"
     },
     "O": {
       "item": "minecraft:purple_dye"

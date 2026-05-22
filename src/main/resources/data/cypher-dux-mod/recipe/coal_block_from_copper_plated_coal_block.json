@@ -1,13 +1,13 @@
 {
   "type": "cypher-dux-mod:enriching",
   "addition": {
-    "item": "minecraft:blaze_rod"
+    "item": "minecraft:coal_block"
   },
   "base": {
-    "item": "cypher-dux-mod:kayber_krystal"
+    "item": "minecraft:raw_copper_block"
   },
   "result": {
-    "id": "minecraft:breeze_rod",
+    "id": "cypher-dux-mod:copper_plated_coal_block",
     "count": 1
   },
   "experience": 1,

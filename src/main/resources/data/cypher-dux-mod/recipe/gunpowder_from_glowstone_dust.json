@@ -1,0 +1,15 @@
+{
+  "type": "cypher-dux-mod:enriching",
+  "addition": {
+    "item": "minecraft:gunpowder"
+  },
+  "base": {
+    "item": "minecraft:blaze_powder"
+  },
+  "result": {
+    "id": "minecraft:glowstone_dust",
+    "count": 2
+  },
+  "experience": 1,
+  "cookingtime": 400
+}

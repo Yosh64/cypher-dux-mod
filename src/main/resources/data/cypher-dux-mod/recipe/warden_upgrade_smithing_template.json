@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "h": {
+      "item": "cypher-dux-mod:warden_heart"
+    },
+    "n": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "s": {
+      "item": "minecraft:echo_shard"
+    }
+  },
+  "pattern": [
+    "shs",
+    "sns",
+    "sss"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cypher-dux-mod:warden_upgrade_smithing_template"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "cypher-dux-mod:reinforced_echo_shard"
+  },
+  "base": {
+    "item": "minecraft:netherite_sword"
+  },
+  "result": {
+    "count": 1,
+    "id": "cypher-dux-mod:warden_sword"
+  },
+  "template": {
+    "item": "cypher-dux-mod:warden_upgrade_smithing_template"
+  }
+}

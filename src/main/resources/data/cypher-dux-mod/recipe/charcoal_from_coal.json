@@ -1,0 +1,15 @@
+{
+  "type": "cypher-dux-mod:enriching",
+  "addition": {
+    "item": "minecraft:charcoal"
+  },
+  "base": {
+    "item": "minecraft:bone_meal"
+  },
+  "result": {
+    "id": "minecraft:coal",
+    "count": 1
+  },
+  "experience": 0,
+  "cookingtime": 50
+}

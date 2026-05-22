@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "g": {
+      "item": "minecraft:echo_shard"
+    },
+    "p": {
+      "item": "minecraft:dried_ghast"
+    }
+  },
+  "pattern": [
+    " g ",
+    "gpg",
+    " g "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cypher-dux-mod:reinforced_echo_shard"
+  }
+}
