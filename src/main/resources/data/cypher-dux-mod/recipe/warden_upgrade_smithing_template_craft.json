@@ -3,10 +3,10 @@
   "category": "equipment",
   "key": {
     "h": {
-      "item": "cypher-dux-mod:warden_upgrade_smithing_template"
+      "item": "cypher-dux-mod:warden_heart"
     },
     "n": {
-      "item": "minecraft:sculk_catalyst"
+      "item": "minecraft:netherite_ingot"
     },
     "s": {
       "item": "minecraft:echo_shard"
