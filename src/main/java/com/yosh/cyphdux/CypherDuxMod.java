@@ -24,10 +24,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.text.Text;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -94,11 +90,11 @@ public class CypherDuxMod implements ModInitializer {
 								IntegerArgumentType.getInteger(context, "height"),
                                 IntegerArgumentType.getInteger(context, "maxAttempts")
                         )))))));
-		ResourceManagerHelper.registerBuiltinResourcePack(
+		/*ResourceManagerHelper.registerBuiltinResourcePack(
 				of("cypherduxdark"),
 				FabricLoader.getInstance().getModContainer(MOD_ID).get(),
 				Text.literal("CypherDux DarkTheme Lite"),
 				ResourcePackActivationType.DEFAULT_ENABLED
-		);
+		);*/
 	}
 }

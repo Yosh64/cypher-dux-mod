@@ -4,7 +4,7 @@
     "item": "cypher-dux-mod:copper_plated_coal"
   },
   "base": {
-    "tag": "c:dusts/glowstone"
+    "item": "minecraft:glowstone"
   },
   "result": {
     "id": "cypher-dux-mod:enriched_copper_plated_coal",
