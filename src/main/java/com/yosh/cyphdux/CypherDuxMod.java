@@ -16,9 +16,13 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -40,6 +44,26 @@ public class CypherDuxMod implements ModInitializer {
 	public void onInitialize() {
 		ModBlocks.initialize();
 		ModItems.initialize();
+		if(FabricLoader.getInstance().isModLoaded("configurablefurnaceburntime")){
+			CypherDuxMod.LOGGER.info("Configurable Furnace Burn Time is Present!");
+			// Fuel time will be divided by 12
+			FuelRegistry.INSTANCE.add(ItemTags.LOGS,1200); //100
+			FuelRegistry.INSTANCE.add(ItemTags.BAMBOO_BLOCKS,1200); //100
+			FuelRegistry.INSTANCE.add(Items.COAL,19200); //1,600
+			FuelRegistry.INSTANCE.add(Items.COAL_BLOCK,192000); //16,000
+			FuelRegistry.INSTANCE.add(Blocks.DRIED_KELP_BLOCK, 36000); //3,000
+			FuelRegistry.INSTANCE.add(Items.BLAZE_ROD, 28800); //2,400
+			FuelRegistry.INSTANCE.add(Items.LAVA_BUCKET,28800); //2,400
+
+			FuelRegistry.INSTANCE.add(Items.CHARCOAL,4800); //400
+			FuelRegistry.INSTANCE.add(ModBlocks.CHARCOAL_BLOCK,48000); //4,000
+			FuelRegistry.INSTANCE.add(ModItems.COPPER_PLATED_COAL,76800); //6,400
+			FuelRegistry.INSTANCE.add(ModItems.ENRICHED_COPPER_PLATED_COAL,768000); //64,000
+			FuelRegistry.INSTANCE.add(ModBlocks.COPPER_PLATED_COAL_BLOCK,331200); //27,600
+			FuelRegistry.INSTANCE.add(ModBlocks.ENRICHED_COPPER_PLATED_COAL_BLOCK,3312000); //276,000
+		}
+
+
 		ModBlockEntityTypes.initialize();
 		ScreenHandlerTypes.initialize();
 		ModRecipes.initialize();
