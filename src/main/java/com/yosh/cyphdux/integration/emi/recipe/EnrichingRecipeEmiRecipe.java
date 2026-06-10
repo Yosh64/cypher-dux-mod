@@ -68,7 +68,7 @@ public class EnrichingRecipeEmiRecipe implements EmiRecipe {
     public void addWidgets(WidgetHolder widgets) {
         // Add an arrow texture to indicate processing
         widgets.addFillingArrow(44,5,this.cookingTime*50);
-        widgets.addTooltip(List.of(TooltipComponent.of(Text.translatable("emi.cooking.time",cookingTime/20).asOrderedText())),44,5, 24, 17);
+        widgets.addTooltip(List.of(TooltipComponent.of(Text.translatable("emi.cooking.time",(float)cookingTime/20).asOrderedText())),44,5, 24, 17);
 
         widgets.addText(Text.of(this.experience+" XP"),44,30,16777215,true);
         if (this.cookingTime >= 1000) {

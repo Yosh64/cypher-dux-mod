@@ -3,6 +3,7 @@ package com.yosh.cyphdux.sceenhandler;
 import com.yosh.cyphdux.block.entity.BlingPressBlockEntity;
 import com.yosh.cyphdux.recipe.ModRecipes;
 import com.yosh.cyphdux.recipe.PressingRecipe;
+import com.yosh.cyphdux.sceenhandler.slot.ModOutputSlot;
 import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,6 +15,7 @@ import net.minecraft.screen.ArrayPropertyDelegate;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -43,10 +45,15 @@ public class BlingPressScreenHandler extends ScreenHandler {
         //Fuel Slot
         this.addSlot(new Slot(inventory,2,56,53));
         //Output
-        this.addSlot(new Slot(inventory,3,116,35){
+        this.addSlot(new ModOutputSlot(playerInventory.player, inventory,3,116,35){
             @Override
-            public boolean canInsert(ItemStack stack) {
-                return false;
+            protected void onCrafted(ItemStack stack) {
+                stack.onCraftByPlayer(this.player.getWorld(), this.player, this.amount);
+                if (this.player instanceof ServerPlayerEntity serverPlayerEntity && this.inventory instanceof BlingPressBlockEntity blingPressBlockEntity) {
+                    blingPressBlockEntity.dropExperienceForRecipesUsed(serverPlayerEntity);
+                }
+
+                this.amount = 0;
             }
         });
 

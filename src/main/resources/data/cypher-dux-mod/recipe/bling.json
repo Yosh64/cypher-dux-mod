@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "bling",
+  "key": {
+    "#": {
+      "item": "cypher-dux-mod:blinguini"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cypher-dux-mod:bling"
+  }
+}

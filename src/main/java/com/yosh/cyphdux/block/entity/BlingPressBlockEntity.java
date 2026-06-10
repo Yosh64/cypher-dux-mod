@@ -242,7 +242,6 @@ public class BlingPressBlockEntity extends BlockEntity implements ImplementedInv
     private boolean hasRecipe() {
         //return this.getStack(LEFT_SLOT).isOf(Items.GOLD_INGOT)&&this.getStack(RIGHT_SLOT).isOf(Items.DIAMOND);
         Optional<RecipeEntry<PressingRecipe>> recipe = getCurrentRecipe();
-
         return recipe.isPresent() && canInsertAmountIntoOutputSlot(recipe.get().value().getResult(null))&&canInsertItemIntoOutputSlot(recipe.get().value().getResult(null).getItem());
     }
 
@@ -251,7 +250,7 @@ public class BlingPressBlockEntity extends BlockEntity implements ImplementedInv
     }
 
     private boolean canInsertAmountIntoOutputSlot(ItemStack result) {
-        return this.getStack(OUTPUT_SLOT).getCount()+result.getCount()<=this.getStack(OUTPUT_SLOT).getMaxCount();
+        return this.getStack(OUTPUT_SLOT).getCount()+result.getCount()<=this.getStack(OUTPUT_SLOT).getMaxCount()||this.getStack(OUTPUT_SLOT).isEmpty();
     }
 
     private boolean hasFuel() {

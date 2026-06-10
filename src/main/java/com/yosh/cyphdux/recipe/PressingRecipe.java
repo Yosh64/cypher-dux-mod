@@ -16,7 +16,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 
-public record PressingRecipe(Ingredient leftItem, Ingredient rightItem, ItemStack output, double experience, int pressingTime) implements Recipe<DoubleStackRecipeInput> {
+public record PressingRecipe(Ingredient leftItem, Ingredient rightItem, ItemStack output, float experience, int pressingTime) implements Recipe<DoubleStackRecipeInput> {
     @Override
     public DefaultedList<Ingredient> getIngredients() {
         DefaultedList<Ingredient> list = DefaultedList.of();
@@ -76,7 +76,7 @@ public record PressingRecipe(Ingredient leftItem, Ingredient rightItem, ItemStac
                                 Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("left_item").forGetter(recipe -> recipe.leftItem),
                                 Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("right_item").forGetter(recipe -> recipe.rightItem),
                                 ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter(recipe -> recipe.output),
-                                Codec.DOUBLE.fieldOf("experience").orElse(0.35).forGetter(recipe -> recipe.experience),
+                                Codec.FLOAT.fieldOf("experience").orElse(0.35F).forGetter(recipe -> recipe.experience),
                                 Codec.INT.fieldOf("pressing_time").orElse(200).forGetter(recipe -> recipe.pressingTime)
                         )
                         .apply(instance, PressingRecipe::new)
@@ -85,7 +85,7 @@ public record PressingRecipe(Ingredient leftItem, Ingredient rightItem, ItemStac
                 Ingredient.PACKET_CODEC, PressingRecipe::leftItem,
                 Ingredient.PACKET_CODEC, PressingRecipe::rightItem,
                 ItemStack.PACKET_CODEC, PressingRecipe::output,
-                PacketCodecs.DOUBLE,PressingRecipe::experience,
+                PacketCodecs.FLOAT,PressingRecipe::experience,
                 PacketCodecs.INTEGER,PressingRecipe::pressingTime,
                 PressingRecipe::new
         );

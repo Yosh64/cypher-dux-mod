@@ -259,7 +259,7 @@ public class EnrichingFurnaceBlockEntity extends BlockEntity implements Extended
     }
 
     private boolean canInsertAmountIntoOutputSlot(ItemStack result) {
-        return this.getStack(OUTPUT_SLOT).getCount()+result.getCount()<=this.getStack(OUTPUT_SLOT).getMaxCount();
+        return this.getStack(OUTPUT_SLOT).getCount()+result.getCount()<=this.getStack(OUTPUT_SLOT).getMaxCount()||this.getStack(OUTPUT_SLOT).isEmpty();
     }
 
     private void craftItem() {

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OXO",
+    "ACA",
+    "OXO"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:bone"
+    },
+    "O": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "A": {
+      "item": "minecraft:gunpowder"
+    },
+    "C": {
+      "item": "minecraft:apple"
+    }
+  },
+  "result": {
+    "id": "cypher-dux-mod:bling_alloy",
+    "count": 1
+  }
+}

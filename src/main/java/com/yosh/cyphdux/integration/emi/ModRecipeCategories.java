@@ -6,4 +6,5 @@ import net.minecraft.util.Identifier;
 
 public class ModRecipeCategories {
     public static final EmiRecipeCategory ENRICHING = new EmiRecipeCategory(Identifier.of(CypherDuxMod.MOD_ID,"enriching"),ModRecipeWorkstations.ENRICHING_FURNACE);
+    public static final EmiRecipeCategory PRESSING = new EmiRecipeCategory(Identifier.of(CypherDuxMod.MOD_ID,"pressing"),ModRecipeWorkstations.BLING_PRESS);
 }

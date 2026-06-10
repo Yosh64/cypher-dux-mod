@@ -15,6 +15,7 @@ import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -53,7 +54,17 @@ public class EnrichingFurnaceScreenHandler extends ScreenHandler {
         //Fuel Slot
         this.addSlot(new Slot(inventory,2,56,53));
         //Output
-        this.addSlot(new ModOutputSlot(playerInventory.player, inventory,3,116,35));
+        this.addSlot(new ModOutputSlot(playerInventory.player, inventory,3,116,35){
+            @Override
+            protected void onCrafted(ItemStack stack) {
+                stack.onCraftByPlayer(this.player.getWorld(), this.player, this.amount);
+                if (this.player instanceof ServerPlayerEntity serverPlayerEntity && this.inventory instanceof EnrichingFurnaceBlockEntity enrichingFurnaceBlockEntity) {
+                    enrichingFurnaceBlockEntity.dropExperienceForRecipesUsed(serverPlayerEntity);
+                }
+
+                this.amount = 0;
+            }
+        });
 
         addPlayerInventory(playerInventory);
         addPlayerHotbar(playerInventory);

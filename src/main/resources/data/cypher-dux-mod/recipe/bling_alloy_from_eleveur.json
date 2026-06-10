@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OXO",
+    "ACA",
+    "OXO"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:egg"
+    },
+    "O": {
+      "item": "minecraft:leather"
+    },
+    "A": {
+      "item": "minecraft:feather"
+    },
+    "C": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "result": {
+    "id": "cypher-dux-mod:bling_alloy",
+    "count": 1
+  }
+}

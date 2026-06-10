@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OXO",
+    "ACA",
+    "OXO"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:coal"
+    },
+    "O": {
+      "item": "minecraft:copper_ingot"
+    },
+    "A": {
+      "item": "minecraft:iron_nugget"
+    },
+    "C": {
+      "item": "minecraft:lapis_lazuli"
+    }
+  },
+  "result": {
+    "id": "cypher-dux-mod:bling_alloy",
+    "count": 1
+  }
+}
