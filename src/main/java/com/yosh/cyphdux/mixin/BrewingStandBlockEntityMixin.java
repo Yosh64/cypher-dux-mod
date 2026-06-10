@@ -24,8 +24,8 @@ public abstract class BrewingStandBlockEntityMixin extends LockableContainerBloc
     @Inject(method = "tick", at = @At("HEAD"))
     private static void onTick(World world, BlockPos pos, BlockState state, BrewingStandBlockEntity blockEntity, CallbackInfo ci){
         ItemStack fuelStack = blockEntity.inventory.get(4);
-        if (blockEntity.fuel <= 0 && fuelStack.isIn(ModTags.Items.BREWING_FUEL)) {
-            blockEntity.fuel = 20;
+        if (blockEntity.fuel <= 16 && fuelStack.isIn(ModTags.Items.BREWING_FUEL)) {
+            blockEntity.fuel += 4;
             fuelStack.decrement(1);
             markDirty(world, pos, state);
         }
