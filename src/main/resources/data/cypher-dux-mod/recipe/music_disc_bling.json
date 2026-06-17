@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#P#",
+    "BQB",
+    "UUU"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bundle"
+    },
+    "P": {
+      "item": "minecraft:emerald_block"
+    },
+    "B": {
+      "item": "minecraft:diamond"
+    },
+    "Q": {
+      "item": "minecraft:copper_ingot"
+    },
+    "U": {
+      "item": "cypher-dux-mod:big_bling"
+    }
+  },
+  "result": {
+    "id": "cypher-dux-mod:music_disc_bling",
+    "count": 1
+  }
+}

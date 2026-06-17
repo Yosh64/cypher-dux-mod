@@ -30,5 +30,13 @@
         "stream": true
       }
     ]
+  },
+  "music_disc.casino": {
+    "sounds": [
+      {
+        "name": "cypher-dux-mod:records/casino",
+        "stream": true
+      }
+    ]
   }
 }

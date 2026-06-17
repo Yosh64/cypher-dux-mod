@@ -58,7 +58,7 @@ public class ModItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(itemGroup -> {
             itemGroup.addAfter(Items.GOLDEN_HOE,ROSE_GOLD_SHOVEL,ROSE_GOLD_PICKAXE,ROSE_GOLD_AXE,ROSE_GOLD_HOE);
             itemGroup.addAfter(Items.NETHERITE_HOE,WARDEN_SHOVEL,WARDEN_PICKAXE,WARDEN_AXE,WARDEN_HOE);
-            itemGroup.addAfter(Items.MUSIC_DISC_PIGSTEP,ZINZIN_DISC,WILSON_DISC,BOUTICA_DISC,KINGCHAM_DISC);
+            itemGroup.addAfter(Items.MUSIC_DISC_PIGSTEP,ZINZIN_DISC,WILSON_DISC,BOUTICA_DISC,KINGCHAM_DISC,BLING_DISC);
         });
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FOOD_AND_DRINK).register(itemGroup -> {
             itemGroup.addAfter(Items.GOLDEN_APPLE,ROSE_GOLD_APPLE);
@@ -107,6 +107,7 @@ public class ModItems {
             itemGroup.add(WILSON_DISC);
             itemGroup.add(BOUTICA_DISC);
             itemGroup.add(KINGCHAM_DISC);
+            itemGroup.add(BLING_DISC);
         });
     }
 
@@ -193,7 +194,7 @@ public class ModItems {
     public static final Item BOUTICA_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON).jukeboxPlayable(ModSounds.BOUTICA_KEY)),"music_disc_boutica");
     public static final Item WILSON_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.COMMON).jukeboxPlayable(ModSounds.WILSON_KEY)),"music_disc_wilson");
     public static final Item KINGCHAM_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.EPIC).jukeboxPlayable(ModSounds.KINGCHAM_KEY)),"music_disc_kingcham");
-            //register("music_disc_strad", new Item((new Item.Settings()).maxCount(1).rarity(Rarity.RARE).jukeboxPlayable(JukeboxSongs.STRAD)));
+    public static final Item BLING_DISC = register(new Item(new Item.Settings().maxCount(1).rarity(Rarity.UNCOMMON).jukeboxPlayable(ModSounds.BLING_KEY)),"music_disc_bling");
 
     public static final Item BLINGUINI = register(new Item(new Item.Settings()),"blinguini");
     public static final Item BLING = register(new Item(new Item.Settings()),"bling");
